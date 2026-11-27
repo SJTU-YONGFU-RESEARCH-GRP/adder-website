@@ -30,7 +30,7 @@ async function fetchGitHubStars() {
     if (el && typeof info.stargazers_count === 'number') {
       el.textContent = String(info.stargazers_count);
     }
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function switchTab(tabName) {
@@ -175,9 +175,21 @@ document.querySelectorAll('#ideas-table th[data-sort]').forEach(th => {
   });
 });
 
+const BASE_RCA_STA = {
+  64: { area: 390.49, delay: 2.2751 },
+  256: { area: 1558.76, delay: 8.8083 },
+};
+
 function getPointsForWidth(width, dataset = selectedDataset) {
   const pts = [];
-  if (dataset === 'ideas' || dataset === 'both') {
+  const normMode = dataset === 'both';
+  const rcaClassic = (() => {
+    const rc = DATA.classical.find(c => c.slug === 'db_ripple_carry');
+    return rc ? (rc.scaling || []).find(s => s.width === width) : null;
+  })();
+  const rcaSta = BASE_RCA_STA[width] || null;
+
+  if (dataset === 'ideas' || normMode) {
     for (const r of DATA.ideas) {
       const pt = (r.sta_scaling || []).find(s => s.width === width);
       if (pt) {
@@ -188,6 +200,8 @@ function getPointsForWidth(width, dataset = selectedDataset) {
           name: r.name,
           area: pt.area,
           delay: pt.delay,
+          xVal: normMode && rcaSta ? pt.area / rcaSta.area : pt.area,
+          yVal: normMode && rcaSta ? pt.delay / rcaSta.delay : pt.delay,
           fmax: pt.fmax,
           power: pt.power,
           adp: pt.area * pt.delay,
@@ -196,7 +210,7 @@ function getPointsForWidth(width, dataset = selectedDataset) {
       }
     }
   }
-  if (dataset === 'classical' || dataset === 'both') {
+  if (dataset === 'classical' || normMode) {
     for (const c of DATA.classical) {
       const pt = (c.scaling || []).find(s => s.width === width);
       if (pt) {
@@ -207,6 +221,8 @@ function getPointsForWidth(width, dataset = selectedDataset) {
           name: `${c.name} Adder`,
           area: pt.area,
           delay: pt.delay,
+          xVal: normMode && rcaClassic ? pt.area / rcaClassic.area : pt.area,
+          yVal: normMode && rcaClassic ? pt.delay / rcaClassic.delay : pt.delay,
           fmax: pt.freq,
           power: pt.power,
           adp: pt.area * pt.delay,
@@ -217,8 +233,8 @@ function getPointsForWidth(width, dataset = selectedDataset) {
   }
   for (const p of pts) {
     p.pareto = !pts.some(o =>
-      o.area <= p.area && o.delay <= p.delay && o.power <= p.power &&
-      (o.area < p.area || o.delay < p.delay || o.power < p.power)
+      o.xVal <= p.xVal && o.yVal <= p.yVal &&
+      (o.xVal < p.xVal || o.yVal < p.yVal)
     );
   }
   return pts;
@@ -278,24 +294,19 @@ function renderBubbleDetail(pt) {
 function renderParetoChart() {
   const pts = getPointsForWidth(selectedWidth);
   if (!pts.length) return;
-  const useLogX = selectedDataset === 'both';
+  const normMode = selectedDataset === 'both';
   const w = 780, h = 360, padL = 62, padR = 32, padT = 24, padB = 46;
-  const xVals = pts.map(p => useLogX ? Math.log10(Math.max(1, p.area)) : p.area);
-  const delays = pts.map(p => p.delay);
-  const minX = Math.min(...xVals) * (useLogX ? 0.96 : 0.96);
-  const maxX = Math.max(...xVals) * (useLogX ? 1.04 : 1.04);
-  const minD = Math.min(...delays) * 0.90, maxD = Math.max(...delays) * 1.06;
-  const sx = a => {
-    const xv = useLogX ? Math.log10(Math.max(1, a)) : a;
-    return padL + ((xv - minX) / Math.max(1e-6, maxX - minX)) * (w - padL - padR);
-  };
-  const sy = d => h - padB - ((d - minD) / Math.max(1e-6, maxD - minD)) * (h - padT - padB);
+  const xVals = pts.map(p => p.xVal), yVals = pts.map(p => p.yVal);
+  const minX = Math.min(...xVals) * 0.92, maxX = Math.max(...xVals) * 1.05;
+  const minY = Math.min(...yVals) * 0.90, maxY = Math.max(...yVals) * 1.06;
+  const sx = x => padL + ((x - minX) / Math.max(1e-6, maxX - minX)) * (w - padL - padR);
+  const sy = y => h - padB - ((y - minY) / Math.max(1e-6, maxY - minY)) * (h - padT - padB);
 
-  const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.area - b.area);
-  const poly = paretoPts.map(p => `${sx(p.area).toFixed(1)},${sy(p.delay).toFixed(1)}`).join(' ');
+  const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.xVal - b.xVal);
+  const poly = paretoPts.map(p => `${sx(p.xVal).toFixed(1)},${sy(p.yVal).toFixed(1)}`).join(' ');
 
   const circles = pts.map(p => {
-    const cx = sx(p.area), cy = sy(p.delay);
+    const cx = sx(p.xVal), cy = sy(p.yVal);
     const isSel = p.slug === selectedBubbleSlug;
     let fill = '#22bfd7';
     if (p.pareto) fill = '#ffc83e';
@@ -305,30 +316,35 @@ function renderParetoChart() {
     const strokeW = isSel ? 3 : 1.5;
     const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
     const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${labelText}</text>` : '';
-    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area} um2, Delay=${p.delay} ns (Click for details)</title></circle>${label}`;
+    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area} um2, Delay=${p.delay} ns</title></circle>${label}`;
   }).join('');
 
   const xTicks = [0, 0.5, 1.0].map(f => {
-    const xv = minX + (maxX - minX) * f;
-    const rawVal = useLogX ? Math.pow(10, xv) : xv;
-    const px = padL + f * (w - padL - padR);
-    const lbl = rawVal >= 10000 ? `${(rawVal/1000).toFixed(0)}k` : rawVal.toFixed(0);
-    return `<text x="${px.toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
+    const val = minX + (maxX - minX) * f;
+    const lbl = normMode ? `${val.toFixed(2)}x` : (val >= 10000 ? `${(val / 1000).toFixed(0)}k` : val.toFixed(0));
+    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
   }).join('');
   const yTicks = [0, 0.5, 1.0].map(f => {
-    const val = minD + (maxD - minD) * f;
-    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${val.toFixed(2)}</text>`;
+    const val = minY + (maxY - minY) * f;
+    const lbl = normMode ? `${val.toFixed(2)}x` : val.toFixed(2);
+    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
   }).join('');
+
+  const rcaLines = (normMode && 1.0 >= minX && 1.0 <= maxX && 1.0 >= minY && 1.0 <= maxY)
+    ? `<line x1="${sx(1.0).toFixed(1)}" y1="${padT}" x2="${sx(1.0).toFixed(1)}" y2="${h - padB}" stroke="rgba(21,27,32,0.28)" stroke-dasharray="3,3"/>
+       <line x1="${padL}" y1="${sy(1.0).toFixed(1)}" x2="${w - padR}" y2="${sy(1.0).toFixed(1)}" stroke="rgba(21,27,32,0.28)" stroke-dasharray="3,3"/>`
+    : '';
 
   document.getElementById('pareto-chart').innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" style="width:100%; max-width:${w}px; height:auto;">
+      ${rcaLines}
       <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
       ${xTicks}${yTicks}
       ${circles}
-      <text x="${(w + padL - padR)/2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit Area (&mu;m&sup2;${useLogX ? ', log scale' : ''})</text>
-      <text x="16" y="${(h - padB + padT)/2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT)/2})">${selectedWidth}-bit Delay (ns)</text>
+      <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${normMode ? `${selectedWidth}-bit Normalized Area (x RCA)` : `${selectedWidth}-bit Area (&mu;m&sup2;)`}</text>
+      <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${normMode ? `${selectedWidth}-bit Normalized Delay (x RCA)` : `${selectedWidth}-bit Delay (ns)`}</text>
     </svg>
   `;
 
@@ -341,17 +357,22 @@ document.querySelectorAll('.dataset-btn').forEach(btn => {
     document.querySelectorAll('.dataset-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     selectedDataset = btn.dataset.dataset;
-    const onlyClassical = selectedDataset === 'classical';
     document.querySelectorAll('.width-btn').forEach(wb => {
       const w = Number(wb.dataset.width);
-      if ([4, 512, 1024].includes(w)) {
-        wb.style.display = onlyClassical ? '' : 'none';
+      if (selectedDataset === 'classical') {
+        wb.style.display = '';
+      } else if (selectedDataset === 'both') {
+        wb.style.display = (w === 64 || w === 256) ? '' : 'none';
+      } else {
+        wb.style.display = [4, 512, 1024].includes(w) ? 'none' : '';
       }
     });
-    if (!onlyClassical && [4, 512, 1024].includes(selectedWidth)) {
+    if (selectedDataset === 'both' && ![64, 256].includes(selectedWidth)) {
       selectedWidth = 256;
-      document.querySelectorAll('.width-btn').forEach(wb => wb.classList.toggle('active', Number(wb.dataset.width) === 256));
+    } else if (selectedDataset === 'ideas' && [4, 512, 1024].includes(selectedWidth)) {
+      selectedWidth = 256;
     }
+    document.querySelectorAll('.width-btn').forEach(wb => wb.classList.toggle('active', Number(wb.dataset.width) === selectedWidth));
     renderParetoChart();
   });
 });
@@ -387,15 +408,15 @@ function renderScalingChart() {
     return `<polyline points="${poly}" fill="none" stroke="${ch.color}" stroke-width="3"/>${dots}`;
   }).join('');
 
-  const xLabels = widths.map((wd, i) => `<text x="${sx(i)}" y="${h-pad+18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${wd}b</text>`).join('');
+  const xLabels = widths.map((wd, i) => `<text x="${sx(i)}" y="${h - pad + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${wd}b</text>`).join('');
 
   document.getElementById('scaling-chart').innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" style="width:100%; max-width:${w}px; height:auto;">
-      <line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="#151b20" stroke-width="2"/>
-      <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${h-pad}" stroke="#151b20" stroke-width="2"/>
+      <line x1="${pad}" y1="${h - pad}" x2="${w - pad}" y2="${h - pad}" stroke="#151b20" stroke-width="2"/>
+      <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${h - pad}" stroke="#151b20" stroke-width="2"/>
       ${lines}
       ${xLabels}
-      <text x="16" y="${h/2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${h/2})">Delay (ns)</text>
+      <text x="16" y="${h / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${h / 2})">Delay (ns)</text>
     </svg>
     <div class="chart-legend">
       <span><span class="legend-dot" style="background:#ffc83e;"></span>idea3 (HGGCBA) — 3.67 ns @ 256b</span>

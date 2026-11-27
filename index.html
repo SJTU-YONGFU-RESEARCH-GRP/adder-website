@@ -72,13 +72,16 @@
       <div class="section-card">
         <h2>Pareto Analysis: Area vs. Delay</h2>
         <p class="section-sub">
-          Switch between <strong>Discovered Ideas</strong> (Nangate45 OpenSTA, 8–256b), <strong>Classic Designs</strong> (4–1024b), or <strong>Combined (Log Area)</strong>. Click any bubble to inspect its full details.
+          Switch between <strong>Classic Designs</strong> (4–1024b), <strong>Discovered Ideas</strong> (Nangate45 OpenSTA, 8–256b), or <strong>Combined (Normalized to RCA)</strong>. Click any bubble to inspect its full details.
+        </p>
+        <p class="section-sub" style="background:var(--yellow-soft); border:1.5px solid var(--ink); border-radius:8px; padding:8px 12px; font-size:0.82rem;">
+          <strong>Note on scale:</strong> Classic Designs use a coarse <code>100 &mu;m&sup2;/cell</code> synthesis proxy (e.g., 256b RCA = <code>27,400 &mu;m&sup2;, 14.0 ns</code>), whereas Discovered Ideas use 45nm <strong>Nangate45 + OpenSTA</strong> (256b <code>base_rca</code> = <code>1,558.76 &mu;m&sup2;, 8.81 ns</code>). The <strong>Combined</strong> view normalizes each design to its own flow&rsquo;s Ripple-Carry baseline (<code>1.0&times; RCA</code>) for a fair linear comparison.
         </p>
         <div class="toolbar">
           <span style="font-weight:800; font-size:0.86rem;">Dataset:</span>
-          <button class="filter-btn dataset-btn active" data-dataset="ideas">Discovered Ideas (69)</button>
           <button class="filter-btn dataset-btn" data-dataset="classical">Classic Designs (29)</button>
-          <button class="filter-btn dataset-btn" data-dataset="both">Combined (Log Area)</button>
+          <button class="filter-btn dataset-btn active" data-dataset="ideas">Discovered Ideas (69)</button>
+          <button class="filter-btn dataset-btn" data-dataset="both">Combined (Norm. to RCA)</button>
         </div>
         <div class="toolbar">
           <span style="font-weight:800; font-size:0.86rem;">Bit Width:</span>
