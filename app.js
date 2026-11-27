@@ -127,12 +127,20 @@ document.querySelectorAll('#db-table th[data-sort]').forEach(th => {
   });
 });
 
+function syncWeightInputs() {
+  document.getElementById('w-nov').value = jointWeights.nov;
+  document.getElementById('w-delay').value = jointWeights.delay;
+  document.getElementById('w-area').value = jointWeights.area;
+  document.getElementById('w-power').value = jointWeights.power;
+  document.getElementById('n-nov').value = jointWeights.nov;
+  document.getElementById('n-delay').value = jointWeights.delay;
+  document.getElementById('n-area').value = jointWeights.area;
+  document.getElementById('n-power').value = jointWeights.power;
+}
+
 function setJointPreset(n, d, a, p) {
-  document.getElementById('w-nov').value = n;
-  document.getElementById('w-delay').value = d;
-  document.getElementById('w-area').value = a;
-  document.getElementById('w-power').value = p;
   jointWeights = { nov: n, delay: d, area: a, power: p };
+  syncWeightInputs();
   renderIdeasTable();
 }
 
@@ -241,14 +249,12 @@ function renderIdeasTable() {
   }).join('');
 }
 
-['w-nov', 'w-delay', 'w-area', 'w-power'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    jointWeights = {
-      nov: Number(document.getElementById('w-nov').value),
-      delay: Number(document.getElementById('w-delay').value),
-      area: Number(document.getElementById('w-area').value),
-      power: Number(document.getElementById('w-power').value),
-    };
+[['w-nov', 'nov'], ['w-delay', 'delay'], ['w-area', 'area'], ['w-power', 'power'],
+ ['n-nov', 'nov'], ['n-delay', 'delay'], ['n-area', 'area'], ['n-power', 'power']].forEach(([id, key]) => {
+  document.getElementById(id).addEventListener('input', (e) => {
+    const val = Math.max(0, Math.min(100, Number(e.target.value) || 0));
+    jointWeights[key] = val;
+    syncWeightInputs();
     renderIdeasTable();
   });
 });

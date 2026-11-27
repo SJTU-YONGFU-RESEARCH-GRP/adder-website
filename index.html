@@ -134,8 +134,16 @@
         </p>
         <div style="background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:14px 16px; margin-bottom:16px;">
           <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px;">
-            <div class="mono" style="font-size:0.82rem; font-weight:700;">
-              Joint = <span id="w-lbl-nov">50%</span>&middot;Novelty + <span id="w-lbl-delay">25%</span>&middot;Speed + <span id="w-lbl-area">15%</span>&middot;(1/Area) + <span id="w-lbl-power">10%</span>&middot;(1/Power)
+            <div class="mono" style="font-size:0.84rem; font-weight:700; display:flex; flex-wrap:wrap; align-items:center; gap:4px;">
+              <span>Joint =</span>
+              <input id="n-nov" type="number" min="0" max="100" value="50" style="width:54px; padding:2px 4px; font-family:var(--font-mono); font-weight:800; border:1.5px solid var(--ink); border-radius:6px; background:var(--cream); text-align:center;">
+              <span>(<span id="w-lbl-nov">50%</span>)&middot;Novelty +</span>
+              <input id="n-delay" type="number" min="0" max="100" value="25" style="width:54px; padding:2px 4px; font-family:var(--font-mono); font-weight:800; border:1.5px solid var(--ink); border-radius:6px; background:var(--cream); text-align:center;">
+              <span>(<span id="w-lbl-delay">25%</span>)&middot;Speed +</span>
+              <input id="n-area" type="number" min="0" max="100" value="15" style="width:54px; padding:2px 4px; font-family:var(--font-mono); font-weight:800; border:1.5px solid var(--ink); border-radius:6px; background:var(--cream); text-align:center;">
+              <span>(<span id="w-lbl-area">15%</span>)&middot;(1/Area) +</span>
+              <input id="n-power" type="number" min="0" max="100" value="10" style="width:54px; padding:2px 4px; font-family:var(--font-mono); font-weight:800; border:1.5px solid var(--ink); border-radius:6px; background:var(--cream); text-align:center;">
+              <span>(<span id="w-lbl-power">10%</span>)&middot;(1/Power)</span>
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:6px;">
               <button class="btn-mini" onclick="setJointPreset(50,25,15,10)">Balanced (50/25/15/10)</button>
