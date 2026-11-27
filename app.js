@@ -406,53 +406,175 @@ function renderScalingChart() {
 }
 
 function renderTaxonomy() {
-  const defs = {
-    'Carry-Path Primitives': [
-      ['select', 'Precomputes Cin=0 and Cin=1 block sums in parallel and muxes by incoming carry.'],
-      ['ripple', 'Sequential bit-by-bit carry propagation; low-area baseline or fallback branch.'],
-      ['propagate / generate / kill', 'Bitwise carry signals p=a^b, g=a&b, k=~(a|b) driving block routing.'],
-      ['skip / bypass', 'Forwards Cin directly to Cout when all bits in a block propagate (P_group=1).'],
-      ['increment / prefix', 'Conditional +1 sum increment or associative parallel-prefix carry network.'],
-      ['fusion / window', 'Combines multiple carry modes under one unified block-level policy.'],
-    ],
-    'Control & Selection': [
-      ['exact', 'All branches compute bit-for-bit identical integer sums (no approximation).'],
-      ['policy', 'Deterministic rule selecting which carry branch evaluates each block.'],
-      ['threshold / margin', 'Width-scaled integer cutoff and signed distance preventing mode chattering.'],
-      ['quorum / majority', 'Integer ratio tests (e.g., 2*popcount(p) >= w_k) to trigger fast paths.'],
-      ['consensus / gating', 'Requires agreement across multiple local indicators before switching modes.'],
-      ['deterministic / bounded', 'Repeatable integer arithmetic with clamped state registers.'],
-    ],
-    'Stateful & Temporal': [
-      ['hysteresis', 'Clamped state from prior blocks biasing the adder toward retaining its recent mode.'],
-      ['streak', 'Count of consecutive blocks where carry remained unchanged (Cin_k == Cin_{k-1}).'],
-      ['momentum', 'Decayed prior-block score (e.g., floor(prev_score / 2)) added to current score.'],
-      ['inertia', 'Low-pass integer filter smoothing score transitions across neighboring blocks.'],
-      ['drift', 'First/second-order score differences tracking multi-block carry trends.'],
-      ['saturation / leak', 'Upper-bound clamping and exponential decay keeping registers fixed-width.'],
-    ],
-    'Block-Local Features': [
-      ['popcount / density', 'Count or fraction of active P, G, or K bits inside a block.'],
-      ['imbalance / polarity', '|G_cnt - K_cnt| and signed (G_cnt - K_cnt) measuring carry generation vs. kill.'],
-      ['entropy', 'Integer disorder proxy (e.g., min(P_cnt, w_k - P_cnt)) without logarithms.'],
-      ['transition', 'Adjacent bit-flip count sum(p_j ^ p_{j+1}) capturing pattern irregularity.'],
-      ['run-length / span', 'Longest contiguous P=1 chain or boundary prefix/suffix propagate span.'],
-      ['skew / gradient / variance', 'Half-block asymmetry, boundary weighting, and squared spread metrics.'],
-    ],
-    'Verification & Synthesis': [
-      ['sweep', 'Automated width (4-512b) and block-size functional verification matrices.'],
-      ['yosys / nangate45', 'Open-source RTL synthesis and 45nm standard-cell technology mapping.'],
-      ['opensta', 'Static timing, area, and power analysis against classical adder baselines.'],
-      ['equivalence collapse', 'Yosys/ABC optimization merging logically equivalent branches into CLA-like netlists.'],
-    ],
-  };
+  const sections = [
+    {
+      title: '1. Carry-Path & Adder Architecture Primitives',
+      accent: 'var(--cyan-soft)',
+      blocks: [
+        {
+          heading: 'Exact Carry-Evaluation Branches (select, ripple, skip, bypass, increment, prefix)',
+          goal: 'Provide multiple hardware topologies for evaluating a w_k-bit block so the control policy can trade off propagation depth, multiplexing, and area while preserving bit-exact integer addition.',
+          items: [
+            '<code>select</code> (Carry-Select): precomputes block sum and carry-out for both <code>Cin=0</code> and <code>Cin=1</code> in parallel, then selects via multiplexer once <code>C_k</code> arrives.',
+            '<code>ripple</code> (Ripple-Carry): sequential bit-by-bit recurrence <code>c_{i+1} = g_i | (p_i &amp; c_i)</code>; low-area baseline or fallback path.',
+            '<code>skip / bypass</code>: forwards <code>C_{k+1} = C_k</code> directly when full-block propagate <code>P_group = &amp;_i p_i = 1</code> holds, paired with carry-conditioned sum selection.',
+            '<code>increment / conditional-sum / prefix</code>: computes a <code>Cin=0</code> sum and conditionally adds <code>+1</code>, recursively merges dual sums, or uses associative prefix trees.',
+            '<code>fusion / window / hybrid / rotating</code>: combines multiple carry strategies across fixed/sliding bit windows or cyclically rotates modes by block index <code>k</code>.'
+          ]
+        }
+      ]
+    },
+    {
+      title: '2. Control & Selection Mechanisms',
+      accent: 'var(--yellow-soft)',
+      blocks: [
+        {
+          heading: 'Exactness & Policy Contract (exact, policy, deterministic, bounded)',
+          goal: 'Guarantee bit-for-bit identical results to A + B + Cin regardless of which branch is selected, while keeping policy decisions repeatable and scores clamped to fixed integer ranges.',
+          items: [
+            '<strong>Exactness invariant</strong>: every branch computes the exact same Boolean sum and carry-out for <code>(A_k, B_k, C_k)</code>; the <code>policy</code> only selects which topology evaluates block <code>k</code>.',
+            '<strong>Deterministic &amp; bounded</strong>: thresholds and counters use integer-only arithmetic so Python models, RTL simulations, and synthesis flows are 100% reproducible.'
+          ]
+        },
+        {
+          heading: 'Quorum & Majority Ratio Gating (quorum, majority, voting)',
+          goal: 'Trigger a fast carry path when a sufficient fraction of bits in a block agree, using integer cross-multiplication instead of floating-point division.',
+          items: [
+            '<strong>Quorum</strong>: <code>ones_k * Q_den &gt;= w_k * Q_num</code> on propagate bits routes to carry-skip if true, else carry-select.',
+            '<strong>Majority &amp; alternating parity</strong>: checks <code>2 * popcount(p) &gt;= w_k</code> on even blocks (<code>k mod 2 == 0</code>) and edge-generate <code>g_lsb | g_msb</code> on odd blocks.'
+          ]
+        },
+        {
+          heading: 'Threshold, Gating & Margin Rules (threshold, gating, gated, margin)',
+          goal: 'Gate between fast-path (bypass/skip), speculative (select), and low-area (ripple) modes using width-dependent cutoffs.',
+          items: [
+            '<strong>Margin-weighted gating</strong>: <code>entropy_score = 2*min(G_cnt, K_cnt) + P_cnt</code>, <code>balance_margin = |G_cnt - K_cnt|</code>, and <code>threshold = w_k + 2 + I(balance_margin &gt;= floor(w_k/2) + 1)</code>.',
+            '<strong>Bypass-first stability threshold</strong>: routes to bypass if <code>P_group == 1</code>, else carry-select if <code>score &gt;= w_k + max(1, floor(P_cnt/2))</code>, else ripple.'
+          ]
+        },
+        {
+          heading: 'Multi-Branch Competition & Consensus (consensus, adaptive, switching, routing)',
+          goal: 'Score each candidate carry path independently and route block k to the winning branch when local indicators align.',
+          items: [
+            '<strong>Consensus</strong>: <code>consensus = 1</code> when <code>|G_cnt - K_cnt| &lt;= 1</code>.',
+            '<strong>Branch competition</strong>: <code>bypass_score = P_cnt + confidence + consensus</code>, <code>select_score = P_cnt + min(G_cnt, K_cnt) + floor(debt/2)</code>, <code>ripple_score = w_k - |G_cnt - K_cnt| + I(debt &gt; 0)</code>.'
+          ]
+        },
+        {
+          heading: 'Synthesis Equivalence Collapse (equivalence, collapse)',
+          goal: 'Understand how combinational logic synthesis maps multi-branch exact policies to standard cells.',
+          items: [
+            'Because all candidate branches compute identical Boolean addition functions, Yosys/ABC (<code>abc -liberty Nangate45_typ.lib</code>) detects functional equivalence and collapses redundant scoring/mux networks toward a standard CLA-like netlist unless structural prefix/bypass boundaries are preserved.'
+          ]
+        }
+      ]
+    },
+    {
+      title: '3. Stateful & Temporal Context Signals',
+      accent: 'var(--purple-soft)',
+      blocks: [
+        {
+          heading: 'Hysteresis & Sticky Mode Retention (hysteresis, hysteretic)',
+          goal: 'Prevent rapid mode chattering across adjacent block boundaries by biasing block k toward retaining the recent mode.',
+          items: [
+            '<strong>Carry-consistency hysteresis</strong>: sets <code>hysteresis_k = 1</code> when <code>Cin_k == Cin_{k-1}</code>, else <code>0</code>.',
+            '<strong>Bounded signed hysteresis</strong>: clamped counter <code>hysteresis in [-3, 4]</code> shifts the block stability score.',
+            '<strong>Sticky carry-select</strong>: biases the FSM to remain in carry-select once triggered.'
+          ]
+        },
+        {
+          heading: 'Carry Streak & Temporal Stability (streak, temporal)',
+          goal: 'Track whether incoming carry C_k is steady or toggling across block boundaries.',
+          items: [
+            '<strong>Carry streak</strong>: <code>carry_streak in [0, 3]</code> increments when <code>carry == previous_carry</code> and resets to <code>0</code> on a flip.',
+            '<strong>Temporal flip vs. stability</strong>: separates <code>temporal_flip_k = (Cin_k != Cin_{k-1})</code> and <code>temporal_stability_k = (Cin_k == Cin_{k-1})</code> weighted alongside <code>floor(score_{k-1}/2)</code>.'
+          ]
+        },
+        {
+          heading: 'Momentum, Inertia & Drift (momentum, inertia, drift)',
+          goal: 'Propagate smoothed trend/velocity from prior blocks rather than reacting to a single-block snapshot.',
+          items: [
+            '<strong>Momentum</strong>: <code>score_k = base_score_k + floor(score_{k-1} / 2)</code>.',
+            '<strong>Inertia</strong>: 4-tap integer low-pass filter <code>inertia_k = floor((2*inertia_{k-1} + score_{k-1} + score_k) / 4)</code> with clipped confidence in <code>[-4, 4]</code>.',
+            '<strong>Drift &amp; derivatives</strong>: first-order <code>delta_k = score_k - score_{k-1}</code> and second-order acceleration <code>accel_k = delta_k - delta_{k-1}</code>.'
+          ]
+        },
+        {
+          heading: 'Memory Regulation: Saturation & Leak (memory, saturation, leak)',
+          goal: 'Prevent unbounded score growth in 256–512b adders and ensure stale history fades.',
+          items: [
+            '<strong>Leak</strong>: subtracts <code>leak_k = floor(prev_score_{k-1} / 3)</code> at each block step.',
+            '<strong>Saturation</strong>: clamps to fixed width via <code>min(3*w_k + 6, base_score_k + prev_score_{k-1} - leak_k)</code>.'
+          ]
+        }
+      ]
+    },
+    {
+      title: '4. Block-Local Statistical & Information-Theoretic Features',
+      accent: 'var(--lime-soft)',
+      blocks: [
+        {
+          heading: 'Bit Counts & Density (popcount, hamming, density)',
+          goal: 'Summarize raw P, G, and K activity levels inside a w_k-bit block.',
+          items: [
+            '<code>P_cnt = sum(p_j)</code>, <code>G_cnt = sum(g_j)</code>, <code>K_cnt = sum(k_j)</code> (Hamming weight / popcount); high <code>P_cnt</code> signals carry-propagation demand while high <code>G_cnt/K_cnt</code> signals local termination.'
+          ]
+        },
+        {
+          heading: 'Balance, Polarity & Asymmetry (imbalance, polarity, parity, skew, variance)',
+          goal: 'Measure whether a block is dominated by carry generation (G), carry killing (K), or alternating bit patterns.',
+          items: [
+            '<strong>Imbalance &amp; Polarity</strong>: <code>|G_cnt - K_cnt|</code> magnitude and signed <code>(G_cnt - K_cnt)</code> direction.',
+            '<strong>Skew</strong>: weights boundary bits (<code>G_msb</code>, <code>K_lsb</code>) via <code>|(2*G_cnt + G_msb) - (2*K_cnt + K_lsb)| + P_cnt + (k mod 2)</code>.',
+            '<strong>Variance</strong>: squared spread <code>(G_cnt - K_cnt)^2 + P_cnt</code> to amplify strong asymmetry.',
+            '<strong>Parity</strong>: XOR-reduction or even/odd bit-index balance of propagate bits.'
+          ]
+        },
+        {
+          heading: 'Disorder, Transitions & Entropy Proxies (entropy, transition, gradient, divergence)',
+          goal: 'Quantify bit-level irregularity and spatial change using integer-only proxies (no logarithms).',
+          items: [
+            '<strong>Transition count</strong>: adjacent bit flips <code>T_k = sum(p_j ^ p_{j+1})</code>.',
+            '<strong>Entropy proxy</strong>: peaks on mixed patterns, e.g., <code>min(P_cnt, w_k - P_cnt)</code> or <code>2*min(G_cnt, K_cnt) + P_cnt</code>.',
+            '<strong>Gradient</strong>: half-block spatial shift <code>|G_cnt - K_cnt| + T_cnt + |F_load - B_load|</code>.'
+          ]
+        },
+        {
+          heading: 'Contiguous Runs & Boundary Spans (run-length, span, pressure)',
+          goal: 'Detect contiguous chains of P=1 bits where carries travel across most or all of a block.',
+          items: [
+            '<strong>Run-length</strong>: longest contiguous <code>1</code>-run (<code>L1_k</code>) and <code>0</code>-run (<code>L0_k</code>) in <code>p</code>.',
+            '<strong>Edge-propagate span</strong>: <code>span_score = prefix_span + suffix_span</code> anchored at LSB/MSB boundaries.'
+          ]
+        },
+        {
+          heading: 'Composite Scores & Alignment (stability, confidence, certainty, signature, phase, resonance, corridor)',
+          goal: 'Combine local features and bounded state into a single integer score for Stage 2 routing.',
+          items: [
+            '<strong>Stability</strong>: <code>span_score + |G_cnt - K_cnt| + carry_streak + hysteresis</code>.',
+            '<strong>Phase &amp; Resonance</strong>: carry-flip alignment <code>phase_match_k</code> and bounded accumulator <code>phase_acc_k in [-7, 7]</code>.',
+            '<strong>Corridor</strong>: <code>entropy_proxy + skew_gap + |corridor_memory|</code> with memory bounded in <code>[-7, 7]</code>.'
+          ]
+        }
+      ]
+    }
+  ];
 
-  document.getElementById('kw-grid').innerHTML = Object.entries(defs).map(([cat, items]) => `
-    <div class="kw-card">
-      <h3 style="margin:0 0 12px; font-size:1rem;">${cat}</h3>
-      <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:0.84rem;">
-        ${items.map(([kw, desc]) => `<li><code>${kw}</code>: ${desc}</li>`).join('')}
-      </ul>
+  document.getElementById('kw-grid').style.gridTemplateColumns = '1fr';
+  document.getElementById('kw-grid').innerHTML = sections.map(sec => `
+    <div class="section-card" style="margin-bottom:0; background:var(--paper);">
+      <h3 style="margin:0 0 14px; font-size:1.15rem; padding:6px 12px; background:${sec.accent}; border:2px solid var(--ink); border-radius:8px; display:inline-block;">${sec.title}</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px;">
+        ${sec.blocks.map(b => `
+          <div class="kw-card" style="background:var(--cream);">
+            <h4 style="margin:0 0 6px; font-size:0.95rem;">${b.heading}</h4>
+            <p style="margin:0 0 8px; font-size:0.83rem; color:rgba(21,27,32,0.82);"><strong>Goal:</strong> ${b.goal}</p>
+            <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:6px; font-size:0.82rem;">
+              ${b.items.map(it => `<li>${it}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `).join('');
 }
