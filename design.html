@@ -6,6 +6,74 @@
   <title>Classic Design — ADDER</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    .diagram-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .diagram-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .diagram-viewport {
+      background:
+        radial-gradient(rgba(21, 27, 32, 0.12) 1px, transparent 1px);
+      background-size: 16px 16px;
+      background-color: var(--cream);
+      border: var(--border-ink);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      min-height: 280px;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .diagram-stage {
+      transform-origin: center center;
+      transition: transform 0.15s ease;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .diagram-stage svg {
+      max-width: 100%;
+      height: auto;
+      font-family: var(--font-sans) !important;
+    }
+    .diagram-stage .node rect,
+    .diagram-stage .node polygon,
+    .diagram-stage .node circle {
+      stroke: #151b20 !important;
+      stroke-width: 2px !important;
+      rx: 8px;
+      ry: 8px;
+    }
+    .diagram-stage .nodeLabel {
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      color: #151b20 !important;
+    }
+    .diagram-stage .edgePath .path {
+      stroke: #151b20 !important;
+      stroke-width: 2px !important;
+    }
+    .diagram-stage .edgeLabel {
+      background-color: #fffaf0 !important;
+      padding: 2px 6px !important;
+      border-radius: 6px;
+      font-family: var(--font-mono) !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -33,10 +101,30 @@
   </main>
 
   <script>
-    mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: {
-      primaryColor: '#fff0b9', primaryTextColor: '#151b20', primaryBorderColor: '#151b20',
-      lineColor: '#151b20', secondaryColor: '#c9f3f4', tertiaryColor: '#e7f4c8'
-    }});
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+        curve: 'basis',
+        nodeSpacing: 42,
+        rankSpacing: 58,
+        padding: 14
+      },
+      themeVariables: {
+        fontFamily: 'Inter, sans-serif',
+        primaryColor: '#fff0b9',
+        primaryTextColor: '#151b20',
+        primaryBorderColor: '#151b20',
+        lineColor: '#151b20',
+        secondaryColor: '#c9f3f4',
+        tertiaryColor: '#e7f4c8',
+        edgeLabelBackground: '#fffaf0'
+      }
+    });
+
+    let zoomScale = 1.0;
 
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -46,6 +134,43 @@
       return esc(s)
         .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
         .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    function setZoom(val) {
+      zoomScale = Math.max(0.5, Math.min(2.2, val));
+      const stage = document.getElementById('diagram-stage');
+      const lbl = document.getElementById('zoom-label');
+      if (stage) stage.style.transform = `scale(${zoomScale.toFixed(2)})`;
+      if (lbl) lbl.textContent = `${Math.round(zoomScale * 100)}%`;
+    }
+
+    function colorizeDiagram() {
+      const svg = document.querySelector('#diagram-stage svg');
+      if (!svg) return;
+      svg.querySelectorAll('.node').forEach(node => {
+        const txt = (node.textContent || '').trim();
+        const shape = node.querySelector('rect, polygon, circle');
+        if (!shape) return;
+        if (/^(A|B|Cin|Input|Operand)/i.test(txt)) {
+          shape.style.fill = '#c9f3f4'; // Cyan soft for inputs
+        } else if (/^(S|Sum|Cout|Out|Result)/i.test(txt)) {
+          shape.style.fill = '#e7f4c8'; // Lime soft for outputs
+        } else {
+          shape.style.fill = '#fff0b9'; // Yellow soft for logic stages
+        }
+      });
+    }
+
+    function downloadSvg(slug) {
+      const svg = document.querySelector('#diagram-stage svg');
+      if (!svg) return;
+      const blob = new Blob([svg.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${slug}_block_diagram.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
     }
 
     async function loadDesign() {
@@ -106,8 +231,24 @@
 
         <div class="section-card">
           <h2>Block Diagram &amp; Datapath</h2>
-          <div class="chart-box" style="display:flex; justify-content:center;">
-            ${d.mermaid ? `<pre class="mermaid">${esc(d.mermaid)}</pre>` : '<p>No block diagram available.</p>'}
+          <div class="diagram-toolbar">
+            <div class="diagram-legend">
+              <span><span class="legend-dot" style="background:#c9f3f4;"></span>Inputs (A, B, Cin)</span>
+              <span><span class="legend-dot" style="background:#fff0b9;"></span>Logic / Carry Stages</span>
+              <span><span class="legend-dot" style="background:#e7f4c8;"></span>Outputs (Sum, Cout)</span>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <button class="btn-mini" onclick="setZoom(zoomScale - 0.15)">-</button>
+              <span id="zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">100%</span>
+              <button class="btn-mini" onclick="setZoom(zoomScale + 0.15)">+</button>
+              <button class="btn-mini" onclick="setZoom(1.0)">Reset</button>
+              <button class="btn-mini" style="background:var(--yellow);" onclick="downloadSvg('${d.slug}')">Download SVG</button>
+            </div>
+          </div>
+          <div class="diagram-viewport">
+            <div id="diagram-stage" class="diagram-stage">
+              ${d.mermaid ? `<pre class="mermaid">${esc(d.mermaid)}</pre>` : '<p>No block diagram available.</p>'}
+            </div>
           </div>
         </div>
 
@@ -144,6 +285,7 @@
 
       if (d.mermaid) {
         await mermaid.run({ querySelector: '.mermaid' });
+        colorizeDiagram();
       }
     }
 
