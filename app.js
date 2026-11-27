@@ -36,6 +36,7 @@ function findEntity(slug) {
 
 function renderChampions() {
   const grid = document.getElementById('champions-grid');
+  if (!grid) return;
   const roles = {
     idea3: 'Case Study 1 — Ultra-Wide High-Speed Anchor',
     idea11: 'Case Study 2 — Balanced Novelty-PPA Adaptive Policy',

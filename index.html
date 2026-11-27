@@ -9,7 +9,7 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand-group" href="#overview">
+      <a class="brand-group" href="#database">
         <div class="brand-badge">
           <svg viewBox="0 0 24 24"><path d="M6 2v2H4a2 2 0 0 0-2 2v2h2v2H2v2h2v2H2v2h2a2 2 0 0 0 2 2v2h2v-2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2v-2h-2V6a2 2 0 0 0-2-2h-2V2h-2v2h-2V2h-2v2H8V2H6m2 4h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m1 2v8h6V8H9z"/></svg>
           <span>ADDER-LAB</span>
@@ -31,8 +31,7 @@
 
   <nav class="tabs-bar" aria-label="Primary Navigation">
     <div class="tabs-inner">
-      <button class="tab-btn active" data-tab="overview">Overview</button>
-      <button class="tab-btn" data-tab="database">Classical Database (29)</button>
+      <button class="tab-btn active" data-tab="database">Classical Database (29)</button>
       <button class="tab-btn" data-tab="benchmarking">256b OpenSTA &amp; Pareto</button>
       <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
       <button class="tab-btn" data-tab="ideas">100 Discovered Ideas</button>
@@ -40,54 +39,8 @@
   </nav>
 
   <main class="container">
-    <!-- OVERVIEW -->
-    <section id="tab-overview" class="tab-panel active">
-      <div class="hero">
-        <h1>Open-Source Adder Architectures: <span class="highlight">From Classical Trees to Policy Silicon</span></h1>
-        <p>
-          A benchmark-driven hardware dataset and autonomous discovery platform unifying
-          <strong>29 parameterized classical adder families</strong> (<code>projects/database</code>, 4–1024 bits)
-          with <strong>100 policy-driven adder proposals</strong> (<code>experiments/idea-adders</code>, evaluated via dual-pass LLM novelty scoring and Nangate45 OpenSTA 3.1.0).
-        </p>
-        <div class="hero-actions">
-          <button class="btn-neo btn-yellow" onclick="switchTab('benchmarking')">Explore 256-bit Pareto Frontier</button>
-          <button class="btn-neo btn-cyan" onclick="switchTab('database')">Browse 29 Classical Baselines</button>
-          <button class="btn-neo btn-lime" onclick="switchTab('ideas')">Inspect 100 Discovered Ideas</button>
-        </div>
-      </div>
-
-      <div class="kpi-grid">
-        <div class="kpi-card accent-cyan">
-          <div class="kpi-val">29</div>
-          <div class="kpi-label">Classical Adder Families</div>
-          <div class="kpi-sub">Parameterized RTL &amp; sweeps (4–1024b)</div>
-        </div>
-        <div class="kpi-card accent-yellow">
-          <div class="kpi-val">100</div>
-          <div class="kpi-label">Discovered Policy Adders</div>
-          <div class="kpi-sub">Verified Python, RTL &amp; Yosys sweeps</div>
-        </div>
-        <div class="kpi-card accent-lime">
-          <div class="kpi-val">69</div>
-          <div class="kpi-label">OpenSTA 256b Verified</div>
-          <div class="kpi-sub">Nangate45 matched-flow timing &amp; power</div>
-        </div>
-        <div class="kpi-card accent-purple">
-          <div class="kpi-val">4</div>
-          <div class="kpi-label">256b Pareto-Optimal Ideas</div>
-          <div class="kpi-sub">idea3, idea23, idea11, idea22</div>
-        </div>
-      </div>
-
-      <div class="section-card">
-        <h2>IEEE OJCAS 2026 — Triad of Champions</h2>
-        <p class="section-sub">Selected via joint 50% Novelty (Report 11) + 50% 256-bit Nangate45 OpenSTA PPA (Report 12) across all 100 ideas.</p>
-        <div id="champions-grid" class="champ-grid"></div>
-      </div>
-    </section>
-
     <!-- CLASSICAL DATABASE -->
-    <section id="tab-database" class="tab-panel">
+    <section id="tab-database" class="tab-panel active">
       <div class="section-card">
         <h2>Classical Parameterized Adder Database (512-bit Comparison)</h2>
         <p class="section-sub">Source: <code>projects/database/REPORT.md</code> — 29 classical architectures benchmarked at 512-bit data width.</p>
