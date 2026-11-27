@@ -1,8 +1,10 @@
 let DATA = null;
 let selectedCompare = ['idea3', 'idea11', 'idea93'];
 let dbSort = { key: 'freq_512_mhz', asc: false };
-let ideasSort = { key: 'joint_rank', asc: true };
+let ideasSort = { key: 'dyn_rank', asc: true };
 let ideasFilter = 'all';
+let ideasWidth = 256;
+let jointWeights = { nov: 50, delay: 25, area: 15, power: 10 };
 let selectedWidth = 256;
 let selectedDataset = 'ideas';
 let selectedAxis = 'area_delay';
@@ -125,15 +127,88 @@ document.querySelectorAll('#db-table th[data-sort]').forEach(th => {
   });
 });
 
+function setJointPreset(n, d, a, p) {
+  document.getElementById('w-nov').value = n;
+  document.getElementById('w-delay').value = d;
+  document.getElementById('w-area').value = a;
+  document.getElementById('w-power').value = p;
+  jointWeights = { nov: n, delay: d, area: a, power: p };
+  renderIdeasTable();
+}
+
+function computeDynamicIdeas() {
+  const sumW = Math.max(1, jointWeights.nov + jointWeights.delay + jointWeights.area + jointWeights.power);
+  const wn = jointWeights.nov / sumW;
+  const wd = jointWeights.delay / sumW;
+  const wa = jointWeights.area / sumW;
+  const wp = jointWeights.power / sumW;
+
+  document.getElementById('s-val-nov').textContent = jointWeights.nov;
+  document.getElementById('s-val-delay').textContent = jointWeights.delay;
+  document.getElementById('s-val-area').textContent = jointWeights.area;
+  document.getElementById('s-val-power').textContent = jointWeights.power;
+  document.getElementById('w-lbl-nov').textContent = `${Math.round(wn * 100)}%`;
+  document.getElementById('w-lbl-delay').textContent = `${Math.round(wd * 100)}%`;
+  document.getElementById('w-lbl-area').textContent = `${Math.round(wa * 100)}%`;
+  document.getElementById('w-lbl-power').textContent = `${Math.round(wp * 100)}%`;
+
+  const withSta = [];
+  const enriched = DATA.ideas.map(r => {
+    const pt = (r.sta_scaling || []).find(s => s.width === ideasWidth) || null;
+    if (pt) withSta.push({ r, pt });
+    return { ...r, _pt: pt };
+  });
+
+  const minD = withSta.length ? Math.min(...withSta.map(x => x.pt.delay)) : 1;
+  const minA = withSta.length ? Math.min(...withSta.map(x => x.pt.area)) : 1;
+  const minP = withSta.length ? Math.min(...withSta.map(x => x.pt.power)) : 1;
+  const ppaW = wd + wa + wp;
+
+  for (const r of enriched) {
+    const pt = r._pt;
+    const novNorm = r.nov_score / 5.0;
+    if (pt) {
+      const sD = minD / pt.delay;
+      const sA = minA / pt.area;
+      const sP = minP / pt.power;
+      r.dyn_ppa = ppaW > 0 ? (wd * sD + wa * sA + wp * sP) / ppaW : (0.5 * sD + 0.3 * sA + 0.2 * sP);
+      r.dyn_joint = wn * novNorm + wd * sD + wa * sA + wp * sP;
+      r.dyn_area = pt.area;
+      r.dyn_delay = pt.delay;
+      r.dyn_fmax = pt.fmax;
+      r.dyn_power = pt.power;
+      r.dyn_has_sta = true;
+      r.dyn_pareto = !withSta.some(o =>
+        o.pt.area <= pt.area && o.pt.delay <= pt.delay && o.pt.power <= pt.power &&
+        (o.pt.area < pt.area || o.pt.delay < pt.delay || o.pt.power < pt.power)
+      );
+    } else {
+      r.dyn_ppa = 0;
+      r.dyn_joint = wn * novNorm;
+      r.dyn_area = null;
+      r.dyn_delay = null;
+      r.dyn_fmax = null;
+      r.dyn_power = null;
+      r.dyn_has_sta = false;
+      r.dyn_pareto = false;
+    }
+  }
+
+  const ranked = [...enriched].sort((a, b) => (b.dyn_joint - a.dyn_joint) || (b.dyn_ppa - a.dyn_ppa) || (a.idea_id - b.idea_id));
+  ranked.forEach((r, i) => { r.dyn_rank = i + 1; });
+  return ranked;
+}
+
 function renderIdeasTable() {
+  const allDynamic = computeDynamicIdeas();
   const q = (document.getElementById('ideas-search').value || '').toLowerCase();
-  const rows = DATA.ideas.filter(r => {
+  const rows = allDynamic.filter(r => {
     const matchText = r.slug.includes(q) || r.name.toLowerCase().includes(q);
     if (!matchText) return false;
     if (ideasFilter === 'novel') return r.decision === 'novel';
-    if (ideasFilter === 'pareto') return r.pareto_256;
-    if (ideasFilter === 'noncollapsed') return r.has_sta && !r.collapsed_cla;
-    if (ideasFilter === 'sta') return r.has_sta;
+    if (ideasFilter === 'pareto') return r.dyn_pareto;
+    if (ideasFilter === 'noncollapsed') return r.dyn_has_sta && !r.collapsed_cla;
+    if (ideasFilter === 'sta') return r.dyn_has_sta;
     return true;
   }).sort((a, b) => {
     const k = ideasSort.key;
@@ -145,26 +220,47 @@ function renderIdeasTable() {
     const isAdded = selectedCompare.includes(r.slug);
     const badges = [
       `<span class="pill ${r.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${r.decision}</span>`,
-      r.pareto_256 ? '<span class="pill pill-pareto">Pareto</span>' : '',
+      r.dyn_pareto ? '<span class="pill pill-pareto">Pareto</span>' : '',
       r.collapsed_cla ? '<span class="pill pill-collapsed">Collapsed</span>' : ''
     ].filter(Boolean).join(' ');
     return `
       <tr>
-        <td class="mono">#${r.joint_rank}</td>
+        <td class="mono">#${r.dyn_rank}</td>
         <td><a href="idea.html?slug=${r.slug}" style="font-weight:800; color:var(--ink); text-decoration:underline; text-decoration-color:var(--yellow); text-underline-offset:3px;">${r.slug}</a> <span style="font-size:0.78rem; color:#444;">${r.name}</span></td>
-        <td class="mono"><strong>${r.joint_score.toFixed(4)}</strong></td>
+        <td class="mono"><strong>${r.dyn_joint.toFixed(4)}</strong></td>
         <td class="mono">${r.nov_score.toFixed(3)}</td>
-        <td class="mono">${r.ppa_score.toFixed(4)}</td>
-        <td class="mono">${r.has_sta ? r.area_256.toFixed(2) : '—'}</td>
-        <td class="mono">${r.has_sta ? r.delay_256_ns.toFixed(4) : '—'}</td>
-        <td class="mono">${r.has_sta ? r.fmax_256_mhz.toFixed(2) : '—'}</td>
-        <td class="mono">${r.has_sta ? r.power_256_mw.toFixed(4) : '—'}</td>
+        <td class="mono">${r.dyn_ppa.toFixed(4)}</td>
+        <td class="mono">${r.dyn_has_sta ? r.dyn_area.toFixed(2) : '—'}</td>
+        <td class="mono">${r.dyn_has_sta ? r.dyn_delay.toFixed(4) : '—'}</td>
+        <td class="mono">${r.dyn_has_sta ? r.dyn_fmax.toFixed(2) : '—'}</td>
+        <td class="mono">${r.dyn_has_sta ? r.dyn_power.toFixed(4) : '—'}</td>
         <td>${badges}</td>
         <td><button class="btn-mini ${isAdded ? 'added' : ''}" onclick="toggleCompare('${r.slug}')">${isAdded ? 'Added' : '+ Compare'}</button></td>
       </tr>
     `;
   }).join('');
 }
+
+['w-nov', 'w-delay', 'w-area', 'w-power'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    jointWeights = {
+      nov: Number(document.getElementById('w-nov').value),
+      delay: Number(document.getElementById('w-delay').value),
+      area: Number(document.getElementById('w-area').value),
+      power: Number(document.getElementById('w-power').value),
+    };
+    renderIdeasTable();
+  });
+});
+
+document.querySelectorAll('.ideas-width-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.ideas-width-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    ideasWidth = Number(btn.dataset.width);
+    renderIdeasTable();
+  });
+});
 
 document.getElementById('ideas-search').addEventListener('input', renderIdeasTable);
 document.querySelectorAll('.filter-btn').forEach(btn => {

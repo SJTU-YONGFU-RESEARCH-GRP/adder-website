@@ -128,29 +128,67 @@
     <!-- NEW IDEAS -->
     <section id="tab-ideas" class="tab-panel">
       <div class="section-card">
-        <h2>New Ideas — Joint PPA + Novelty Leaderboard</h2>
-        <p class="section-sub">Ranked by <code>0.50 &times; (Novelty/5) + 0.50 &times; PPA_256b</code>. Click column headers to sort or add any idea to Compare.</p>
+        <h2>New Ideas — Customizable Joint PPA + Novelty Leaderboard</h2>
+        <p class="section-sub">
+          Adjust the bit width and normalized weights below to explore how <strong>Novelty</strong>, <strong>Speed (1/Delay)</strong>, <strong>Area</strong>, and <strong>Power</strong> shift the ranking across all 100 ideas.
+        </p>
+        <div style="background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:14px 16px; margin-bottom:16px;">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px;">
+            <div class="mono" style="font-size:0.82rem; font-weight:700;">
+              Joint = <span id="w-lbl-nov">50%</span>&middot;Novelty + <span id="w-lbl-delay">25%</span>&middot;Speed + <span id="w-lbl-area">15%</span>&middot;(1/Area) + <span id="w-lbl-power">10%</span>&middot;(1/Power)
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              <button class="btn-mini" onclick="setJointPreset(50,25,15,10)">Balanced (50/25/15/10)</button>
+              <button class="btn-mini" onclick="setJointPreset(0,50,30,20)">Pure PPA (0/50/30/20)</button>
+              <button class="btn-mini" onclick="setJointPreset(100,0,0,0)">Pure Novelty (100/0/0/0)</button>
+              <button class="btn-mini" onclick="setJointPreset(25,15,30,30)">Low-Power Edge (25/15/30/30)</button>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+            <label style="font-size:0.82rem; font-weight:700;">Novelty (<span id="s-val-nov">50</span>)
+              <input id="w-nov" type="range" min="0" max="100" value="50" style="width:100%;">
+            </label>
+            <label style="font-size:0.82rem; font-weight:700;">Speed / 1/Delay (<span id="s-val-delay">25</span>)
+              <input id="w-delay" type="range" min="0" max="100" value="25" style="width:100%;">
+            </label>
+            <label style="font-size:0.82rem; font-weight:700;">Area Efficiency (<span id="s-val-area">15</span>)
+              <input id="w-area" type="range" min="0" max="100" value="15" style="width:100%;">
+            </label>
+            <label style="font-size:0.82rem; font-weight:700;">Power Efficiency (<span id="s-val-power">10</span>)
+              <input id="w-power" type="range" min="0" max="100" value="10" style="width:100%;">
+            </label>
+          </div>
+        </div>
+        <div class="toolbar">
+          <span style="font-weight:800; font-size:0.84rem;">STA Width:</span>
+          <button class="filter-btn ideas-width-btn" data-width="8">8b (100)</button>
+          <button class="filter-btn ideas-width-btn" data-width="16">16b (100)</button>
+          <button class="filter-btn ideas-width-btn" data-width="32">32b (98)</button>
+          <button class="filter-btn ideas-width-btn" data-width="64">64b (94)</button>
+          <button class="filter-btn ideas-width-btn" data-width="128">128b (85)</button>
+          <button class="filter-btn ideas-width-btn active" data-width="256">256b (71)</button>
+        </div>
         <div class="toolbar">
           <input id="ideas-search" class="search-input" type="text" placeholder="Search idea ID or name (e.g., idea3, Hysteresis, Entropy)...">
           <button class="filter-btn active" data-filter="all">All (100)</button>
           <button class="filter-btn" data-filter="novel">Novel</button>
-          <button class="filter-btn" data-filter="pareto">Pareto (4)</button>
+          <button class="filter-btn" data-filter="pareto">Pareto</button>
           <button class="filter-btn" data-filter="noncollapsed">Non-Collapsed</button>
-          <button class="filter-btn" data-filter="sta">OpenSTA (69)</button>
+          <button class="filter-btn" data-filter="sta">Has STA @ Width</button>
         </div>
         <div class="table-wrap">
           <table id="ideas-table">
             <thead>
               <tr>
-                <th data-sort="joint_rank">Rank</th>
+                <th data-sort="dyn_rank">Rank</th>
                 <th data-sort="idea_id">Idea</th>
-                <th data-sort="joint_score">Joint</th>
+                <th data-sort="dyn_joint">Joint</th>
                 <th data-sort="nov_score">Novelty</th>
-                <th data-sort="ppa_score">PPA</th>
-                <th data-sort="area_256">Area 256b</th>
-                <th data-sort="delay_256_ns">Delay (ns)</th>
-                <th data-sort="fmax_256_mhz">Fmax (MHz)</th>
-                <th data-sort="power_256_mw">Power (mW)</th>
+                <th data-sort="dyn_ppa">PPA</th>
+                <th data-sort="dyn_area">Area (&mu;m&sup2;)</th>
+                <th data-sort="dyn_delay">Delay (ns)</th>
+                <th data-sort="dyn_fmax">Fmax (MHz)</th>
+                <th data-sort="dyn_power">Power (mW)</th>
                 <th>Status</th>
                 <th>Compare</th>
               </tr>
