@@ -219,11 +219,19 @@ function getPointsForWidth(width, dataset = selectedDataset) {
       }
     }
   }
+  const nonCpaSlugs = new Set(['db_carry_save']);
   for (const p of pts) {
-    p.pareto = !pts.some(o =>
-      o.xVal <= p.xVal && o.yVal <= p.yVal &&
-      (o.xVal < p.xVal || o.yVal < p.yVal)
-    );
+    if (nonCpaSlugs.has(p.slug)) {
+      p.nonCpa = true;
+      p.pareto = false;
+    } else {
+      p.nonCpa = false;
+      p.pareto = !pts.some(o =>
+        !nonCpaSlugs.has(o.slug) &&
+        o.xVal <= p.xVal && o.yVal <= p.yVal &&
+        (o.xVal < p.xVal || o.yVal < p.yVal)
+      );
+    }
   }
   return pts;
 }
@@ -244,6 +252,7 @@ function renderBubbleDetail(pt) {
   const isAdded = selectedCompare.includes(pt.slug);
   const pills = pt.kind === 'classical'
     ? `<span class="pill" style="background:var(--purple-soft);">Classic Design</span>
+       ${pt.nonCpa ? '<span class="pill pill-collapsed">3:2 Redundant CSA (Excluded from CPA Pareto)</span>' : ''}
        ${pt.pareto ? `<span class="pill pill-pareto">Pareto-Optimal @ ${selectedWidth}b</span>` : ''}`
     : `<span class="pill ${e.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${e.decision} (${e.nov_score.toFixed(3)}/5)</span>
        <span class="pill">Joint #${e.joint_rank} (${e.joint_score.toFixed(4)})</span>
