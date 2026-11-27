@@ -94,7 +94,7 @@ function renderDbTable() {
     const isAdded = selectedCompare.includes(r.slug);
     return `
       <tr>
-        <td><strong>${r.name}</strong></td>
+        <td><a href="design.html?slug=${r.slug}" style="font-weight:800; color:var(--ink); text-decoration:underline; text-decoration-color:var(--cyan); text-underline-offset:3px;">${r.name}</a></td>
         <td class="mono">${r.area_512.toFixed(2)}</td>
         <td class="mono">${r.freq_512_mhz.toFixed(1)}</td>
         <td class="mono">${r.delay_512_ns.toFixed(2)}</td>

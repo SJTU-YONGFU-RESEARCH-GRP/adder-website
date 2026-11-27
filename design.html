@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classic Design — ADDER</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-group" href="index.html">
+        <div class="brand-badge">
+          <svg viewBox="0 0 24 24"><path d="M6 2v2H4a2 2 0 0 0-2 2v2h2v2H2v2h2v2H2v2h2a2 2 0 0 0 2 2v2h2v-2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2v-2h-2V6a2 2 0 0 0-2-2h-2V2h-2v2h-2V2h-2v2H8V2H6m2 4h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m1 2v8h6V8H9z"/></svg>
+          <span>ADDER</span>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">Classic Design Dossier</span>
+          <span class="brand-sub">Block Diagram, Architecture &amp; Width Scaling</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a class="btn-neo btn-yellow" href="index.html">&larr; Back to Classic Design</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="design-content">
+      <div class="section-card"><p>Loading design details…</p></div>
+    </div>
+  </main>
+
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: 'base', themeVariables: {
+      primaryColor: '#fff0b9', primaryTextColor: '#151b20', primaryBorderColor: '#151b20',
+      lineColor: '#151b20', secondaryColor: '#c9f3f4', tertiaryColor: '#e7f4c8'
+    }});
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function mdInline(s) {
+      return esc(s)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    async function loadDesign() {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      const res = await fetch('data.json');
+      const data = await res.json();
+      const d = data.classical.find(c => c.slug === slug);
+      const root = document.getElementById('design-content');
+      if (!d) {
+        root.innerHTML = '<div class="section-card"><h2>Design not found</h2><p><a href="index.html">Return to Classic Design</a></p></div>';
+        return;
+      }
+      document.title = `${d.name} — Classic Design`;
+
+      const charsHtml = (d.characteristics && d.characteristics.length)
+        ? `<ul>${d.characteristics.map(c => `<li>${mdInline(c)}</li>`).join('')}</ul>`
+        : '<p>See width scaling table below.</p>';
+      const usesHtml = (d.use_cases && d.use_cases.length)
+        ? `<ul>${d.use_cases.map(u => `<li>${mdInline(u)}</li>`).join('')}</ul>`
+        : '<p>General-purpose integer arithmetic datapaths.</p>';
+
+      const scalingRows = (d.scaling || []).map(s => `
+        <tr>
+          <td class="mono">${s.width}-bit</td>
+          <td class="mono">${s.area.toFixed(2)}</td>
+          <td class="mono">${s.delay.toFixed(2)}</td>
+          <td class="mono">${s.freq.toFixed(1)}</td>
+          <td class="mono">${s.power.toFixed(2)}</td>
+          <td class="mono">${s.cells}</td>
+        </tr>
+      `).join('');
+
+      root.innerHTML = `
+        <div class="hero" style="padding:24px 28px;">
+          <span class="pill pill-pareto" style="margin-bottom:10px;">Classic Design</span>
+          <h1>${esc(d.name)} Adder</h1>
+          <p style="margin-bottom:0;">${mdInline(d.overview || '')}</p>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card accent-cyan">
+            <div class="kpi-val">${d.area_512.toFixed(0)}</div>
+            <div class="kpi-label">512-bit Area (&mu;m&sup2;)</div>
+          </div>
+          <div class="kpi-card accent-yellow">
+            <div class="kpi-val">${d.freq_512_mhz.toFixed(1)}</div>
+            <div class="kpi-label">512-bit Speed (MHz)</div>
+          </div>
+          <div class="kpi-card accent-lime">
+            <div class="kpi-val">${d.delay_512_ns.toFixed(2)}</div>
+            <div class="kpi-label">512-bit Delay (ns)</div>
+          </div>
+          <div class="kpi-card accent-purple">
+            <div class="kpi-val">${d.power_512_mw.toFixed(1)}</div>
+            <div class="kpi-label">512-bit Power (mW)</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>Block Diagram &amp; Datapath</h2>
+          <div class="chart-box" style="display:flex; justify-content:center;">
+            ${d.mermaid ? `<pre class="mermaid">${esc(d.mermaid)}</pre>` : '<p>No block diagram available.</p>'}
+          </div>
+        </div>
+
+        <div class="kw-grid" style="margin-bottom:24px;">
+          <div class="section-card" style="margin-bottom:0;">
+            <h2>Key Characteristics</h2>
+            ${charsHtml}
+          </div>
+          <div class="section-card" style="margin-bottom:0;">
+            <h2>Typical Use Cases</h2>
+            ${usesHtml}
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>Width Scaling (4-bit to 1024-bit)</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Width</th>
+                  <th>Area (&mu;m&sup2;)</th>
+                  <th>Delay (ns)</th>
+                  <th>Frequency (MHz)</th>
+                  <th>Power (mW)</th>
+                  <th>Cells</th>
+                </tr>
+              </thead>
+              <tbody>${scalingRows}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      if (d.mermaid) {
+        await mermaid.run({ querySelector: '.mermaid' });
+      }
+    }
+
+    loadDesign();
+  </script>
+</body>
+</html>
