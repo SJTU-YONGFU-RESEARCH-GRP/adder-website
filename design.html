@@ -141,7 +141,8 @@
       }
     });
 
-    let zoomScale = 1.0;
+    let zoomScale = 0.70;
+    let baseSvgWidth = null;
 
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -154,10 +155,13 @@
     }
 
     function setZoom(val) {
-      zoomScale = Math.max(0.5, Math.min(2.5, val));
-      const stage = document.getElementById('diagram-stage');
+      zoomScale = Math.max(0.4, Math.min(2.2, val));
+      const svg = document.querySelector('#diagram-stage svg');
       const lbl = document.getElementById('zoom-label');
-      if (stage) stage.style.transform = `scale(${zoomScale.toFixed(2)})`;
+      if (svg && baseSvgWidth) {
+        svg.style.minWidth = '0';
+        svg.style.width = `${Math.round(baseSvgWidth * zoomScale)}px`;
+      }
       if (lbl) lbl.textContent = `${Math.round(zoomScale * 100)}%`;
     }
 
@@ -312,9 +316,9 @@
             </div>
             <div style="display:flex; gap:6px; align-items:center;">
               <button class="btn-mini" onclick="setZoom(zoomScale - 0.15)">-</button>
-              <span id="zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">100%</span>
+              <span id="zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">70%</span>
               <button class="btn-mini" onclick="setZoom(zoomScale + 0.15)">+</button>
-              <button class="btn-mini" onclick="setZoom(1.0)">Reset</button>
+              <button class="btn-mini" onclick="setZoom(0.70)">Reset</button>
               <button class="btn-mini" style="background:var(--yellow);" onclick="downloadSvg('${d.slug}')">Download SVG</button>
             </div>
           </div>
@@ -374,6 +378,11 @@
       if (d.mermaid) {
         await mermaid.run({ querySelector: '.mermaid' });
         colorizeDiagram();
+        const svg = document.querySelector('#diagram-stage svg');
+        if (svg) {
+          baseSvgWidth = svg.getBoundingClientRect().width || 720;
+          setZoom(0.70);
+        }
       }
     }
 
