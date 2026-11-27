@@ -8291,6 +8291,20 @@
           "delay": 1.8858,
           "fmax": 530.28,
           "power": 0.0427
+        },
+        {
+          "width": 128,
+          "area": 966.38,
+          "delay": 3.6373,
+          "fmax": 274.93,
+          "power": 0.0882
+        },
+        {
+          "width": 256,
+          "area": 1909.35,
+          "delay": 7.2115,
+          "fmax": 138.67,
+          "power": 0.175
         }
       ],
       "title_sub": "TDSCA: Deterministic Carry Policy Switching via Block-Local Propagate Transition Density",
@@ -9207,6 +9221,13 @@
           "delay": 4.3157,
           "fmax": 231.71,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "ACMFA: Dual-Momentum Carry Policy for Exact Tri-Path Block Addition",
@@ -10045,6 +10066,20 @@
           "delay": 1.9421,
           "fmax": 514.91,
           "power": 0.0463
+        },
+        {
+          "width": 128,
+          "area": 970.1,
+          "delay": 4.0367,
+          "fmax": 247.73,
+          "power": 0.0917
+        },
+        {
+          "width": 256,
+          "area": 1947.12,
+          "delay": 7.9985,
+          "fmax": 125.02,
+          "power": 0.185
         }
       ],
       "title_sub": "",
