@@ -37,7 +37,7 @@
       <button class="tab-btn active" data-tab="database">Classic Design</button>
       <button class="tab-btn" data-tab="ideas">New Ideas</button>
       <button class="tab-btn" data-tab="benchmarking">Pareto Analysis</button>
-      <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
+      <button class="tab-btn" data-tab="taxonomy">Architecture &amp; Taxonomy</button>
     </div>
   </nav>
 
@@ -70,7 +70,10 @@
     <!-- PARETO ANALYSIS -->
     <section id="tab-benchmarking" class="tab-panel">
       <div class="section-card">
-        <h2>Pareto Analysis: Area vs. Delay (Nangate45 + OpenSTA 3.1.0)</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <h2 style="margin:0;">Pareto Analysis: Area vs. Delay (Nangate45 + OpenSTA 3.1.0)</h2>
+          <span class="tag tag-yellow">Paper Fig. 4</span>
+        </div>
         <p class="section-sub">
           Matched-flow 45nm Nangate45 synthesis &amp; OpenSTA across <strong>Classic Designs</strong> (8–512b), <strong>Discovered Ideas</strong> (8–256b), and <strong>Combined</strong>. Click any bubble to inspect its full details.
         </p>
@@ -105,6 +108,7 @@
             <span id="pareto-zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">100%</span>
             <button class="btn-mini" onclick="setParetoZoom(paretoZoom + 0.25)">Zoom +</button>
             <button class="btn-mini" onclick="setParetoZoom(1.0)">Reset</button>
+            <button class="btn-mini" onclick="exportChartSvg('#pareto-chart svg', `adder_pareto_${selectedWidth}b_${selectedAxis}.svg`)">Export SVG</button>
           </div>
         </div>
         <div class="toolbar" style="justify-content:space-between;">
@@ -139,7 +143,13 @@
       </div>
 
       <div class="section-card">
-        <h2>Champion Width Scaling (8-bit to 256-bit OpenSTA Delay)</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <h2 style="margin:0;">Champion Width Scaling (8-bit to 256-bit OpenSTA Delay)</h2>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="tag tag-cyan">Paper Fig. 6</span>
+            <button class="btn-mini" onclick="exportChartSvg('#scaling-chart svg', 'adder_champion_scaling.svg')">Export SVG</button>
+          </div>
+        </div>
         <p class="section-sub">Comparing delay scaling of Case Study 1 (<code>idea3</code>), Case Study 2 (<code>idea11</code>), and Case Study 3 (<code>idea93</code>).</p>
         <div id="scaling-chart" class="chart-box"></div>
       </div>
@@ -225,15 +235,34 @@
           </table>
         </div>
       </div>
+
+      <div class="section-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <h2 style="margin:0;">Joint Preset Sensitivity &amp; Rank Trajectories</h2>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="tag tag-yellow">Paper Fig. 5</span>
+            <button class="btn-mini" onclick="exportChartSvg('#preset-chart svg', `adder_joint_presets_${ideasWidth}b.svg`)">Export SVG</button>
+          </div>
+        </div>
+        <p class="section-sub">How the three champions (<code>idea3</code>, <code>idea11</code>, <code>idea93</code>) and Pareto/novelty peers shift across the four weight presets at the selected bit width.</p>
+        <div id="preset-chart" class="chart-box"></div>
+      </div>
     </section>
 
     <!-- KEYWORD TAXONOMY -->
     <section id="tab-taxonomy" class="tab-panel">
       <div class="section-card">
-        <h2>Common Policy-Driven Adder Architecture &amp; Keyword Taxonomy</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <h2 style="margin:0;">Common Policy-Driven Adder Architecture &amp; Keyword Taxonomy</h2>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span class="tag tag-cyan">Paper Fig. 2</span>
+            <button class="btn-mini" onclick="exportChartSvg('#taxonomy-arch-svg', 'adder_policy_architecture.svg')">Export SVG</button>
+          </div>
+        </div>
         <p class="section-sub">How block-local features, stateful context, and deterministic control policies compose exact carry-evaluation paths.</p>
         <div class="chart-box" style="margin-bottom:20px; display:flex; justify-content:center;">
-          <svg viewBox="0 0 860 270" style="width:100%; max-width:860px; height:auto;">
+          <svg id="taxonomy-arch-svg" viewBox="0 0 860 270" style="width:100%; max-width:860px; height:auto;">
+            <rect width="860" height="270" rx="10" fill="#fffaf0"/>
             <defs>
               <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                 <path d="M0,0 L8,4 L0,8 Z" fill="#151b20"/>
