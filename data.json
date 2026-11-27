@@ -7894,7 +7894,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea99",
@@ -7915,7 +7944,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1141,
+          "fmax": 897.59,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1686,
+          "fmax": 461.13,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.287,
+          "fmax": 233.26,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea44",
@@ -7936,7 +8001,29 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        }
+      ]
     },
     {
       "slug": "idea36",
@@ -7957,7 +8044,29 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        }
+      ]
     },
     {
       "slug": "idea40",
@@ -7978,7 +8087,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3419,
+          "fmax": 2924.83,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5971,
+          "fmax": 1674.76,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1285,
+          "fmax": 469.81,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1734,
+          "fmax": 239.61,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea34",
@@ -7999,7 +8144,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.15,
+          "delay": 0.3329,
+          "fmax": 3003.91,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 98.15,
+          "delay": 0.5782,
+          "fmax": 1729.51,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 198.17,
+          "delay": 1.0791,
+          "fmax": 926.7,
+          "power": 0.0168
+        },
+        {
+          "width": 64,
+          "area": 399.0,
+          "delay": 2.1174,
+          "fmax": 472.28,
+          "power": 0.0339
+        },
+        {
+          "width": 128,
+          "area": 799.06,
+          "delay": 4.2086,
+          "fmax": 237.61,
+          "power": 0.0678
+        }
+      ]
     },
     {
       "slug": "idea47",
@@ -8020,7 +8201,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6037,
+          "fmax": 1656.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1333,
+          "fmax": 882.38,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1925,
+          "fmax": 456.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea35",
@@ -8041,7 +8251,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea32",
@@ -8062,7 +8301,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3419,
+          "fmax": 2924.83,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5971,
+          "fmax": 1674.76,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1381,
+          "fmax": 467.7,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1896,
+          "fmax": 238.69,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea57",
@@ -8083,7 +8358,29 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        }
+      ]
     },
     {
       "slug": "idea45",
@@ -8104,7 +8401,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1028,
+          "fmax": 906.78,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1411,
+          "fmax": 467.05,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1752,
+          "fmax": 239.51,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea55",
@@ -8125,7 +8458,22 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        }
+      ]
     },
     {
       "slug": "idea43",
@@ -8146,7 +8494,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1028,
+          "fmax": 906.78,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1255,
+          "fmax": 470.48,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1722,
+          "fmax": 239.68,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea59",
@@ -8167,7 +8551,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea49",
@@ -8188,7 +8608,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1237,
+          "fmax": 889.92,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1829,
+          "fmax": 458.11,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea31",
@@ -8209,7 +8658,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3371,
+          "fmax": 2966.48,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5923,
+          "fmax": 1688.33,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1135,
+          "fmax": 898.07,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.144,
+          "fmax": 466.42,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1907,
+          "fmax": 238.62,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea39",
@@ -8230,7 +8715,29 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        }
+      ]
     },
     {
       "slug": "idea46",
@@ -8251,7 +8758,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6068,
+          "fmax": 1647.99,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea38",
@@ -8272,7 +8808,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1123,
+          "fmax": 899.04,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1506,
+          "fmax": 464.99,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1878,
+          "fmax": 238.79,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea33",
@@ -8293,7 +8865,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1123,
+          "fmax": 899.04,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1381,
+          "fmax": 467.7,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1847,
+          "fmax": 238.97,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea60",
@@ -8314,7 +8922,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.159,
+          "fmax": 463.18,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2583,
+          "fmax": 234.84,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea42",
@@ -8335,7 +8979,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3419,
+          "fmax": 2924.83,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6001,
+          "fmax": 1666.39,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1093,
+          "fmax": 901.47,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1733,
+          "fmax": 460.13,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea98",
@@ -8470,7 +9150,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea41",
@@ -8491,7 +9200,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.345,
+          "fmax": 2898.55,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6037,
+          "fmax": 1656.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        }
+      ]
     },
     {
       "slug": "idea48",
@@ -8512,7 +9257,36 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        }
+      ]
     },
     {
       "slug": "idea54",
@@ -8533,7 +9307,22 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        }
+      ]
     },
     {
       "slug": "idea37",
@@ -8554,7 +9343,43 @@
       "power_256_mw": null,
       "adp_256": null,
       "pdp_256_pj": null,
-      "sta_scaling": []
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.11,
+          "fmax": 900.9,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1363,
+          "fmax": 468.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.186,
+          "fmax": 238.89,
+          "power": 0.0669
+        }
+      ]
     }
   ],
   "champions": [
