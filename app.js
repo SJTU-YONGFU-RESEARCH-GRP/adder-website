@@ -3,6 +3,8 @@ let selectedCompare = ['idea3', 'idea11', 'idea93'];
 let dbSort = { key: 'freq_512_mhz', asc: false };
 let ideasSort = { key: 'joint_rank', asc: true };
 let ideasFilter = 'all';
+let selectedWidth = 256;
+let selectedBubbleSlug = 'idea3';
 
 async function init() {
   const res = await fetch('data.json');
@@ -172,41 +174,129 @@ document.querySelectorAll('#ideas-table th[data-sort]').forEach(th => {
   });
 });
 
+function getPointsForWidth(width) {
+  const pts = [];
+  for (const r of DATA.ideas) {
+    const pt = (r.sta_scaling || []).find(s => s.width === width);
+    if (pt) {
+      pts.push({
+        idea: r,
+        slug: r.slug,
+        area: pt.area,
+        delay: pt.delay,
+        fmax: pt.fmax,
+        power: pt.power,
+        adp: pt.area * pt.delay,
+        pdp: pt.power * pt.delay,
+      });
+    }
+  }
+  for (const p of pts) {
+    p.pareto = !pts.some(o =>
+      o.area <= p.area && o.delay <= p.delay && o.power <= p.power &&
+      (o.area < p.area || o.delay < p.delay || o.power < p.power)
+    );
+  }
+  return pts;
+}
+
+function selectBubble(slug) {
+  selectedBubbleSlug = slug;
+  renderParetoChart();
+}
+
+function renderBubbleDetail(pt) {
+  const box = document.getElementById('bubble-detail');
+  if (!box) return;
+  if (!pt) {
+    box.style.display = 'none';
+    return;
+  }
+  const r = pt.idea;
+  const isAdded = selectedCompare.includes(r.slug);
+  box.style.display = 'flex';
+  box.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
+          <span class="pill ${r.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${r.decision} (${r.nov_score.toFixed(3)}/5)</span>
+          <span class="pill">Joint #${r.joint_rank} (${r.joint_score.toFixed(4)})</span>
+          ${pt.pareto ? `<span class="pill pill-pareto">Pareto-Optimal @ ${selectedWidth}b</span>` : ''}
+          ${r.collapsed_cla ? '<span class="pill pill-collapsed">ABC Equivalence-Collapsed</span>' : '<span class="pill" style="background:var(--cyan-soft);">Non-Collapsed</span>'}
+        </div>
+        <h3 style="margin:0; font-size:1.1rem;">${r.slug.toUpperCase()}: ${r.name}</h3>
+      </div>
+      <button class="btn-mini ${isAdded ? 'added' : ''}" onclick="toggleCompare('${r.slug}'); renderBubbleDetail(getPointsForWidth(selectedWidth).find(p => p.slug === '${r.slug}'));">
+        ${isAdded ? 'Added to Compare' : '+ Add to Compare'}
+      </button>
+    </div>
+    <div class="mono" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; font-size:0.84rem; background:var(--cream); border:1.5px solid var(--ink); border-radius:8px; padding:12px;">
+      <div><strong>Area (${selectedWidth}b):</strong><br>${pt.area.toFixed(2)} &mu;m&sup2;</div>
+      <div><strong>Delay (${selectedWidth}b):</strong><br>${pt.delay.toFixed(4)} ns</div>
+      <div><strong>Fmax (${selectedWidth}b):</strong><br>${pt.fmax.toFixed(2)} MHz</div>
+      <div><strong>Power (${selectedWidth}b):</strong><br>${pt.power.toFixed(4)} mW</div>
+      <div><strong>ADP:</strong><br>${pt.adp.toFixed(1)} &mu;m&sup2;&middot;ns</div>
+      <div><strong>PDP:</strong><br>${pt.pdp.toFixed(4)} pJ</div>
+    </div>
+  `;
+}
+
 function renderParetoChart() {
-  const sta = DATA.ideas.filter(r => r.has_sta);
-  const w = 780, h = 360, pad = 56;
-  const minA = 1500, maxA = 2250, minD = 3.2, maxD = 9.2;
-  const sx = a => pad + ((a - minA) / (maxA - minA)) * (w - 2 * pad);
-  const sy = d => h - pad - ((d - minD) / (maxD - minD)) * (h - 2 * pad);
+  const pts = getPointsForWidth(selectedWidth);
+  if (!pts.length) return;
+  const w = 780, h = 360, padL = 62, padR = 32, padT = 24, padB = 46;
+  const areas = pts.map(p => p.area), delays = pts.map(p => p.delay);
+  const minA = Math.min(...areas) * 0.96, maxA = Math.max(...areas) * 1.04;
+  const minD = Math.min(...delays) * 0.90, maxD = Math.max(...delays) * 1.06;
+  const sx = a => padL + ((a - minA) / Math.max(1e-6, maxA - minA)) * (w - padL - padR);
+  const sy = d => h - padB - ((d - minD) / Math.max(1e-6, maxD - minD)) * (h - padT - padB);
 
-  const paretoPts = sta.filter(r => r.pareto_256).sort((a, b) => a.area_256 - b.area_256);
-  const poly = paretoPts.map(p => `${sx(p.area_256).toFixed(1)},${sy(p.delay_256_ns).toFixed(1)}`).join(' ');
+  const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.area - b.area);
+  const poly = paretoPts.map(p => `${sx(p.area).toFixed(1)},${sy(p.delay).toFixed(1)}`).join(' ');
 
-  const circles = sta.map(r => {
-    const cx = sx(r.area_256), cy = sy(r.delay_256_ns);
-    const fill = r.pareto_256 ? '#ffc83e' : (r.collapsed_cla ? '#f38469' : '#22bfd7');
-    const rad = r.pareto_256 ? 7 : 4.5;
-    const label = r.pareto_256 ? `<text x="${cx + 9}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${r.slug}</text>` : '';
-    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="1.5"><title>${r.slug}: Area=${r.area_256} um2, Delay=${r.delay_256_ns} ns, Joint=${r.joint_score}</title></circle>${label}`;
+  const circles = pts.map(p => {
+    const cx = sx(p.area), cy = sy(p.delay);
+    const isSel = p.slug === selectedBubbleSlug;
+    const fill = p.pareto ? '#ffc83e' : (p.idea.collapsed_cla ? '#f38469' : '#22bfd7');
+    const rad = isSel ? 9 : (p.pareto ? 7 : 5);
+    const strokeW = isSel ? 3 : 1.5;
+    const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${p.slug}</text>` : '';
+    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${p.slug}: Area=${p.area} um2, Delay=${p.delay} ns (Click for details)</title></circle>${label}`;
+  }).join('');
+
+  const xTicks = [0, 0.5, 1.0].map(f => {
+    const val = minA + (maxA - minA) * f;
+    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${val.toFixed(0)}</text>`;
+  }).join('');
+  const yTicks = [0, 0.5, 1.0].map(f => {
+    const val = minD + (maxD - minD) * f;
+    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${val.toFixed(2)}</text>`;
   }).join('');
 
   document.getElementById('pareto-chart').innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" style="width:100%; max-width:${w}px; height:auto;">
-      <line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="#151b20" stroke-width="2"/>
-      <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${h-pad}" stroke="#151b20" stroke-width="2"/>
+      <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
+      <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
+      ${xTicks}${yTicks}
       ${circles}
-      <text x="${w/2}" y="${h-14}" text-anchor="middle" font-size="12" font-weight="700">256-bit Area (&mu;m&sup2;)</text>
-      <text x="16" y="${h/2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${h/2})">256-bit Delay (ns)</text>
-      <text x="${sx(1566)}" y="${sy(3.4)}" font-size="11" font-weight="700">1566</text>
-      <text x="${sx(1900)}" y="${h-pad+16}" font-size="11">1900</text>
-      <text x="${sx(2150)}" y="${h-pad+16}" font-size="11">2150</text>
-      <text x="${pad-36}" y="${sy(3.7)}" font-size="11">3.7</text>
-      <text x="${pad-36}" y="${sy(6.0)}" font-size="11">6.0</text>
-      <text x="${pad-36}" y="${sy(8.5)}" font-size="11">8.5</text>
+      <text x="${(w + padL - padR)/2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit Area (&mu;m&sup2;)</text>
+      <text x="16" y="${(h - padB + padT)/2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT)/2})">${selectedWidth}-bit Delay (ns)</text>
     </svg>
   `;
+
+  const selPt = pts.find(p => p.slug === selectedBubbleSlug) || paretoPts[0];
+  renderBubbleDetail(selPt);
 }
+
+document.querySelectorAll('.width-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.width-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedWidth = Number(btn.dataset.width);
+    renderParetoChart();
+  });
+});
 
 function renderScalingChart() {
   const champs = [
