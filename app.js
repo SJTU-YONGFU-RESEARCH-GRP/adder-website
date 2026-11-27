@@ -344,10 +344,15 @@ function renderParetoChart() {
   const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.xVal - b.xVal);
   const poly = paretoPts.map(p => `${sx(p.xVal).toFixed(1)},${sy(p.yVal).toFixed(1)}`).join(' ');
 
-  const placedBoxes = [];
+  const placedBoxes = pts.map(p => {
+    const cx = sx(p.xVal), cy = sy(p.yVal);
+    return { x0: cx - 7, y0: cy - 7, x1: cx + 7, y1: cy + 7 };
+  });
   const candidateOffsets = [
-    [10, 4], [10, -10], [10, 16], [-10, -10], [-10, 16],
-    [14, -22], [14, 28], [-14, -22], [-14, 28], [22, 4], [10, -34], [10, 40]
+    [10, 4], [10, -12], [10, 18], [-10, -12], [-10, 18], [-10, 4],
+    [16, -26], [16, 32], [-16, -26], [-16, 32],
+    [24, -40], [24, 46], [-24, -40], [-24, 46],
+    [36, 4], [-36, 4], [10, -54], [10, 60]
   ];
 
   const labelsSvg = [];
@@ -363,10 +368,9 @@ function renderParetoChart() {
     const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
 
     if (p.pareto || isSel) {
-      const tw = labelText.length * 6.8 + 6;
-      const th = 14;
-      let best = candidateOffsets[0];
-      let anchor = 'start';
+      const tw = labelText.length * 7.0 + 8;
+      const th = 15;
+      let chosen = null;
       for (const [dx, dy] of candidateOffsets) {
         const isLeft = dx < 0;
         const lx = cx + dx;
@@ -374,21 +378,27 @@ function renderParetoChart() {
         const x0 = isLeft ? lx - tw : lx;
         const x1 = isLeft ? lx : lx + tw;
         const y0 = ly - th + 2;
-        const y1 = ly + 2;
+        const y1 = ly + 3;
         if (x0 < padL || x1 > w - 4 || y0 < 6 || y1 > h - padB) continue;
         const overlaps = placedBoxes.some(b => !(x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1));
         if (!overlaps) {
-          best = [dx, dy];
-          anchor = isLeft ? 'end' : 'start';
-          placedBoxes.push({ x0, y0, x1, y1 });
+          chosen = { dx, dy, anchor: isLeft ? 'end' : 'start', box: { x0, y0, x1, y1 } };
           break;
         }
       }
-      const lx = cx + best[0], ly = cy + best[1];
-      if (Math.hypot(best[0], best[1]) > 14) {
+      if (!chosen) {
+        // Fallback: place cleanly above/below with guaranteed vertical separation
+        const dy = -14 - (labelsSvg.length * 16) % 64;
+        const lx = Math.min(w - tw - 6, Math.max(padL + 4, cx + 10));
+        const ly = Math.max(20, Math.min(h - padB - 6, cy + dy));
+        chosen = { dx: lx - cx, dy: ly - cy, anchor: 'start', box: { x0: lx, y0: ly - th + 2, x1: lx + tw, y1: ly + 3 } };
+      }
+      placedBoxes.push(chosen.box);
+      const lx = cx + chosen.dx, ly = cy + chosen.dy;
+      if (Math.hypot(chosen.dx, chosen.dy) > 14) {
         labelsSvg.push(`<line x1="${cx.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${lx.toFixed(1)}" y2="${(ly - 3).toFixed(1)}" stroke="rgba(21,27,32,0.45)" stroke-width="1"/>`);
       }
-      labelsSvg.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" font-size="11" font-weight="800" font-family="JetBrains Mono" stroke="#fffaf0" stroke-width="3" paint-order="stroke">${labelText}</text>`);
+      labelsSvg.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${chosen.anchor}" font-size="11" font-weight="800" font-family="JetBrains Mono" stroke="#fffaf0" stroke-width="3.5" paint-order="stroke">${labelText}</text>`);
     }
 
     return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area.toFixed(2)} um2, Delay=${p.delay.toFixed(4)} ns, Power=${p.power.toFixed(4)} mW, PDP=${p.pdp.toFixed(4)} pJ</title></circle>`;

@@ -479,3 +479,16 @@ tr:hover td { background: var(--yellow-soft); }
   border-radius: var(--radius-sm);
   background: var(--paper);
 }
+
+#ideas-table td:nth-child(2) {
+  white-space: normal;
+  min-width: 220px;
+}
+
+@media (max-width: 640px) {
+  .header-inner { flex-wrap: wrap; padding: 10px 14px; }
+  .brand-meta { display: none; }
+  .container { padding: 16px 12px 48px; }
+  .section-card { padding: 16px; }
+  .modal-head { flex-wrap: wrap; }
+}
