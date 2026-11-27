@@ -19,59 +19,75 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 700;
     }
     .diagram-viewport {
-      background:
-        radial-gradient(rgba(21, 27, 32, 0.12) 1px, transparent 1px);
-      background-size: 16px 16px;
+      background: radial-gradient(rgba(21, 27, 32, 0.12) 1px, transparent 1px);
+      background-size: 18px 18px;
       background-color: var(--cream);
       border: var(--border-ink);
       border-radius: var(--radius-sm);
-      padding: 20px;
-      min-height: 280px;
+      padding: 24px;
+      min-height: 340px;
       overflow: auto;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .diagram-stage {
-      transform-origin: center center;
+      transform-origin: top center;
       transition: transform 0.15s ease;
-      width: 100%;
-      display: flex;
-      justify-content: center;
+      display: inline-block;
     }
     .diagram-stage svg {
-      max-width: 100%;
       height: auto;
+      min-width: 680px;
       font-family: var(--font-sans) !important;
     }
     .diagram-stage .node rect,
     .diagram-stage .node polygon,
     .diagram-stage .node circle {
       stroke: #151b20 !important;
-      stroke-width: 2px !important;
+      stroke-width: 2.2px !important;
       rx: 8px;
       ry: 8px;
     }
     .diagram-stage .nodeLabel {
       font-weight: 700 !important;
-      font-size: 13px !important;
+      font-size: 16px !important;
       color: #151b20 !important;
     }
     .diagram-stage .edgePath .path {
       stroke: #151b20 !important;
-      stroke-width: 2px !important;
+      stroke-width: 2.2px !important;
     }
     .diagram-stage .edgeLabel {
       background-color: #fffaf0 !important;
-      padding: 2px 6px !important;
+      padding: 3px 7px !important;
       border-radius: 6px;
       font-family: var(--font-mono) !important;
-      font-size: 11px !important;
+      font-size: 13px !important;
       font-weight: 700 !important;
+    }
+    .plots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 16px;
+    }
+    .ref-list {
+      margin: 0;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+    .ref-list a {
+      color: #0e7490;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      word-break: break-all;
     }
   </style>
 </head>
@@ -85,7 +101,7 @@
         </div>
         <div class="brand-meta">
           <span class="brand-name">Classic Design Dossier</span>
-          <span class="brand-sub">Block Diagram, Architecture &amp; Width Scaling</span>
+          <span class="brand-sub">Block Diagram, Scaling Bottlenecks &amp; References</span>
         </div>
       </a>
       <div class="header-actions">
@@ -105,15 +121,16 @@
       startOnLoad: false,
       theme: 'base',
       flowchart: {
-        useMaxWidth: true,
+        useMaxWidth: false,
         htmlLabels: true,
         curve: 'basis',
-        nodeSpacing: 42,
-        rankSpacing: 58,
-        padding: 14
+        nodeSpacing: 52,
+        rankSpacing: 72,
+        padding: 18
       },
       themeVariables: {
         fontFamily: 'Inter, sans-serif',
+        fontSize: '17px',
         primaryColor: '#fff0b9',
         primaryTextColor: '#151b20',
         primaryBorderColor: '#151b20',
@@ -137,7 +154,7 @@
     }
 
     function setZoom(val) {
-      zoomScale = Math.max(0.5, Math.min(2.2, val));
+      zoomScale = Math.max(0.5, Math.min(2.5, val));
       const stage = document.getElementById('diagram-stage');
       const lbl = document.getElementById('zoom-label');
       if (stage) stage.style.transform = `scale(${zoomScale.toFixed(2)})`;
@@ -152,11 +169,11 @@
         const shape = node.querySelector('rect, polygon, circle');
         if (!shape) return;
         if (/^(A|B|Cin|Input|Operand)/i.test(txt)) {
-          shape.style.fill = '#c9f3f4'; // Cyan soft for inputs
+          shape.style.fill = '#c9f3f4';
         } else if (/^(S|Sum|Cout|Out|Result)/i.test(txt)) {
-          shape.style.fill = '#e7f4c8'; // Lime soft for outputs
+          shape.style.fill = '#e7f4c8';
         } else {
-          shape.style.fill = '#fff0b9'; // Yellow soft for logic stages
+          shape.style.fill = '#fff0b9';
         }
       });
     }
@@ -171,6 +188,44 @@
       a.download = `${slug}_block_diagram.svg`;
       a.click();
       URL.revokeObjectURL(url);
+    }
+
+    function buildScalingPlot(scaling, key, title, unit, color) {
+      if (!scaling || scaling.length < 2) return '<p>No scaling data.</p>';
+      const w = 460, h = 240, padL = 62, padR = 20, padT = 22, padB = 38;
+      const maxVal = Math.max(...scaling.map(s => s[key])) * 1.1 || 1;
+      const sx = i => padL + (i / (scaling.length - 1)) * (w - padL - padR);
+      const sy = v => h - padB - (v / maxVal) * (h - padT - padB);
+
+      const poly = scaling.map((s, i) => `${sx(i).toFixed(1)},${sy(s[key]).toFixed(1)}`).join(' ');
+      const dots = scaling.map((s, i) => `
+        <circle cx="${sx(i).toFixed(1)}" cy="${sy(s[key]).toFixed(1)}" r="4.5" fill="${color}" stroke="#151b20" stroke-width="1.6">
+          <title>${s.width}-bit: ${s[key]} ${unit}</title>
+        </circle>
+        <text x="${sx(i).toFixed(1)}" y="${h - padB + 16}" text-anchor="middle" font-size="10" font-family="JetBrains Mono">${s.width}</text>
+      `).join('');
+
+      const yTicks = [0, 0.5, 1.0].map(f => {
+        const val = maxVal * f;
+        const y = sy(val);
+        const label = val >= 1000 ? `${(val/1000).toFixed(1)}k` : val.toFixed(1);
+        return `
+          <line x1="${padL}" y1="${y.toFixed(1)}" x2="${w - padR}" y2="${y.toFixed(1)}" stroke="rgba(21,27,32,0.12)" stroke-dasharray="3,3"/>
+          <text x="${padL - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="10" font-family="JetBrains Mono">${label}</text>
+        `;
+      }).join('');
+
+      return `
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:6px;">${title} (${unit})</div>
+        <svg viewBox="0 0 ${w} ${h}" style="width:100%; height:auto;">
+          ${yTicks}
+          <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
+          <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
+          <polyline points="${poly}" fill="none" stroke="${color}" stroke-width="3"/>
+          ${dots}
+          <text x="${(w + padL - padR)/2}" y="${h - 4}" text-anchor="middle" font-size="11" font-weight="700">Bit Width (N)</text>
+        </svg>
+      `;
     }
 
     async function loadDesign() {
@@ -192,7 +247,25 @@
         ? `<ul>${d.use_cases.map(u => `<li>${mdInline(u)}</li>`).join('')}</ul>`
         : '<p>General-purpose integer arithmetic datapaths.</p>';
 
-      const scalingRows = (d.scaling || []).map(s => `
+      const sc = d.scaling || [];
+      let growthSummary = '';
+      if (sc.length >= 2) {
+        const first = sc[0], last = sc[sc.length - 1];
+        const areaRatio = first.area > 0 ? (last.area / first.area).toFixed(1) : '—';
+        const delayRatio = first.delay > 0 ? (last.delay / first.delay).toFixed(2) : '—';
+        growthSummary = `<p class="section-sub"><strong>Observed ${first.width}-bit &rarr; ${last.width}-bit growth:</strong> Area scales <strong>${areaRatio}&times;</strong> (${first.area.toFixed(0)} &rarr; ${last.area.toFixed(0)} &mu;m&sup2;) and Delay scales <strong>${delayRatio}&times;</strong> (${first.delay.toFixed(2)} &rarr; ${last.delay.toFixed(2)} ns).</p>`;
+      }
+
+      const complexityBullets = [...(d.complexity || []), ...(d.impl_notes || [])];
+      const scalingIssuesHtml = complexityBullets.length
+        ? `<ul>${complexityBullets.map(b => `<li>${mdInline(b)}</li>`).join('')}</ul>`
+        : '<p>See scaling plots and table below.</p>';
+
+      const refsHtml = (d.references && d.references.length)
+        ? `<ol class="ref-list">${d.references.map(r => `<li><strong>[${esc(r.id)}]</strong> ${esc(r.text)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.url)}</a>` : ''}</li>`).join('')}</ol>`
+        : '<p>No references recorded.</p>';
+
+      const scalingRows = sc.map(s => `
         <tr>
           <td class="mono">${s.width}-bit</td>
           <td class="mono">${s.area.toFixed(2)}</td>
@@ -252,6 +325,16 @@
           </div>
         </div>
 
+        <div class="section-card">
+          <h2>Scaling Challenges &amp; Width Behavior (4-bit &rarr; 1024-bit)</h2>
+          ${growthSummary}
+          ${scalingIssuesHtml}
+          <div class="plots-grid" style="margin-top:16px;">
+            <div class="chart-box">${buildScalingPlot(sc, 'area', 'Area Scaling vs. Width', 'um^2', '#22bfd7')}</div>
+            <div class="chart-box">${buildScalingPlot(sc, 'delay', 'Delay Scaling vs. Width', 'ns', '#f38469')}</div>
+          </div>
+        </div>
+
         <div class="kw-grid" style="margin-bottom:24px;">
           <div class="section-card" style="margin-bottom:0;">
             <h2>Key Characteristics</h2>
@@ -264,7 +347,7 @@
         </div>
 
         <div class="section-card">
-          <h2>Width Scaling (4-bit to 1024-bit)</h2>
+          <h2>Width Scaling Data (4-bit to 1024-bit)</h2>
           <div class="table-wrap">
             <table>
               <thead>
@@ -280,6 +363,11 @@
               <tbody>${scalingRows}</tbody>
             </table>
           </div>
+        </div>
+
+        <div class="section-card">
+          <h2>References</h2>
+          ${refsHtml}
         </div>
       `;
 
