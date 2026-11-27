@@ -404,6 +404,8 @@ tr:hover td { background: var(--yellow-soft); }
   border: var(--border-ink);
   border-radius: var(--radius-md);
   padding: 16px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .kw-bar-row { margin-bottom: 10px; }

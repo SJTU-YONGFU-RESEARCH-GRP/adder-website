@@ -564,7 +564,7 @@ function renderTaxonomy() {
   document.getElementById('kw-grid').innerHTML = sections.map(sec => `
     <div class="section-card" style="margin-bottom:0; background:var(--paper);">
       <h3 style="margin:0 0 14px; font-size:1.15rem; padding:6px 12px; background:${sec.accent}; border:2px solid var(--ink); border-radius:8px; display:inline-block;">${sec.title}</h3>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px;">
+      <div style="display:flex; flex-direction:column; gap:12px;">
         ${sec.blocks.map(b => `
           <div class="kw-card" style="background:var(--cream);">
             <h4 style="margin:0 0 6px; font-size:0.95rem;">${b.heading}</h4>
