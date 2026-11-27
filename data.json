@@ -8419,6 +8419,20 @@
           "delay": 2.1973,
           "fmax": 455.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CHGA: Gradient-Aware Hysteresis Carry Policy for Exact Tri-Path Block Addition",
@@ -8483,6 +8497,13 @@
           "delay": 4.287,
           "fmax": 233.26,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5238,
+          "fmax": 117.32,
+          "power": 0.134
         }
       ],
       "title_sub": "SWCA: Signature-Window Bypass/Select/Ripple Carry Adder with Exact Arithmetic",
@@ -8533,6 +8554,27 @@
           "delay": 1.1381,
           "fmax": 878.66,
           "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CCGTPA: Certainty-Gradient Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8583,6 +8625,27 @@
           "delay": 1.1381,
           "fmax": 878.66,
           "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CIPW-TPA: Inertia and Carry-Phase Streak Weighted Block Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8647,6 +8710,13 @@
           "delay": 4.1734,
           "fmax": 239.61,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.256,
+          "fmax": 121.12,
+          "power": 0.134
         }
       ],
       "title_sub": "CTBTA: Temporal Carry-Bias Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8711,6 +8781,13 @@
           "delay": 4.2086,
           "fmax": 237.61,
           "power": 0.0678
+        },
+        {
+          "width": 256,
+          "area": 1599.46,
+          "delay": 8.39,
+          "fmax": 119.19,
+          "power": 0.136
         }
       ],
       "title_sub": "CPETPA: Phase-Entropy Weighted Block Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8768,6 +8845,20 @@
           "delay": 2.1925,
           "fmax": 456.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3109,
+          "fmax": 231.97,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5477,
+          "fmax": 116.99,
+          "power": 0.134
         }
       ],
       "title_sub": "",
@@ -8825,6 +8916,20 @@
           "delay": 2.1973,
           "fmax": 455.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CMPTPA: Momentum-Polarity Weighted Block Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8889,6 +8994,13 @@
           "delay": 4.1896,
           "fmax": 238.69,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2907,
+          "fmax": 120.62,
+          "power": 0.134
         }
       ],
       "title_sub": "CGSTPA: Block Gradient-Stability Score Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -8939,6 +9051,27 @@
           "delay": 1.1381,
           "fmax": 878.66,
           "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "EHCFA: Entropy-Hysteresis Carry Policy for Exact Tri-Path Block Addition",
@@ -9003,6 +9136,13 @@
           "delay": 4.1752,
           "fmax": 239.51,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2811,
+          "fmax": 120.76,
+          "power": 0.134
         }
       ],
       "title_sub": "CMWTPA: Momentum-Window Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9046,6 +9186,27 @@
           "delay": 0.6084,
           "fmax": 1643.66,
           "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
         }
       ],
       "title_sub": "ACMFA: Dual-Momentum Carry Policy for Exact Tri-Path Block Addition",
@@ -9110,6 +9271,13 @@
           "delay": 4.1722,
           "fmax": 239.68,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.259,
+          "fmax": 121.08,
+          "power": 0.134
         }
       ],
       "title_sub": "CCSTPA: Completion-Signature Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9174,6 +9342,13 @@
           "delay": 4.3157,
           "fmax": 231.71,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "DSHCA: Pressure-Volatility Hysteresis Policy for Exact Tri-Path Block Addition",
@@ -9231,6 +9406,20 @@
           "delay": 2.1829,
           "fmax": 458.11,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CPLTA: Carry Phase-Lattice Memory for Exact Tri-Path Block Carry Policy",
@@ -9295,6 +9484,13 @@
           "delay": 4.1907,
           "fmax": 238.62,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2686,
+          "fmax": 120.94,
+          "power": 0.134
         }
       ],
       "title_sub": "CEBTPA: Block Entropy Score Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9345,6 +9541,27 @@
           "delay": 1.1381,
           "fmax": 878.66,
           "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CSLTPA: Saturation-Capped and Leak-Decayed Carry Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9402,6 +9619,20 @@
           "delay": 2.1973,
           "fmax": 455.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CPR-TPA: Phase-Resonance Carry Scoring Across Exact Ripple, Carry-Select, and Carry-Skip Paths",
@@ -9466,6 +9697,13 @@
           "delay": 4.1878,
           "fmax": 238.79,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.256,
+          "fmax": 121.12,
+          "power": 0.134
         }
       ],
       "title_sub": "CPHDTA: Dual-Weighted Carry Phase and Hysteresis Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9530,6 +9768,13 @@
           "delay": 4.1847,
           "fmax": 238.97,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2608,
+          "fmax": 121.05,
+          "power": 0.134
         }
       ],
       "title_sub": "CHWTPA: Hysteresis-Weighted Block Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9594,6 +9839,13 @@
           "delay": 4.2583,
           "fmax": 234.84,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.4616,
+          "fmax": 118.18,
+          "power": 0.134
         }
       ],
       "title_sub": "PWTCA: Transition-Phase Weighted Policy for Exact Tri-Path Block Addition",
@@ -9658,6 +9910,13 @@
           "delay": 4.3157,
           "fmax": 231.71,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CHDMTA: Dual-Memory Hysteresis Carry Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9843,6 +10102,20 @@
           "delay": 2.1973,
           "fmax": 455.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CWCA: Consensus-Window Carry Policy for Exact Tri-Path Block Addition",
@@ -9907,6 +10180,13 @@
           "delay": 4.3157,
           "fmax": 231.71,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CHETA: Carry-Hysteresis and Entropy-Coupled Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
@@ -9964,6 +10244,20 @@
           "delay": 2.1973,
           "fmax": 455.1,
           "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "CSM-TPA: Saturation-Memory Carry Scoring Across Exact Ripple, Carry-Select, and Carry-Skip Paths",
@@ -10007,6 +10301,34 @@
           "delay": 0.6084,
           "fmax": 1643.66,
           "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
         }
       ],
       "title_sub": "DWCFA: Exact Tri-Path Block Carry Policy with Dual-Window Fusion and Bounded Hysteresis",
@@ -10071,6 +10393,13 @@
           "delay": 4.186,
           "fmax": 238.89,
           "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.256,
+          "fmax": 121.12,
+          "power": 0.134
         }
       ],
       "title_sub": "CHETPA: Hysteresis and Propagate-Entropy Weighted Block Scoring Across Ripple, Carry-Select, and Carry-Skip Exact Paths",
