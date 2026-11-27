@@ -289,19 +289,19 @@
 
         <div class="kpi-grid">
           <div class="kpi-card accent-cyan">
-            <div class="kpi-val">${d.area_512.toFixed(0)}</div>
+            <div class="kpi-val">${d.area_512 != null ? d.area_512.toFixed(0) : '—'}</div>
             <div class="kpi-label">512-bit Area (&mu;m&sup2;)</div>
           </div>
           <div class="kpi-card accent-yellow">
-            <div class="kpi-val">${d.freq_512_mhz.toFixed(1)}</div>
+            <div class="kpi-val">${d.freq_512_mhz != null ? d.freq_512_mhz.toFixed(1) : '—'}</div>
             <div class="kpi-label">512-bit Speed (MHz)</div>
           </div>
           <div class="kpi-card accent-lime">
-            <div class="kpi-val">${d.delay_512_ns.toFixed(2)}</div>
+            <div class="kpi-val">${d.delay_512_ns != null ? d.delay_512_ns.toFixed(2) : '—'}</div>
             <div class="kpi-label">512-bit Delay (ns)</div>
           </div>
           <div class="kpi-card accent-purple">
-            <div class="kpi-val">${d.power_512_mw.toFixed(1)}</div>
+            <div class="kpi-val">${d.power_512_mw != null ? d.power_512_mw.toFixed(2) : '—'}</div>
             <div class="kpi-label">512-bit Power (mW)</div>
           </div>
         </div>
@@ -330,7 +330,7 @@
         </div>
 
         <div class="section-card">
-          <h2>Scaling Challenges &amp; Width Behavior (4-bit &rarr; 1024-bit)</h2>
+          <h2>Nangate45 + OpenSTA Scaling &amp; Width Behavior (8-bit &rarr; 512-bit)</h2>
           ${growthSummary}
           ${scalingIssuesHtml}
           <div class="plots-grid" style="margin-top:16px;">
@@ -351,7 +351,7 @@
         </div>
 
         <div class="section-card">
-          <h2>Width Scaling Data (4-bit to 1024-bit)</h2>
+          <h2>Nangate45 Width Scaling Data (8-bit to 512-bit)</h2>
           <div class="table-wrap">
             <table>
               <thead>

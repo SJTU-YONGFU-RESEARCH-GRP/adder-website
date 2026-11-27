@@ -4,10 +4,10 @@
       "slug": "db_bcd",
       "name": "Bcd",
       "kind": "classical",
-      "area_512": 30400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 152.0,
-      "delay_512_ns": 16.0,
+      "area_512": 5704.37,
+      "freq_512_mhz": 35.49,
+      "power_512_mw": 1.12,
+      "delay_512_ns": 28.173,
       "overview": "The `bcd_adder` is a parameterized Verilog module implementing a Binary Coded Decimal (BCD) adder that adds two BCD-encoded numbers. BCD uses 4 bits to represent each decimal digit (0-9). The adder performs binary addition and then corrects the result to ensure each digit remains in valid BCD range (0-9). This makes it suitable for decimal arithmetic applications where exact decimal representation is required.",
       "characteristics": [
         "**Logic Depth**: O(n/4) - one stage per BCD digit",
@@ -27,76 +27,60 @@
       "mermaid": "flowchart LR\n  A[A BCD digit] --> PRE[Preliminary four-bit add]\n  B[B BCD digit] --> PRE\n  Cin[Cin] --> PRE\n\n  PRE --> DET[Correction detect]\n  DET --> CORR[Add binary zero one one zero when needed]\n  PRE --> CORR\n  CORR --> S[BCD sum digit]\n  CORR --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 200.0,
-          "delay": 6.0,
-          "power": 1.0,
-          "freq": 166.7,
-          "cells": 2
-        },
-        {
           "width": 8,
-          "area": 500.0,
-          "delay": 6.0,
-          "power": 2.5,
-          "freq": 166.7,
-          "cells": 5
+          "area": 101.35,
+          "delay": 0.5929,
+          "freq": 1686.63,
+          "power": 0.0137,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 900.0,
-          "delay": 6.0,
-          "power": 4.5,
-          "freq": 166.7,
-          "cells": 9
+          "area": 183.01,
+          "delay": 0.9815,
+          "freq": 1018.85,
+          "power": 0.0275,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 1700.0,
-          "delay": 8.0,
-          "power": 8.5,
-          "freq": 125.0,
-          "cells": 17
+          "area": 386.5,
+          "delay": 1.8789,
+          "freq": 532.23,
+          "power": 0.0683,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 3600.0,
-          "delay": 10.0,
-          "power": 18.0,
-          "freq": 100.0,
-          "cells": 36
+          "area": 711.28,
+          "delay": 3.7986,
+          "freq": 263.25,
+          "power": 0.131,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 8000.0,
-          "delay": 12.0,
-          "power": 40.0,
-          "freq": 83.3,
-          "cells": 80
+          "area": 1423.63,
+          "delay": 7.1596,
+          "freq": 139.67,
+          "power": 0.282,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 15100.0,
-          "delay": 14.0,
-          "power": 75.5,
-          "freq": 71.4,
-          "cells": 151
+          "area": 2835.83,
+          "delay": 14.0345,
+          "freq": 71.25,
+          "power": 0.567,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 30400.0,
-          "delay": 16.0,
-          "power": 152.0,
-          "freq": 62.5,
-          "cells": 304
-        },
-        {
-          "width": 1024,
-          "area": 63200.0,
-          "delay": 18.0,
-          "power": 316.0,
-          "freq": 55.6,
-          "cells": 632
+          "area": 5704.37,
+          "delay": 28.173,
+          "freq": 35.49,
+          "power": 1.12,
+          "cells": -1
         }
       ],
       "references": [
@@ -128,16 +112,17 @@
         "correction detector correctness is critical for decimal validity,",
         "multi-digit designs must preserve carry semantics digit by digit,",
         "verify edge cases around `9 + 9 + Cin`."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_brent_kung",
       "name": "Brent Kung",
       "kind": "classical",
-      "area_512": 697400.0,
-      "freq_512_mhz": 71.4,
-      "power_512_mw": 3487.0,
-      "delay_512_ns": 14.01,
+      "area_512": 10528.28,
+      "freq_512_mhz": 50.23,
+      "power_512_mw": 0.885,
+      "delay_512_ns": 19.9066,
       "overview": "The `brent_kung_adder` is a parameterized Verilog module implementing a Brent-Kung prefix tree adder, which uses a two-phase approach: forward tree (compute group prefixes) and reverse tree (distribute prefixes to individual positions). This design minimizes wiring complexity at the cost of increased logic depth compared to Kogge-Stone, making it ideal for medium-to-large adders where balanced speed/area is desired and wiring complexity is a concern.",
       "characteristics": [
         "**Logic Depth**: O(2\u00d7log\u2082 n) stages - deeper than Kogge-Stone but with less wiring",
@@ -156,76 +141,60 @@
       "mermaid": "flowchart LR\n  abus[A bus] --> gp_stage[Generate propagate generation]\n  bbus[B bus] --> gp_stage\n  cin[Cin] --> prefix_up[Prefix up sweep]\n  gp_stage --> prefix_up\n\n  prefix_up --> prefix_down[Prefix down sweep]\n  gp_stage --> prefix_down\n  prefix_down --> sum_stage[Sum stage]\n  gp_stage --> sum_stage\n\n  sum_stage --> sum_bus[Sum bus]\n  prefix_down --> cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 5.25,
-          "power": 2.0,
-          "freq": 190.5,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2200.0,
-          "delay": 5.25,
-          "power": 11.0,
-          "freq": 190.5,
-          "cells": 22
+          "area": 70.49,
+          "delay": 0.4817,
+          "freq": 2075.98,
+          "power": 0.0062,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7200.0,
-          "delay": 5.25,
-          "power": 36.0,
-          "freq": 190.5,
-          "cells": 72
+          "area": 193.38,
+          "delay": 0.7658,
+          "freq": 1305.82,
+          "power": 0.0169,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 18000.0,
-          "delay": 7.0,
-          "power": 90.0,
-          "freq": 142.9,
-          "cells": 180
+          "area": 411.24,
+          "delay": 1.2942,
+          "freq": 772.68,
+          "power": 0.0347,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 46800.0,
-          "delay": 8.75,
-          "power": 234.0,
-          "freq": 114.3,
-          "cells": 468
+          "area": 1005.21,
+          "delay": 2.5501,
+          "freq": 392.14,
+          "power": 0.0823,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 122300.0,
-          "delay": 10.5,
-          "power": 611.5,
-          "freq": 95.2,
-          "cells": 1223
+          "area": 2154.6,
+          "delay": 5.4036,
+          "freq": 185.06,
+          "power": 0.187,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 285600.0,
-          "delay": 12.25,
-          "power": 1428.0,
-          "freq": 81.6,
-          "cells": 2856
+          "area": 4920.47,
+          "delay": 8.2124,
+          "freq": 121.77,
+          "power": 0.4,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 697400.0,
-          "delay": 14.0,
-          "power": 3487.0,
-          "freq": 71.4,
-          "cells": 6974
-        },
-        {
-          "width": 1024,
-          "area": 1566800.0,
-          "delay": 15.75,
-          "power": 7834.0,
-          "freq": 63.5,
-          "cells": 15668
+          "area": 10528.28,
+          "delay": 19.9066,
+          "freq": 50.23,
+          "power": 0.885,
+          "cells": -1
         }
       ],
       "references": [
@@ -257,16 +226,17 @@
         "Brent-Kung reduces fanout compared with denser prefix topologies,",
         "two-phase prefix flow can simplify wire planning versus flat dense trees,",
         "prefix black/gray cell implementation quality strongly affects PPA outcomes."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_brent_kung_hybrid",
       "name": "Brent Kung Hybrid",
       "kind": "classical",
-      "area_512": 697400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 3487.0,
-      "delay_512_ns": 16.0,
+      "area_512": 10528.28,
+      "freq_512_mhz": 50.23,
+      "power_512_mw": 0.885,
+      "delay_512_ns": 19.9066,
       "overview": "The `brent_kung_hybrid_adder` is a parameterized Verilog module implementing a Brent-Kung prefix tree adder with parameterized hybrid modes. This design extends the standard Brent-Kung adder by allowing different computation strategies for different parts of the prefix tree, enabling optimization for specific design goals such as area, speed, or power consumption.",
       "characteristics": [
         "**Logic Depth**: 2\u00d7log\u2082(n) stages (log\u2082(n) forward + log\u2082(n) reverse) - same as standard Brent-Kung",
@@ -286,76 +256,60 @@
       "mermaid": "flowchart LR\n  abus[A bus] --> gp_stage[Generate propagate generation]\n  bbus[B bus] --> gp_stage\n  cin[Cin] --> prefix_core[Hybrid prefix core]\n  gp_stage --> prefix_core\n\n  prefix_core --> local_refine[Local hybrid carry refinement]\n  gp_stage --> local_refine\n  local_refine --> sum_stage[Sum stage]\n  gp_stage --> sum_stage\n\n  sum_stage --> sum_bus[Sum bus]\n  local_refine --> cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 6.0,
-          "power": 2.0,
-          "freq": 166.7,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2200.0,
-          "delay": 6.0,
-          "power": 11.0,
-          "freq": 166.7,
-          "cells": 22
+          "area": 70.49,
+          "delay": 0.4817,
+          "freq": 2075.98,
+          "power": 0.0062,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7200.0,
-          "delay": 6.0,
-          "power": 36.0,
-          "freq": 166.7,
-          "cells": 72
+          "area": 193.38,
+          "delay": 0.7658,
+          "freq": 1305.82,
+          "power": 0.0169,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 18000.0,
-          "delay": 8.0,
-          "power": 90.0,
-          "freq": 125.0,
-          "cells": 180
+          "area": 411.24,
+          "delay": 1.2942,
+          "freq": 772.68,
+          "power": 0.0347,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 46800.0,
-          "delay": 10.0,
-          "power": 234.0,
-          "freq": 100.0,
-          "cells": 468
+          "area": 1005.21,
+          "delay": 2.5501,
+          "freq": 392.14,
+          "power": 0.0823,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 122300.0,
-          "delay": 12.0,
-          "power": 611.5,
-          "freq": 83.3,
-          "cells": 1223
+          "area": 2154.6,
+          "delay": 5.4036,
+          "freq": 185.06,
+          "power": 0.187,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 285600.0,
-          "delay": 14.0,
-          "power": 1428.0,
-          "freq": 71.4,
-          "cells": 2856
+          "area": 4920.47,
+          "delay": 8.2124,
+          "freq": 121.77,
+          "power": 0.4,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 697400.0,
-          "delay": 16.0,
-          "power": 3487.0,
-          "freq": 62.5,
-          "cells": 6974
-        },
-        {
-          "width": 1024,
-          "area": 1566800.0,
-          "delay": 18.0,
-          "power": 7834.0,
-          "freq": 55.6,
-          "cells": 15668
+          "area": 10528.28,
+          "delay": 19.9066,
+          "freq": 50.23,
+          "power": 0.885,
+          "cells": -1
         }
       ],
       "references": [
@@ -387,16 +341,17 @@
         "hybrid stage boundaries are the primary optimization lever,",
         "physical synthesis may favor or penalize hybrids depending on mapping,",
         "verification should emphasize carry-corner cases across hybrid boundaries."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_bypass",
       "name": "Carry Bypass",
       "kind": "classical",
-      "area_512": 54500.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 272.5,
-      "delay_512_ns": 16.0,
+      "area_512": 3113.26,
+      "freq_512_mhz": 56.94,
+      "power_512_mw": 0.267,
+      "delay_512_ns": 17.5621,
       "overview": "The `carry_bypass_adder` (also known as Carry-Skip Adder) is a parameterized Verilog module implementing a block-based adder that optimizes carry propagation. When all bits in a block propagate (P[i] = 1 for all i), the carry can bypass the block entirely, skipping the ripple carry delay through that block. This design provides a good balance between area and speed for medium-width adders.",
       "characteristics": [
         "**Logic Depth**: O(n/BLOCK_SIZE) - depends on block size and bypass frequency",
@@ -415,76 +370,60 @@
       "mermaid": "flowchart LR\n  n0[Cin] --> n1[Ripple block zero]\n  n1 --> n2[Bypass select zero]\n  n3[Propagate block zero] --> n2\n\n  n2 --> n4[Ripple block one]\n  n4 --> n5[Bypass select one]\n  n6[Propagate block one] --> n5\n\n  n5 --> n7[Ripple block last]\n  n7 --> n8[Bypass select last]\n  n9[Propagate block last] --> n8\n  n8 --> n10[Cout]\n\n  n11[A bus] --> n1\n  n12[B bus] --> n1\n  n11 --> n4\n  n12 --> n4\n  n11 --> n7\n  n12 --> n7",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
+          "area": 48.94,
+          "delay": 0.338,
+          "freq": 2958.58,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1800.0,
-          "delay": 6.0,
-          "power": 9.0,
-          "freq": 166.7,
-          "cells": 18
+          "area": 97.89,
+          "delay": 0.6039,
+          "freq": 1655.9,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3600.0,
-          "delay": 8.0,
-          "power": 18.0,
-          "freq": 125.0,
-          "cells": 36
+          "area": 194.45,
+          "delay": 1.1629,
+          "freq": 859.92,
+          "power": 0.0165,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 6900.0,
-          "delay": 10.0,
-          "power": 34.5,
-          "freq": 100.0,
-          "cells": 69
+          "area": 389.69,
+          "delay": 2.2416,
+          "freq": 446.11,
+          "power": 0.0333,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 13700.0,
-          "delay": 12.0,
-          "power": 68.5,
-          "freq": 83.3,
-          "cells": 137
+          "area": 778.58,
+          "delay": 4.4233,
+          "freq": 226.08,
+          "power": 0.0667,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 27500.0,
-          "delay": 14.0,
-          "power": 137.5,
-          "freq": 71.4,
-          "cells": 275
+          "area": 1555.57,
+          "delay": 8.822,
+          "freq": 113.35,
+          "power": 0.133,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 54500.0,
-          "delay": 16.0,
-          "power": 272.5,
-          "freq": 62.5,
-          "cells": 545
-        },
-        {
-          "width": 1024,
-          "area": 108600.0,
-          "delay": 18.0,
-          "power": 543.0,
-          "freq": 55.6,
-          "cells": 1086
+          "area": 3113.26,
+          "delay": 17.5621,
+          "freq": 56.94,
+          "power": 0.267,
+          "cells": -1
         }
       ],
       "references": [
@@ -516,16 +455,17 @@
         "bypass selector delay and propagate-tree fan-in can dominate block boundaries,",
         "architecture quality is sensitive to block partitioning strategy,",
         "synthesis results should be checked against RCA and Carry Skip under identical constraints."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_chain",
       "name": "Carry Chain",
       "kind": "classical",
-      "area_512": 54300.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 271.5,
-      "delay_512_ns": 16.0,
+      "area_512": 3117.25,
+      "freq_512_mhz": 57.13,
+      "power_512_mw": 0.268,
+      "delay_512_ns": 17.5038,
       "overview": "The `carry_chain_adder` is a parameterized Verilog module implementing a simple carry-chain adder, which is essentially a ripple carry adder where carries propagate sequentially through a chain of full adders. This is the simplest adder implementation and serves as a baseline for comparison with more complex adder architectures.",
       "characteristics": [
         "**Logic Depth**: O(n) - worst case delay grows linearly with width",
@@ -546,76 +486,60 @@
       "mermaid": "flowchart LR\n  n0[Cin] --> n1[Carry cell zero]\n  n1 -->|carry one| n2[Carry cell one]\n  n2 -->|carry two| n3[Carry cell two]\n  n3 -->|carry last| n4[Carry cell last]\n\n  n5[A bus] --> n1\n  n6[B bus] --> n1\n  n5 --> n2\n  n6 --> n2\n  n5 --> n3\n  n6 --> n3\n  n5 --> n4\n  n6 --> n4\n\n  n1 --> n7[S0]\n  n2 --> n8[S1]\n  n3 --> n9[S2]\n  n4 --> n10[S N-1]\n  n4 --> n11[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
+          "area": 48.94,
+          "delay": 0.338,
+          "freq": 2958.58,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1900.0,
-          "delay": 6.0,
-          "power": 9.5,
-          "freq": 166.7,
-          "cells": 19
+          "area": 97.09,
+          "delay": 0.6161,
+          "freq": 1623.11,
+          "power": 0.0081,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3500.0,
-          "delay": 8.0,
-          "power": 17.5,
-          "freq": 125.0,
-          "cells": 35
+          "area": 194.98,
+          "delay": 1.1481,
+          "freq": 871.0,
+          "power": 0.0165,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 7200.0,
-          "delay": 10.0,
-          "power": 36.0,
-          "freq": 100.0,
-          "cells": 72
+          "area": 390.49,
+          "delay": 2.2751,
+          "freq": 439.54,
+          "power": 0.0335,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 13800.0,
-          "delay": 12.0,
-          "power": 69.0,
-          "freq": 83.3,
-          "cells": 138
+          "area": 780.44,
+          "delay": 4.4536,
+          "freq": 224.54,
+          "power": 0.0671,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 27400.0,
-          "delay": 14.0,
-          "power": 137.0,
-          "freq": 71.4,
-          "cells": 274
+          "area": 1558.76,
+          "delay": 8.8083,
+          "freq": 113.53,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 54300.0,
-          "delay": 16.0,
-          "power": 271.5,
-          "freq": 62.5,
-          "cells": 543
-        },
-        {
-          "width": 1024,
-          "area": 108400.0,
-          "delay": 18.0,
-          "power": 542.0,
-          "freq": 55.6,
-          "cells": 1084
+          "area": 3117.25,
+          "delay": 17.5038,
+          "freq": 57.13,
+          "power": 0.268,
+          "cells": -1
         }
       ],
       "references": [
@@ -647,16 +571,17 @@
         "carry path locality is the dominant timing lever,",
         "this architecture generally scales linearly in delay with width,",
         "excellent baseline for validating correctness and integration."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_completion_sensing",
       "name": "Carry Completion Sensing",
       "kind": "classical",
-      "area_512": 52800.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 264.0,
-      "delay_512_ns": 16.0,
+      "area_512": 3111.14,
+      "freq_512_mhz": 56.94,
+      "power_512_mw": 0.267,
+      "delay_512_ns": 17.5625,
       "overview": "The `carry_completion_sensing_adder` (CCSA) is a parameterized Verilog module implementing a carry completion sensing adder that detects when the addition operation is complete. This adder extends a ripple carry adder with completion detection logic, making it useful in asynchronous circuits where operations complete at variable times, or in systems that need to know when computation is finished.",
       "characteristics": [
         "**Logic Depth**: O(n) - same as ripple carry adder",
@@ -677,76 +602,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n3[Carry path adder core]\n  n1[B bus] --> n3\n  n2[Cin] --> n3\n\n  n3 --> n4[Sum bus]\n  n3 --> n5[Cout]\n  n3 --> n6[Completion sensing]\n  n6 --> n7[Done completion]",
       "scaling": [
         {
-          "width": 4,
-          "area": 500.0,
-          "delay": 6.0,
-          "power": 2.5,
-          "freq": 166.7,
-          "cells": 5
-        },
-        {
           "width": 8,
-          "area": 1100.0,
-          "delay": 6.0,
-          "power": 5.5,
-          "freq": 166.7,
-          "cells": 11
+          "area": 48.41,
+          "delay": 0.3535,
+          "freq": 2828.85,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1800.0,
-          "delay": 6.0,
-          "power": 9.0,
-          "freq": 166.7,
-          "cells": 18
+          "area": 97.62,
+          "delay": 0.6199,
+          "freq": 1613.16,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3600.0,
-          "delay": 8.0,
-          "power": 18.0,
-          "freq": 125.0,
-          "cells": 36
+          "area": 194.18,
+          "delay": 1.1614,
+          "freq": 861.03,
+          "power": 0.0165,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 7000.0,
-          "delay": 10.0,
-          "power": 35.0,
-          "freq": 100.0,
-          "cells": 70
+          "area": 387.83,
+          "delay": 2.2548,
+          "freq": 443.5,
+          "power": 0.0331,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 13300.0,
-          "delay": 12.0,
-          "power": 66.5,
-          "freq": 83.3,
-          "cells": 133
+          "area": 776.99,
+          "delay": 4.4665,
+          "freq": 223.89,
+          "power": 0.0666,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 26400.0,
-          "delay": 14.0,
-          "power": 132.0,
-          "freq": 71.4,
-          "cells": 264
+          "area": 1552.91,
+          "delay": 8.8488,
+          "freq": 113.01,
+          "power": 0.133,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 52800.0,
-          "delay": 16.0,
-          "power": 264.0,
-          "freq": 62.5,
-          "cells": 528
-        },
-        {
-          "width": 1024,
-          "area": 105800.0,
-          "delay": 18.0,
-          "power": 529.0,
-          "freq": 55.6,
-          "cells": 1058
+          "area": 3111.14,
+          "delay": 17.5625,
+          "freq": 56.94,
+          "power": 0.267,
+          "cells": -1
         }
       ],
       "references": [
@@ -778,16 +687,17 @@
         "completion aggregation design impacts control timing and robustness,",
         "completion logic should be verified under corner-case carry patterns,",
         "architecture value is strongest when completion is consumed by system policy."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_generate_propagate",
       "name": "Carry Generate Propagate",
       "kind": "classical",
-      "area_512": 108300.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 541.5,
-      "delay_512_ns": 16.0,
+      "area_512": 3799.81,
+      "freq_512_mhz": 164.06,
+      "power_512_mw": 0.339,
+      "delay_512_ns": 6.0954,
       "overview": "The `carry_generate_propagate_adder` is a parameterized Verilog module implementing a hierarchical carry-generate/propagate adder that uses group-level generate and propagate signals. Unlike standard carry-lookahead adders (CLA), this implementation uses OR-based propagate (P = a OR b) instead of XOR-based propagate (P = a XOR b), which simplifies some logic but requires different carry computation equations.",
       "characteristics": [
         "**Logic Depth**: O(n/GROUP_SIZE) - faster than ripple carry",
@@ -806,76 +716,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n2[Generate propagate stage]\n  n1[B bus] --> n2\n  n3[Cin] --> n4[Carry resolver]\n\n  n2 --> n4\n  n2 --> n5[Sum stage]\n  n4 --> n5\n\n  n5 --> n6[Sum bus]\n  n4 --> n7[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 100.0,
-          "delay": 6.0,
-          "power": 0.5,
-          "freq": 166.7,
-          "cells": 1
-        },
-        {
           "width": 8,
-          "area": 1100.0,
-          "delay": 6.0,
-          "power": 5.5,
-          "freq": 166.7,
-          "cells": 11
+          "area": 49.21,
+          "delay": 0.3397,
+          "freq": 2943.77,
+          "power": 0.0041,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 2800.0,
-          "delay": 6.0,
-          "power": 14.0,
-          "freq": 166.7,
-          "cells": 28
+          "area": 109.06,
+          "delay": 0.412,
+          "freq": 2427.18,
+          "power": 0.0092,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 6400.0,
-          "delay": 8.0,
-          "power": 32.0,
-          "freq": 125.0,
-          "cells": 64
+          "area": 225.04,
+          "delay": 0.6296,
+          "freq": 1588.31,
+          "power": 0.0196,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 13200.0,
-          "delay": 10.0,
-          "power": 66.0,
-          "freq": 100.0,
-          "cells": 132
+          "area": 465.5,
+          "delay": 0.9971,
+          "freq": 1002.91,
+          "power": 0.041,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 26000.0,
-          "delay": 12.0,
-          "power": 130.0,
-          "freq": 83.3,
-          "cells": 260
+          "area": 964.25,
+          "delay": 1.4773,
+          "freq": 676.91,
+          "power": 0.0853,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 53900.0,
-          "delay": 14.0,
-          "power": 269.5,
-          "freq": 71.4,
-          "cells": 539
+          "area": 1914.14,
+          "delay": 2.9801,
+          "freq": 335.56,
+          "power": 0.17,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 108300.0,
-          "delay": 16.0,
-          "power": 541.5,
-          "freq": 62.5,
-          "cells": 1083
-        },
-        {
-          "width": 1024,
-          "area": 212900.0,
-          "delay": 18.0,
-          "power": 1064.5,
-          "freq": 55.6,
-          "cells": 2129
+          "area": 3799.81,
+          "delay": 6.0954,
+          "freq": 164.06,
+          "power": 0.339,
+          "cells": -1
         }
       ],
       "references": [
@@ -907,16 +801,17 @@
         "decomposition into `G/P`, carry, and sum stages improves structure readability,",
         "carry resolver implementation determines timing behavior,",
         "useful for educational and analysis-oriented architecture studies."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_lookahead",
       "name": "Carry Lookahead",
       "kind": "classical",
-      "area_512": 153600.0,
-      "freq_512_mhz": 125.0,
-      "power_512_mw": 768.0,
-      "delay_512_ns": 8.0,
+      "area_512": 3132.42,
+      "freq_512_mhz": 60.92,
+      "power_512_mw": 0.268,
+      "delay_512_ns": 16.4141,
       "overview": "The `carry_lookahead_adder` (CLA) is a parameterized Verilog module implementing a grouped carry lookahead adder that computes carries in parallel within groups, significantly reducing delay compared to ripple carry adders. This is the standard carry lookahead adder implementation using XOR-based propagate signals.",
       "characteristics": [
         "**Logic Depth**: O(n/GROUP_SIZE) - much faster than ripple carry",
@@ -935,76 +830,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> GP0[Generate-propagate stage]\n  B[B bus] --> GP0\n  Cin[Cin] --> GL0[Group lookahead 0]\n\n  GP0 --> GL0\n  GP0 --> GL1[Group lookahead 1]\n  GL0 -->|carry g1| GL1\n  GL1 -->|carry last| SUM[Sum network]\n  GP0 --> SUM\n  SUM --> S[Sum bus]\n  GL1 --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1200.0,
-          "delay": 3.0,
-          "power": 6.0,
-          "freq": 333.3,
-          "cells": 12
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 3.0,
-          "power": 12.0,
-          "freq": 333.3,
-          "cells": 24
+          "area": 48.94,
+          "delay": 0.3341,
+          "freq": 2993.12,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 4800.0,
-          "delay": 3.0,
-          "power": 24.0,
-          "freq": 333.3,
-          "cells": 48
+          "area": 97.89,
+          "delay": 0.5893,
+          "freq": 1696.93,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 9600.0,
-          "delay": 4.0,
-          "power": 48.0,
-          "freq": 250.0,
-          "cells": 96
+          "area": 195.78,
+          "delay": 1.0998,
+          "freq": 909.26,
+          "power": 0.0166,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 19200.0,
-          "delay": 5.0,
-          "power": 96.0,
-          "freq": 200.0,
-          "cells": 192
+          "area": 391.55,
+          "delay": 2.1207,
+          "freq": 471.54,
+          "power": 0.0333,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 38400.0,
-          "delay": 6.0,
-          "power": 192.0,
-          "freq": 166.7,
-          "cells": 384
+          "area": 783.1,
+          "delay": 4.1626,
+          "freq": 240.23,
+          "power": 0.0669,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 76800.0,
-          "delay": 7.0,
-          "power": 384.0,
-          "freq": 142.9,
-          "cells": 768
+          "area": 1566.21,
+          "delay": 8.2464,
+          "freq": 121.27,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 153600.0,
-          "delay": 8.0,
-          "power": 768.0,
-          "freq": 125.0,
-          "cells": 1536
-        },
-        {
-          "width": 1024,
-          "area": 307200.0,
-          "delay": 9.0,
-          "power": 1536.0,
-          "freq": 111.1,
-          "cells": 3072
+          "area": 3132.42,
+          "delay": 16.4141,
+          "freq": 60.92,
+          "power": 0.268,
+          "cells": -1
         }
       ],
       "references": [
@@ -1035,16 +914,17 @@
         "CLA critical path usually shifts from full-width carry ripple to group-carry logic depth,",
         "wiring and fanout are higher than RCA due to parallel carry term formation,",
         "group sizing strongly influences area-delay trade-off."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_lookahead_bcd",
       "name": "Carry Lookahead Bcd",
       "kind": "classical",
-      "area_512": 80100.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 400.5,
-      "delay_512_ns": 16.0,
+      "area_512": 5465.24,
+      "freq_512_mhz": 112.16,
+      "power_512_mw": 0.799,
+      "delay_512_ns": 8.916,
       "overview": "The `carry_lookahead_bcd_adder` is a parameterized Verilog module implementing a Binary Coded Decimal (BCD) adder with carry lookahead (CLA) to speed up decimal addition. It combines BCD digit addition with CLA to reduce delay compared to a simple ripple-carry BCD adder. The carry lookahead is applied at the digit level (not bit level), making it suitable for high-speed decimal arithmetic.",
       "characteristics": [
         "**Logic Depth**: O(n/GROUP_SIZE) - faster than ripple-carry BCD",
@@ -1064,76 +944,60 @@
       "mermaid": "flowchart LR\n  A[A BCD digits] --> D0[Digit pre-add and correction]\n  B[B BCD digits] --> D0\n  Cin[Cin] --> CLA[Digit carry-lookahead network]\n\n  D0 --> CLA\n  CLA --> D1[Digit correction finalization]\n  D1 --> S[BCD sum bus]\n  CLA --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
-        },
-        {
           "width": 8,
-          "area": 1700.0,
-          "delay": 6.0,
-          "power": 8.5,
-          "freq": 166.7,
-          "cells": 17
+          "area": 76.61,
+          "delay": 0.4444,
+          "freq": 2250.23,
+          "power": 0.0107,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 2500.0,
-          "delay": 6.0,
-          "power": 12.5,
-          "freq": 166.7,
-          "cells": 25
+          "area": 151.89,
+          "delay": 0.8409,
+          "freq": 1189.2,
+          "power": 0.0219,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 4600.0,
-          "delay": 8.0,
-          "power": 23.0,
-          "freq": 125.0,
-          "cells": 46
+          "area": 331.44,
+          "delay": 1.0694,
+          "freq": 935.1,
+          "power": 0.0482,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 9800.0,
-          "delay": 10.0,
-          "power": 49.0,
-          "freq": 100.0,
-          "cells": 98
+          "area": 665.8,
+          "delay": 1.5364,
+          "freq": 650.87,
+          "power": 0.0957,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 19800.0,
-          "delay": 12.0,
-          "power": 99.0,
-          "freq": 83.3,
-          "cells": 198
+          "area": 1357.13,
+          "delay": 2.5604,
+          "freq": 390.56,
+          "power": 0.196,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 37700.0,
-          "delay": 14.0,
-          "power": 188.5,
-          "freq": 71.4,
-          "cells": 377
+          "area": 2729.69,
+          "delay": 4.4455,
+          "freq": 224.95,
+          "power": 0.396,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 80100.0,
-          "delay": 16.0,
-          "power": 400.5,
-          "freq": 62.5,
-          "cells": 801
-        },
-        {
-          "width": 1024,
-          "area": 153800.0,
-          "delay": 18.0,
-          "power": 769.0,
-          "freq": 55.6,
-          "cells": 1538
+          "area": 5465.24,
+          "delay": 8.916,
+          "freq": 112.16,
+          "power": 0.799,
+          "cells": -1
         }
       ],
       "references": [
@@ -1165,16 +1029,17 @@
         "digit carry-lookahead network is the main timing accelerator,",
         "correction and lookahead logic interaction must be verified carefully,",
         "good fit for performance-critical decimal datapaths."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_save",
       "name": "Carry Save",
       "kind": "classical",
-      "area_512": 102400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 512.0,
-      "delay_512_ns": 16.0,
+      "area_512": 2860.03,
+      "freq_512_mhz": 10101.01,
+      "power_512_mw": 0.178,
+      "delay_512_ns": 0.099,
       "overview": "The `carry_save_adder` is a parameterized Verilog module implementing a carry-save adder (CSA), also known as a 3:2 compressor. Unlike conventional adders that propagate carries sequentially, the carry-save adder processes all bit positions independently with no carry propagation between bits. This makes it ideal for multi-operand addition, particularly in multiplication circuits (Wallace tree, Dadda tree) and other applications where multiple numbers need to be added together.",
       "characteristics": [
         "**Logic Depth**: O(1) - constant delay, independent of width",
@@ -1194,76 +1059,60 @@
       "mermaid": "flowchart LR\n  X[X operand] --> CSA[Bitwise three-to-two compressor stage]\n  Y[Y operand] --> CSA\n  Z[Z operand] --> CSA\n\n  CSA --> S[Sum vector S]\n  CSA --> C[Carry vector C shifted]\n  S --> FIN[Final carry-propagate adder]\n  C --> FIN\n  FIN --> OUT[Final result]",
       "scaling": [
         {
-          "width": 4,
-          "area": 800.0,
-          "delay": 6.0,
-          "power": 4.0,
-          "freq": 166.7,
-          "cells": 8
-        },
-        {
           "width": 8,
-          "area": 1600.0,
-          "delay": 6.0,
-          "power": 8.0,
-          "freq": 166.7,
-          "cells": 16
+          "area": 44.69,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0028,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 3200.0,
-          "delay": 6.0,
-          "power": 16.0,
-          "freq": 166.7,
-          "cells": 32
+          "area": 89.38,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0056,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 6400.0,
-          "delay": 8.0,
-          "power": 32.0,
-          "freq": 125.0,
-          "cells": 64
+          "area": 178.75,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0111,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 12800.0,
-          "delay": 10.0,
-          "power": 64.0,
-          "freq": 100.0,
-          "cells": 128
+          "area": 357.5,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0222,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 25600.0,
-          "delay": 12.0,
-          "power": 128.0,
-          "freq": 83.3,
-          "cells": 256
+          "area": 715.01,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0444,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 51200.0,
-          "delay": 14.0,
-          "power": 256.0,
-          "freq": 71.4,
-          "cells": 512
+          "area": 1430.02,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.0888,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 102400.0,
-          "delay": 16.0,
-          "power": 512.0,
-          "freq": 62.5,
-          "cells": 1024
-        },
-        {
-          "width": 1024,
-          "area": 204800.0,
-          "delay": 18.0,
-          "power": 1024.0,
-          "freq": 55.6,
-          "cells": 2048
+          "area": 2860.03,
+          "delay": 0.099,
+          "freq": 10101.01,
+          "power": 0.178,
+          "cells": -1
         }
       ],
       "references": [
@@ -1295,16 +1144,17 @@
         "CSA strength appears when chained for multi-operand reductions,",
         "final carry-propagate adder choice materially affects end-to-end PPA,",
         "verify bit-weight alignment carefully (`C` shift semantics)."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_select",
       "name": "Carry Select",
       "kind": "classical",
-      "area_512": 57800.0,
-      "freq_512_mhz": 55.6,
-      "power_512_mw": 289.0,
-      "delay_512_ns": 17.99,
+      "area_512": 4544.61,
+      "freq_512_mhz": 154.18,
+      "power_512_mw": 0.488,
+      "delay_512_ns": 6.4861,
       "overview": "The `carry_select_adder` is a parameterized Verilog module implementing a carry-select adder (CSA), which pre-computes sums for both possible carry-in values (0 and 1) and then selects the correct result based on the actual carry-in. This eliminates the carry propagation delay between blocks, making it significantly faster than ripple-carry adders while maintaining a simpler structure than full parallel prefix adders.",
       "characteristics": [
         "**Logic Depth**: O(n/BLOCK_SIZE) - much faster than ripple carry",
@@ -1323,76 +1173,60 @@
       "mermaid": "flowchart LR\n  n0[Cin] --> n1[Select zero]\n\n  n2[A bus] --> n3[Block adder cin zero]\n  n4[B bus] --> n3\n  n2 --> n5[Block adder cin one]\n  n4 --> n5\n\n  n3 -->|sum zero carry zero| n1\n  n5 -->|sum one carry one| n1\n  n1 -->|carry next| n6[Select one]\n\n  n2 --> n7[Next block cin zero]\n  n4 --> n7\n  n2 --> n8[Next block cin one]\n  n4 --> n8\n  n7 -->|sum zero carry zero| n6\n  n8 -->|sum one carry one| n6\n\n  n6 --> n9[Sum bus]\n  n6 --> n10[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 300.0,
-          "delay": 6.75,
-          "power": 1.5,
-          "freq": 148.1,
-          "cells": 3
-        },
-        {
           "width": 8,
-          "area": 300.0,
-          "delay": 6.75,
-          "power": 1.5,
-          "freq": 148.1,
-          "cells": 3
+          "area": 49.21,
+          "delay": 0.3248,
+          "freq": 3078.82,
+          "power": 0.0041,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1600.0,
-          "delay": 6.75,
-          "power": 8.0,
-          "freq": 148.1,
-          "cells": 16
+          "area": 115.98,
+          "delay": 0.6218,
+          "freq": 1608.23,
+          "power": 0.0103,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3000.0,
-          "delay": 9.0,
-          "power": 15.0,
-          "freq": 111.1,
-          "cells": 30
+          "area": 256.42,
+          "delay": 0.8987,
+          "freq": 1112.72,
+          "power": 0.0248,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 7000.0,
-          "delay": 11.25,
-          "power": 35.0,
-          "freq": 88.9,
-          "cells": 70
+          "area": 546.1,
+          "delay": 1.1076,
+          "freq": 902.85,
+          "power": 0.053,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 15200.0,
-          "delay": 13.5,
-          "power": 76.0,
-          "freq": 74.1,
-          "cells": 152
+          "area": 1095.92,
+          "delay": 2.3579,
+          "freq": 424.11,
+          "power": 0.113,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 29600.0,
-          "delay": 15.75,
-          "power": 148.0,
-          "freq": 63.5,
-          "cells": 296
+          "area": 2228.28,
+          "delay": 3.7079,
+          "freq": 269.69,
+          "power": 0.232,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 57800.0,
-          "delay": 18.0,
-          "power": 289.0,
-          "freq": 55.6,
-          "cells": 578
-        },
-        {
-          "width": 1024,
-          "area": 115300.0,
-          "delay": 20.25,
-          "power": 576.5,
-          "freq": 49.4,
-          "cells": 1153
+          "area": 4544.61,
+          "delay": 6.4861,
+          "freq": 154.18,
+          "power": 0.488,
+          "cells": -1
         }
       ],
       "references": [
@@ -1424,16 +1258,17 @@
         "critical path usually includes first block carry generation plus downstream mux chain,",
         "duplicated block hardware increases area and dynamic power,",
         "variable block sizing is often used to better balance delay."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_carry_skip",
       "name": "Carry Skip",
       "kind": "classical",
-      "area_512": 54500.0,
-      "freq_512_mhz": 45.5,
-      "power_512_mw": 272.5,
-      "delay_512_ns": 21.98,
+      "area_512": 3113.26,
+      "freq_512_mhz": 56.94,
+      "power_512_mw": 0.267,
+      "delay_512_ns": 17.5621,
       "overview": "The `carry_skip_adder` (also known as Carry-Bypass Adder) is a parameterized Verilog module implementing a block-based adder that optimizes carry propagation. When all bits in a block propagate (P[i] = 1 for all i), the carry can skip over the block entirely, avoiding the ripple carry delay through that block. This design provides a good balance between area and speed for medium-width adders.\n\n**Note**: This adder is functionally identical to the carry-bypass adder. The name \"carry-skip\" emphasizes that the carry skips over blocks, while \"carry-bypass\" emphasizes that the carry bypasses blocks. Both terms refer to the same optimization technique.",
       "characteristics": [
         "**Logic Depth**: O(n/BLOCK_SIZE) - depends on block size and skip frequency",
@@ -1452,76 +1287,60 @@
       "mermaid": "flowchart LR\n  Cin[Cin] --> B0[Block zero ripple]\n  B0 --> M0[Skip mux zero]\n  P0[Block propagate zero] --> M0\n\n  M0 --> B1[Block one ripple]\n  B1 --> M1[Skip mux one]\n  P1[Block propagate one] --> M1\n\n  M1 --> BL[Last block ripple]\n  BL --> ML[Skip mux last]\n  PL[Block propagate last] --> ML\n  ML --> Cout[Cout]\n\n  A[A bus] --> B0\n  B[B bus] --> B0\n  A --> B1\n  B --> B1\n  A --> BL\n  B --> BL",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 8.25,
-          "power": 3.0,
-          "freq": 121.2,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 1000.0,
-          "delay": 8.25,
-          "power": 5.0,
-          "freq": 121.2,
-          "cells": 10
+          "area": 48.94,
+          "delay": 0.338,
+          "freq": 2958.58,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1800.0,
-          "delay": 8.25,
-          "power": 9.0,
-          "freq": 121.2,
-          "cells": 18
+          "area": 97.89,
+          "delay": 0.6039,
+          "freq": 1655.9,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3600.0,
-          "delay": 11.0,
-          "power": 18.0,
-          "freq": 90.9,
-          "cells": 36
+          "area": 194.45,
+          "delay": 1.1629,
+          "freq": 859.92,
+          "power": 0.0165,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 6900.0,
-          "delay": 13.75,
-          "power": 34.5,
-          "freq": 72.7,
-          "cells": 69
+          "area": 389.69,
+          "delay": 2.2416,
+          "freq": 446.11,
+          "power": 0.0333,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 13700.0,
-          "delay": 16.5,
-          "power": 68.5,
-          "freq": 60.6,
-          "cells": 137
+          "area": 778.58,
+          "delay": 4.4233,
+          "freq": 226.08,
+          "power": 0.0667,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 27500.0,
-          "delay": 19.25,
-          "power": 137.5,
-          "freq": 51.9,
-          "cells": 275
+          "area": 1555.57,
+          "delay": 8.822,
+          "freq": 113.35,
+          "power": 0.133,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 54500.0,
-          "delay": 22.0,
-          "power": 272.5,
-          "freq": 45.5,
-          "cells": 545
-        },
-        {
-          "width": 1024,
-          "area": 108600.0,
-          "delay": 24.75,
-          "power": 543.0,
-          "freq": 40.4,
-          "cells": 1086
+          "area": 3113.26,
+          "delay": 17.5621,
+          "freq": 56.94,
+          "power": 0.267,
+          "cells": -1
         }
       ],
       "references": [
@@ -1553,16 +1372,17 @@
         "skip mux depth and block propagate fan-in affect timing materially,",
         "too-small blocks reduce skip benefit; too-large blocks increase local ripple delay,",
         "careful block sizing is the key design knob."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_conditional_sum",
       "name": "Conditional Sum",
       "kind": "classical",
-      "area_512": 68000.0,
-      "freq_512_mhz": 50.0,
-      "power_512_mw": 340.0,
-      "delay_512_ns": 20.0,
+      "area_512": 4425.44,
+      "freq_512_mhz": 97.22,
+      "power_512_mw": 0.461,
+      "delay_512_ns": 10.2859,
       "overview": "The `conditional_sum_adder` is a parameterized Verilog module implementing a conditional sum adder, which pre-computes sums for both possible carry-in values (0 and 1) for each block and then selects the correct result based on the actual carry-in. This design is similar to the carry-select adder but emphasizes the conditional computation approach, where each block computes two conditional sums in parallel.\n\n**Note**: The conditional sum adder is functionally very similar to the carry-select adder. The main conceptual difference is that conditional sum adders can use hierarchical tree structures for very wide adders, though this implementation uses a simpler sequential block approach similar to carry-select. Both achieve similar performance characteristics.",
       "characteristics": [
         "**Logic Depth**: O(n/BLOCK_SIZE) - much faster than ripple carry",
@@ -1581,76 +1401,60 @@
       "mermaid": "flowchart LR\n  abus[A bus] --> level_zero[Level zero candidate generators]\n  bbus[B bus] --> level_zero\n  cin[Cin] --> select_zero[Selection level zero]\n\n  level_zero --> select_zero\n  select_zero --> select_one[Selection level one]\n  level_zero --> select_one\n  select_one --> select_top[Selection level top]\n\n  select_top --> sum_bus[Sum bus]\n  select_top --> cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 7.5,
-          "power": 2.0,
-          "freq": 133.3,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 1100.0,
-          "delay": 7.5,
-          "power": 5.5,
-          "freq": 133.3,
-          "cells": 11
+          "area": 52.67,
+          "delay": 0.3561,
+          "freq": 2808.2,
+          "power": 0.0043,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 2200.0,
-          "delay": 7.5,
-          "power": 11.0,
-          "freq": 133.3,
-          "cells": 22
+          "area": 115.18,
+          "delay": 0.5917,
+          "freq": 1690.05,
+          "power": 0.0101,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 4100.0,
-          "delay": 10.0,
-          "power": 20.5,
-          "freq": 100.0,
-          "cells": 41
+          "area": 254.03,
+          "delay": 0.9418,
+          "freq": 1061.8,
+          "power": 0.0236,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 8700.0,
-          "delay": 12.5,
-          "power": 43.5,
-          "freq": 80.0,
-          "cells": 87
+          "area": 525.35,
+          "delay": 1.6664,
+          "freq": 600.1,
+          "power": 0.0534,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 17100.0,
-          "delay": 15.0,
-          "power": 85.5,
-          "freq": 66.7,
-          "cells": 171
+          "area": 1070.38,
+          "delay": 3.0458,
+          "freq": 328.32,
+          "power": 0.107,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 33900.0,
-          "delay": 17.5,
-          "power": 169.5,
-          "freq": 57.1,
-          "cells": 339
+          "area": 2213.39,
+          "delay": 5.4504,
+          "freq": 183.47,
+          "power": 0.227,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 68000.0,
-          "delay": 20.0,
-          "power": 340.0,
-          "freq": 50.0,
-          "cells": 680
-        },
-        {
-          "width": 1024,
-          "area": 133000.0,
-          "delay": 22.5,
-          "power": 665.0,
-          "freq": 44.4,
-          "cells": 1330
+          "area": 4425.44,
+          "delay": 10.2859,
+          "freq": 97.22,
+          "power": 0.461,
+          "cells": -1
         }
       ],
       "references": [
@@ -1682,16 +1486,17 @@
         "hierarchy balancing is key to timing and routing quality,",
         "selector loading can dominate large-width implementations,",
         "design is sensitive to mux implementation and physical synthesis strategy."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_dadda_tree",
       "name": "Dadda Tree",
       "kind": "classical",
-      "area_512": 178300.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 891.5,
-      "delay_512_ns": 16.0,
+      "area_512": 25906.27,
+      "freq_512_mhz": 68.26,
+      "power_512_mw": 61.7,
+      "delay_512_ns": 14.6504,
       "overview": "The `dadda_tree_adder` is a parameterized Verilog module implementing a true Dadda tree adder using carry-save adders (CSAs) arranged in reduction stages according to the Dadda sequence. This is the full implementation that uses CSAs to reduce multiple operands to two operands, which are then added with a final adder.\n\n**Note**: This implementation uses true CSA stages following the Dadda sequence to achieve O(log n) delay with fewer CSAs than a Wallace tree, making it more area-efficient.",
       "characteristics": [
         "**Logic Depth**: O(log n) - logarithmic depth with CSA stages",
@@ -1711,76 +1516,60 @@
       "mermaid": "flowchart LR\n  PP[Partial products and operands] --> H0[Height-limited stage 0]\n  H0 --> H1[Height-limited stage 1]\n  H1 --> H2[Height-limited stage 2]\n  H2 --> V2[Two-vector output]\n  V2 --> FA[Final carry-propagate adder]\n  FA --> OUT[Final sum]",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
+          "area": 315.48,
+          "delay": 1.0772,
+          "freq": 928.33,
+          "power": 0.441,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 2300.0,
-          "delay": 6.0,
-          "power": 11.5,
-          "freq": 166.7,
-          "cells": 23
+          "area": 632.02,
+          "delay": 1.3101,
+          "freq": 763.3,
+          "power": 1.29,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 5400.0,
-          "delay": 8.0,
-          "power": 27.0,
-          "freq": 125.0,
-          "cells": 54
+          "area": 1482.42,
+          "delay": 2.1603,
+          "freq": 462.9,
+          "power": 2.77,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 13300.0,
-          "delay": 10.0,
-          "power": 66.5,
-          "freq": 100.0,
-          "cells": 133
+          "area": 2808.69,
+          "delay": 3.5063,
+          "freq": 285.2,
+          "power": 5.98,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 32000.0,
-          "delay": 12.0,
-          "power": 160.0,
-          "freq": 83.3,
-          "cells": 320
+          "area": 6138.48,
+          "delay": 6.5596,
+          "freq": 152.45,
+          "power": 12.0,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 77200.0,
-          "delay": 14.0,
-          "power": 386.0,
-          "freq": 71.4,
-          "cells": 772
+          "area": 12294.52,
+          "delay": 10.566,
+          "freq": 94.64,
+          "power": 26.0,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 178300.0,
-          "delay": 16.0,
-          "power": 891.5,
-          "freq": 62.5,
-          "cells": 1783
-        },
-        {
-          "width": 1024,
-          "area": 392900.0,
-          "delay": 18.0,
-          "power": 1964.5,
-          "freq": 55.6,
-          "cells": 3929
+          "area": 25906.27,
+          "delay": 14.6504,
+          "freq": 68.26,
+          "power": 61.7,
+          "cells": -1
         }
       ],
       "references": [
@@ -1812,16 +1601,17 @@
         "stage-height schedule is the defining optimization mechanism,",
         "compressor placement remains critical for timing and routing,",
         "strong choice for reduction efficiency in multiplier-like pipelines."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_error_correcting",
       "name": "Error Correcting",
       "kind": "classical",
-      "area_512": 378600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 1893.0,
-      "delay_512_ns": 16.0,
+      "area_512": null,
+      "freq_512_mhz": null,
+      "power_512_mw": null,
+      "delay_512_ns": null,
       "overview": "The `error_correcting_adder` is a parameterized Verilog module implementing an error-correcting adder using Triple Modular Redundancy (TMR). It uses three identical adders computing the same operation in parallel, then applies majority voting to detect and correct single-bit errors. This provides fault tolerance for critical applications where reliability is paramount.",
       "characteristics": [
         "**Logic Depth**: Same as single adder (all compute in parallel)",
@@ -1840,80 +1630,7 @@
         "**Industrial control**: Safety-critical automation"
       ],
       "mermaid": "flowchart LR\n  A[A operand] --> ADD[Adder core]\n  B[B operand] --> ADD\n  Cin[Cin] --> ADD\n\n  ADD --> CHK[Error detect and correct logic]\n  ADD --> RAW[Raw sum path]\n  CHK --> CORR[Corrected and validated sum]\n  CORR --> S[Sum bus]\n  CHK --> ERR[Error flag]\n  CHK --> Cout[Cout]",
-      "scaling": [
-        {
-          "width": 4,
-          "area": 1800.0,
-          "delay": 6.0,
-          "power": 9.0,
-          "freq": 166.7,
-          "cells": 18
-        },
-        {
-          "width": 8,
-          "area": 5700.0,
-          "delay": 6.0,
-          "power": 28.5,
-          "freq": 166.7,
-          "cells": 57
-        },
-        {
-          "width": 16,
-          "area": 11400.0,
-          "delay": 6.0,
-          "power": 57.0,
-          "freq": 166.7,
-          "cells": 114
-        },
-        {
-          "width": 32,
-          "area": 22800.0,
-          "delay": 8.0,
-          "power": 114.0,
-          "freq": 125.0,
-          "cells": 228
-        },
-        {
-          "width": 64,
-          "area": 46400.0,
-          "delay": 10.0,
-          "power": 232.0,
-          "freq": 100.0,
-          "cells": 464
-        },
-        {
-          "width": 128,
-          "area": 92800.0,
-          "delay": 12.0,
-          "power": 464.0,
-          "freq": 83.3,
-          "cells": 928
-        },
-        {
-          "width": 256,
-          "area": 189200.0,
-          "delay": 14.0,
-          "power": 946.0,
-          "freq": 71.4,
-          "cells": 1892
-        },
-        {
-          "width": 512,
-          "area": 378600.0,
-          "delay": 16.0,
-          "power": 1893.0,
-          "freq": 62.5,
-          "cells": 3786
-        },
-        {
-          "width": 1024,
-          "area": 754500.0,
-          "delay": 18.0,
-          "power": 3772.5,
-          "freq": 55.6,
-          "cells": 7545
-        }
-      ],
+      "scaling": [],
       "references": [
         {
           "id": "R83",
@@ -1943,16 +1660,17 @@
         "reliability policy (detect-only vs detect-correct) determines overhead,",
         "fault-model assumptions should be explicit in evaluation,",
         "fault-injection testing is essential for confidence."
-      ]
+      ],
+      "has_sta": false
     },
     {
       "slug": "db_han_carlson",
       "name": "Han Carlson",
       "kind": "classical",
-      "area_512": 167000.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 835.0,
-      "delay_512_ns": 16.0,
+      "area_512": 5715.28,
+      "freq_512_mhz": 27.16,
+      "power_512_mw": 0.526,
+      "delay_512_ns": 36.8237,
       "overview": "The `han_carlson_adder` is a parameterized Verilog module implementing a Han-Carlson prefix tree adder, which is a hybrid design that combines the speed of Kogge-Stone (early stages) with the area efficiency of Brent-Kung (later stages). This provides an excellent balance between speed and hardware complexity, making it ideal for high-performance adders where both speed and area are important.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - same as Kogge-Stone",
@@ -1971,76 +1689,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n2[Generate propagate generation]\n  n1[B bus] --> n2\n  n3[Cin] --> n4[Sparse prefix stage]\n  n2 --> n4\n\n  n4 --> n5[Dense refinement stage]\n  n2 --> n5\n  n5 --> n6[Sum stage]\n  n2 --> n6\n\n  n6 --> n7[Sum bus]\n  n5 --> n8[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 6.0,
-          "power": 2.0,
-          "freq": 166.7,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 6.0,
-          "power": 12.0,
-          "freq": 166.7,
-          "cells": 24
+          "area": 72.35,
+          "delay": 0.4838,
+          "freq": 2066.97,
+          "power": 0.0063,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 4600.0,
-          "delay": 6.0,
-          "power": 23.0,
-          "freq": 166.7,
-          "cells": 46
+          "area": 157.47,
+          "delay": 0.9852,
+          "freq": 1015.02,
+          "power": 0.0145,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 10000.0,
-          "delay": 8.0,
-          "power": 50.0,
-          "freq": 125.0,
-          "cells": 100
+          "area": 331.97,
+          "delay": 1.9941,
+          "freq": 501.48,
+          "power": 0.0303,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 20800.0,
-          "delay": 10.0,
-          "power": 104.0,
-          "freq": 100.0,
-          "cells": 208
+          "area": 684.68,
+          "delay": 4.1804,
+          "freq": 239.21,
+          "power": 0.0628,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 41300.0,
-          "delay": 12.0,
-          "power": 206.5,
-          "freq": 83.3,
-          "cells": 413
+          "area": 1389.58,
+          "delay": 8.6815,
+          "freq": 115.19,
+          "power": 0.128,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 83600.0,
-          "delay": 14.0,
-          "power": 418.0,
-          "freq": 71.4,
-          "cells": 836
+          "area": 2835.56,
+          "delay": 17.868,
+          "freq": 55.97,
+          "power": 0.261,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 167000.0,
-          "delay": 16.0,
-          "power": 835.0,
-          "freq": 62.5,
-          "cells": 1670
-        },
-        {
-          "width": 1024,
-          "area": 333200.0,
-          "delay": 18.0,
-          "power": 1666.0,
-          "freq": 55.6,
-          "cells": 3332
+          "area": 5715.28,
+          "delay": 36.8237,
+          "freq": 27.16,
+          "power": 0.526,
+          "cells": -1
         }
       ],
       "references": [
@@ -2072,16 +1774,17 @@
         "hybrid stage composition is the key performance lever,",
         "fanout and route complexity are usually lower than dense-prefix extremes,",
         "careful physical synthesis is still required for wide datapaths."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_knowles",
       "name": "Knowles",
       "kind": "classical",
-      "area_512": 261400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 1307.0,
-      "delay_512_ns": 16.0,
+      "area_512": 5943.5,
+      "freq_512_mhz": 56.25,
+      "power_512_mw": 0.417,
+      "delay_512_ns": 17.7791,
       "overview": "The `knowles_adder` is a parameterized Verilog module implementing a Knowles prefix tree adder with parameterized fanout patterns. The Knowles adder family provides tradeoffs between wiring complexity and logic depth by allowing different fanout configurations at each stage. This implementation uses the Knowles [1,1,1,1] pattern, where each stage has fanout 1, creating a sparse tree that differs from both Kogge-Stone (high fanout) and Sklansky (moderate fanout) architectures.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - same as Kogge-Stone and Sklansky",
@@ -2101,76 +1804,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n2[Generate propagate generation]\n  n1[B bus] --> n2\n  n3[Cin] --> n4[Parameterized prefix graph]\n  n2 --> n4\n\n  n4 --> n5[Sum stage]\n  n2 --> n5\n  n5 --> n6[Sum bus]\n  n4 --> n7[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 900.0,
-          "delay": 6.0,
-          "power": 4.5,
-          "freq": 166.7,
-          "cells": 9
-        },
-        {
           "width": 8,
-          "area": 2200.0,
-          "delay": 6.0,
-          "power": 11.0,
-          "freq": 166.7,
-          "cells": 22
+          "area": 63.84,
+          "delay": 0.4305,
+          "freq": 2322.88,
+          "power": 0.0045,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 5200.0,
-          "delay": 6.0,
-          "power": 26.0,
-          "freq": 166.7,
-          "cells": 52
+          "area": 137.52,
+          "delay": 0.7236,
+          "freq": 1381.98,
+          "power": 0.0104,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 11700.0,
-          "delay": 8.0,
-          "power": 58.5,
-          "freq": 125.0,
-          "cells": 117
+          "area": 296.86,
+          "delay": 1.2927,
+          "freq": 773.57,
+          "power": 0.0226,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 25400.0,
-          "delay": 10.0,
-          "power": 127.0,
-          "freq": 100.0,
-          "cells": 254
+          "area": 634.68,
+          "delay": 2.3687,
+          "freq": 422.17,
+          "power": 0.0472,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 54500.0,
-          "delay": 12.0,
-          "power": 272.5,
-          "freq": 83.3,
-          "cells": 545
+          "area": 1349.95,
+          "delay": 4.6195,
+          "freq": 216.47,
+          "power": 0.0972,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 120000.0,
-          "delay": 14.0,
-          "power": 600.0,
-          "freq": 71.4,
-          "cells": 1200
+          "area": 2883.44,
+          "delay": 8.5812,
+          "freq": 116.53,
+          "power": 0.205,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 261400.0,
-          "delay": 16.0,
-          "power": 1307.0,
-          "freq": 62.5,
-          "cells": 2614
-        },
-        {
-          "width": 1024,
-          "area": 559200.0,
-          "delay": 18.0,
-          "power": 2796.0,
-          "freq": 55.6,
-          "cells": 5592
+          "area": 5943.5,
+          "delay": 17.7791,
+          "freq": 56.25,
+          "power": 0.417,
+          "cells": -1
         }
       ],
       "references": [
@@ -2202,16 +1889,17 @@
         "parameter choice determines graph density and buffering needs,",
         "synthesis should sweep candidate configurations for target width,",
         "verification must ensure correctness across chosen topology parameters."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_kogge_stone",
       "name": "Kogge Stone",
       "kind": "classical",
-      "area_512": 697400.0,
-      "freq_512_mhz": 100.0,
-      "power_512_mw": 3487.0,
-      "delay_512_ns": 10.0,
+      "area_512": 10528.28,
+      "freq_512_mhz": 50.23,
+      "power_512_mw": 0.885,
+      "delay_512_ns": 19.9066,
       "overview": "The `kogge_stone_adder` is a parameterized Verilog module implementing a Kogge-Stone prefix tree adder, which is one of the fastest parallel prefix adder architectures. It achieves minimum logic depth (log\u2082(n) stages) by using full connections at all stages, at the cost of increased wiring complexity and fanout. This makes it ideal for high-performance applications where speed is critical and area/wiring overhead is acceptable.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - minimum possible for parallel prefix",
@@ -2231,76 +1919,60 @@
       "mermaid": "flowchart LR\n  abus[A bus] --> gp_stage[Generate propagate generation]\n  bbus[B bus] --> gp_stage\n  cin[Cin] --> prefix_zero[Prefix stage zero]\n  gp_stage --> prefix_zero\n\n  prefix_zero --> prefix_one[Prefix stage one]\n  prefix_one --> prefix_two[Prefix stage two]\n  prefix_two --> prefix_last[Prefix stage last]\n\n  gp_stage --> sum_stage[Sum stage]\n  prefix_last --> sum_stage\n  sum_stage --> sum_bus[Sum bus]\n  prefix_last --> cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 3.75,
-          "power": 2.0,
-          "freq": 266.7,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2200.0,
-          "delay": 3.75,
-          "power": 11.0,
-          "freq": 266.7,
-          "cells": 22
+          "area": 70.49,
+          "delay": 0.4817,
+          "freq": 2075.98,
+          "power": 0.0062,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7200.0,
-          "delay": 3.75,
-          "power": 36.0,
-          "freq": 266.7,
-          "cells": 72
+          "area": 193.38,
+          "delay": 0.7658,
+          "freq": 1305.82,
+          "power": 0.0169,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 18000.0,
-          "delay": 5.0,
-          "power": 90.0,
-          "freq": 200.0,
-          "cells": 180
+          "area": 411.24,
+          "delay": 1.2942,
+          "freq": 772.68,
+          "power": 0.0347,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 46800.0,
-          "delay": 6.25,
-          "power": 234.0,
-          "freq": 160.0,
-          "cells": 468
+          "area": 1005.21,
+          "delay": 2.5501,
+          "freq": 392.14,
+          "power": 0.0823,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 122300.0,
-          "delay": 7.5,
-          "power": 611.5,
-          "freq": 133.3,
-          "cells": 1223
+          "area": 2154.6,
+          "delay": 5.4036,
+          "freq": 185.06,
+          "power": 0.187,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 285600.0,
-          "delay": 8.75,
-          "power": 1428.0,
-          "freq": 114.3,
-          "cells": 2856
+          "area": 4920.47,
+          "delay": 8.2124,
+          "freq": 121.77,
+          "power": 0.4,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 697400.0,
-          "delay": 10.0,
-          "power": 3487.0,
-          "freq": 100.0,
-          "cells": 6974
-        },
-        {
-          "width": 1024,
-          "area": 1566800.0,
-          "delay": 11.25,
-          "power": 7834.0,
-          "freq": 88.9,
-          "cells": 15668
+          "area": 10528.28,
+          "delay": 19.9066,
+          "freq": 50.23,
+          "power": 0.885,
+          "cells": -1
         }
       ],
       "references": [
@@ -2332,16 +2004,17 @@
         "dense prefix wiring is the main implementation challenge,",
         "careful floorplanning/routing is critical for expected speed gains,",
         "KSA often exposes strong logic speed but potential interconnect bottlenecks."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_ladner_fischer",
       "name": "Ladner Fischer",
       "kind": "classical",
-      "area_512": 698100.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 3490.5,
-      "delay_512_ns": 16.0,
+      "area_512": 10551.16,
+      "freq_512_mhz": 49.78,
+      "power_512_mw": 0.886,
+      "delay_512_ns": 20.0869,
       "overview": "The `ladner_fischer_adder` is a parameterized Verilog module implementing a Ladner-Fischer prefix tree adder, which uses a hierarchical approach to reduce wiring complexity compared to Kogge-Stone while maintaining minimum logic depth. It achieves a good balance between area and speed, making it suitable for high-performance adders where both metrics are important.\n\n**Note**: In this implementation, the Ladner-Fischer adder uses a connection pattern similar to Kogge-Stone. The theoretical difference (reduced wiring complexity) is more apparent in optimized implementations with specific layout optimizations. Both achieve the same minimum logic depth of log\u2082(n) stages.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - same as Kogge-Stone (minimum)",
@@ -2360,76 +2033,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n2[Generate propagate generation]\n  n1[B bus] --> n2\n  n3[Cin] --> n4[Configurable prefix graph]\n  n2 --> n4\n\n  n4 --> n5[Sum stage]\n  n2 --> n5\n  n5 --> n6[Sum bus]\n  n4 --> n7[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 6.0,
-          "power": 2.0,
-          "freq": 166.7,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2700.0,
-          "delay": 6.0,
-          "power": 13.5,
-          "freq": 166.7,
-          "cells": 27
+          "area": 74.75,
+          "delay": 0.4333,
+          "freq": 2307.87,
+          "power": 0.0066,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7100.0,
-          "delay": 6.0,
-          "power": 35.5,
-          "freq": 166.7,
-          "cells": 71
+          "area": 197.11,
+          "delay": 0.7529,
+          "freq": 1328.2,
+          "power": 0.017,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 16600.0,
-          "delay": 8.0,
-          "power": 83.0,
-          "freq": 125.0,
-          "cells": 166
+          "area": 414.69,
+          "delay": 1.2267,
+          "freq": 815.2,
+          "power": 0.0348,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 47200.0,
-          "delay": 10.0,
-          "power": 236.0,
-          "freq": 100.0,
-          "cells": 472
+          "area": 961.86,
+          "delay": 2.6077,
+          "freq": 383.48,
+          "power": 0.082,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 122900.0,
-          "delay": 12.0,
-          "power": 614.5,
-          "freq": 83.3,
-          "cells": 1229
+          "area": 2165.24,
+          "delay": 5.1873,
+          "freq": 192.78,
+          "power": 0.183,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 283700.0,
-          "delay": 14.0,
-          "power": 1418.5,
-          "freq": 71.4,
-          "cells": 2837
+          "area": 4839.87,
+          "delay": 8.9352,
+          "freq": 111.92,
+          "power": 0.394,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 698100.0,
-          "delay": 16.0,
-          "power": 3490.5,
-          "freq": 62.5,
-          "cells": 6981
-        },
-        {
-          "width": 1024,
-          "area": 1583700.0,
-          "delay": 18.0,
-          "power": 7918.5,
-          "freq": 55.6,
-          "cells": 15837
+          "area": 10551.16,
+          "delay": 20.0869,
+          "freq": 49.78,
+          "power": 0.886,
+          "cells": -1
         }
       ],
       "references": [
@@ -2461,16 +2118,17 @@
         "configurable graph selection is a key synthesis-time control,",
         "fanout management and buffering can dominate realized performance,",
         "topology should be validated under target placement/routing assumptions."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_ling",
       "name": "Ling",
       "kind": "classical",
-      "area_512": 153600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 768.0,
-      "delay_512_ns": 16.0,
+      "area_512": 3132.42,
+      "freq_512_mhz": 60.92,
+      "power_512_mw": 0.268,
+      "delay_512_ns": 16.4141,
       "overview": "The `ling_adder` is a parameterized Verilog module implementing a Ling adder, which is based on a mathematical transformation that can simplify carry computation in certain contexts. The Ling adder uses a different approach to carry propagation that can be optimized for specific hardware implementations. This implementation uses standard sequential carry propagation, while a fully optimized Ling adder would exploit the Ling transformation to reduce logic depth further.\n\n**Note**: This implementation uses sequential carry propagation similar to a basic carry lookahead adder. A fully optimized Ling adder would use the Ling transformation to compute all carries in parallel, reducing logic depth. The mathematical foundation is based on Ling's transformation, but the implementation here is simplified.",
       "characteristics": [
         "**Logic Depth**: O(n) - sequential carry propagation (this implementation)",
@@ -2489,76 +2147,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> GP[Generate-Propagate stage]\n  B[B bus] --> GP\n  Cin[Cin] --> LT[Ling transform stage]\n  GP --> LT\n\n  LT --> REC[Carry reconstruction]\n  GP --> REC\n  REC --> SUM[Sum stage]\n  GP --> SUM\n\n  SUM --> S[Sum bus]\n  REC --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1200.0,
-          "delay": 6.0,
-          "power": 6.0,
-          "freq": 166.7,
-          "cells": 12
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 6.0,
-          "power": 12.0,
-          "freq": 166.7,
-          "cells": 24
+          "area": 48.94,
+          "delay": 0.3341,
+          "freq": 2993.12,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 4800.0,
-          "delay": 6.0,
-          "power": 24.0,
-          "freq": 166.7,
-          "cells": 48
+          "area": 97.89,
+          "delay": 0.5893,
+          "freq": 1696.93,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 9600.0,
-          "delay": 8.0,
-          "power": 48.0,
-          "freq": 125.0,
-          "cells": 96
+          "area": 195.78,
+          "delay": 1.0998,
+          "freq": 909.26,
+          "power": 0.0166,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 19200.0,
-          "delay": 10.0,
-          "power": 96.0,
-          "freq": 100.0,
-          "cells": 192
+          "area": 391.55,
+          "delay": 2.1207,
+          "freq": 471.54,
+          "power": 0.0333,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 38400.0,
-          "delay": 12.0,
-          "power": 192.0,
-          "freq": 83.3,
-          "cells": 384
+          "area": 783.1,
+          "delay": 4.1626,
+          "freq": 240.23,
+          "power": 0.0669,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 76800.0,
-          "delay": 14.0,
-          "power": 384.0,
-          "freq": 71.4,
-          "cells": 768
+          "area": 1566.21,
+          "delay": 8.2464,
+          "freq": 121.27,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 153600.0,
-          "delay": 16.0,
-          "power": 768.0,
-          "freq": 62.5,
-          "cells": 1536
-        },
-        {
-          "width": 1024,
-          "area": 307200.0,
-          "delay": 18.0,
-          "power": 1536.0,
-          "freq": 55.6,
-          "cells": 3072
+          "area": 3132.42,
+          "delay": 16.4141,
+          "freq": 60.92,
+          "power": 0.268,
+          "cells": -1
         }
       ],
       "references": [
@@ -2590,16 +2232,17 @@
         "transformation and reconstruction stages are key for timing behavior,",
         "correctness validation should stress carry corner patterns,",
         "performance depends on how well transformed logic maps to target cells."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_lynch_swartzlander",
       "name": "Lynch Swartzlander",
       "kind": "classical",
-      "area_512": 697400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 3487.0,
-      "delay_512_ns": 16.0,
+      "area_512": 10528.28,
+      "freq_512_mhz": 50.23,
+      "power_512_mw": 0.885,
+      "delay_512_ns": 19.9066,
       "overview": "The `lynch_swartzlander_adder` is a parameterized Verilog module implementing a Lynch-Swartzlander Spanning Tree Adder (STA), which is a parallel prefix adder that achieves lower fanout than Kogge-Stone while maintaining the same minimum logic depth. The spanning tree structure reduces wiring congestion by using a more sparse connection pattern, making it ideal for applications where fanout reduction and routing are important concerns.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - same as Kogge-Stone (minimum)",
@@ -2619,76 +2262,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> GP[Generate-propagate generation]\n  B[B bus] --> GP\n  Cin[Cin] --> PW[Wiring-optimized prefix graph]\n  GP --> PW\n\n  PW --> SUM[Sum stage]\n  GP --> SUM\n  SUM --> S[Sum bus]\n  PW --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 400.0,
-          "delay": 6.0,
-          "power": 2.0,
-          "freq": 166.7,
-          "cells": 4
-        },
-        {
           "width": 8,
-          "area": 2200.0,
-          "delay": 6.0,
-          "power": 11.0,
-          "freq": 166.7,
-          "cells": 22
+          "area": 70.49,
+          "delay": 0.4817,
+          "freq": 2075.98,
+          "power": 0.0062,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7200.0,
-          "delay": 6.0,
-          "power": 36.0,
-          "freq": 166.7,
-          "cells": 72
+          "area": 193.38,
+          "delay": 0.7658,
+          "freq": 1305.82,
+          "power": 0.0169,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 18000.0,
-          "delay": 8.0,
-          "power": 90.0,
-          "freq": 125.0,
-          "cells": 180
+          "area": 411.24,
+          "delay": 1.2942,
+          "freq": 772.68,
+          "power": 0.0347,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 46800.0,
-          "delay": 10.0,
-          "power": 234.0,
-          "freq": 100.0,
-          "cells": 468
+          "area": 1005.21,
+          "delay": 2.5501,
+          "freq": 392.14,
+          "power": 0.0823,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 122300.0,
-          "delay": 12.0,
-          "power": 611.5,
-          "freq": 83.3,
-          "cells": 1223
+          "area": 2154.6,
+          "delay": 5.4036,
+          "freq": 185.06,
+          "power": 0.187,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 285600.0,
-          "delay": 14.0,
-          "power": 1428.0,
-          "freq": 71.4,
-          "cells": 2856
+          "area": 4920.47,
+          "delay": 8.2124,
+          "freq": 121.77,
+          "power": 0.4,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 697400.0,
-          "delay": 16.0,
-          "power": 3487.0,
-          "freq": 62.5,
-          "cells": 6974
-        },
-        {
-          "width": 1024,
-          "area": 1566800.0,
-          "delay": 18.0,
-          "power": 7834.0,
-          "freq": 55.6,
-          "cells": 15668
+          "area": 10528.28,
+          "delay": 19.9066,
+          "freq": 50.23,
+          "power": 0.885,
+          "cells": -1
         }
       ],
       "references": [
@@ -2725,16 +2352,17 @@
         "interconnect topology is the primary optimization objective,",
         "logical speed gains may be limited if wiring constraints dominate,",
         "best assessed under realistic backend assumptions."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_manchester",
       "name": "Manchester",
       "kind": "classical",
-      "area_512": 153600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 768.0,
-      "delay_512_ns": 16.0,
+      "area_512": 3643.14,
+      "freq_512_mhz": 60.54,
+      "power_512_mw": 0.33,
+      "delay_512_ns": 16.5186,
       "overview": "The `manchester_adder` is a parameterized Verilog module implementing a Manchester carry chain adder, which pre-computes results for both possible carry-in values (0 and 1) within each group using generate/propagate signals and carry chains, then selects the correct result based on the actual carry-in. This is similar to carry-select but uses G/P signals for more efficient computation, eliminating carry propagation delay within groups.",
       "characteristics": [
         "**Logic Depth**: O(n/GROUP_SIZE) - much faster than ripple carry",
@@ -2753,76 +2381,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> MC[Manchester carry-chain core]\n  B[B bus] --> MC\n  Cin[Cin] --> MC\n\n  MC --> SUM[Sum stage]\n  MC --> COUTGEN[Carry out stage]\n  SUM --> S[Sum bus]\n  COUTGEN --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1200.0,
-          "delay": 6.0,
-          "power": 6.0,
-          "freq": 166.7,
-          "cells": 12
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 6.0,
-          "power": 12.0,
-          "freq": 166.7,
-          "cells": 24
+          "area": 60.65,
+          "delay": 0.3327,
+          "freq": 3005.71,
+          "power": 0.0051,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 4800.0,
-          "delay": 6.0,
-          "power": 24.0,
-          "freq": 166.7,
-          "cells": 48
+          "area": 111.45,
+          "delay": 0.6298,
+          "freq": 1587.81,
+          "power": 0.0097,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 9600.0,
-          "delay": 8.0,
-          "power": 48.0,
-          "freq": 125.0,
-          "cells": 96
+          "area": 227.7,
+          "delay": 1.0819,
+          "freq": 924.3,
+          "power": 0.0202,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 19200.0,
-          "delay": 10.0,
-          "power": 96.0,
-          "freq": 100.0,
-          "cells": 192
+          "area": 455.66,
+          "delay": 2.1067,
+          "freq": 474.68,
+          "power": 0.0409,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 38400.0,
-          "delay": 12.0,
-          "power": 192.0,
-          "freq": 83.3,
-          "cells": 384
+          "area": 912.65,
+          "delay": 4.1934,
+          "freq": 238.47,
+          "power": 0.0824,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 76800.0,
-          "delay": 14.0,
-          "power": 384.0,
-          "freq": 71.4,
-          "cells": 768
+          "area": 1826.62,
+          "delay": 8.3065,
+          "freq": 120.39,
+          "power": 0.165,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 153600.0,
-          "delay": 16.0,
-          "power": 768.0,
-          "freq": 62.5,
-          "cells": 1536
-        },
-        {
-          "width": 1024,
-          "area": 307200.0,
-          "delay": 18.0,
-          "power": 1536.0,
-          "freq": 55.6,
-          "cells": 3072
+          "area": 3643.14,
+          "delay": 16.5186,
+          "freq": 60.54,
+          "power": 0.33,
+          "cells": -1
         }
       ],
       "references": [
@@ -2854,16 +2466,17 @@
         "carry-chain mapping quality is the primary timing driver,",
         "architecture is generally routing-friendly due to regular structure,",
         "useful baseline for comparing compact carry-optimized approaches."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_radix_cla",
       "name": "Radix Cla",
       "kind": "classical",
-      "area_512": 153600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 768.0,
-      "delay_512_ns": 16.0,
+      "area_512": 3132.42,
+      "freq_512_mhz": 60.92,
+      "power_512_mw": 0.268,
+      "delay_512_ns": 16.4141,
       "overview": "The `radix_carry_lookahead_adder` is a parameterized Verilog module implementing a radix-based carry lookahead adder that groups bits into fixed-size radix groups (4, 8, 16, or 32 bits). Each group computes carries sequentially using CLA equations, and groups are connected sequentially. Higher radix values reduce delay (fewer groups) but increase area and fanout within each group.",
       "characteristics": [
         "**Logic Depth**: O(n/RADIX_SIZE) - decreases with higher radix",
@@ -2882,76 +2495,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> B0[Block GP 0]\n  B[B bus] --> B0\n  A --> B1[Block GP 1]\n  B --> B1\n  A --> B2[Block GP last]\n  B --> B2\n\n  Cin[Cin] --> C0[Carry block 0]\n  B0 --> C0\n  C0 -->|carry b1| C1[Carry block 1]\n  B1 --> C1\n  C1 -->|carry last| C2[Carry block last]\n  B2 --> C2\n\n  B0 --> SUM[Block sum network]\n  B1 --> SUM\n  B2 --> SUM\n  C2 --> SUM\n  SUM --> S[Sum bus]\n  C2 --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1400.0,
-          "delay": 6.0,
-          "power": 7.0,
-          "freq": 166.7,
-          "cells": 14
-        },
-        {
           "width": 8,
-          "area": 2800.0,
-          "delay": 6.0,
-          "power": 14.0,
-          "freq": 166.7,
-          "cells": 28
+          "area": 12.77,
+          "delay": 0.0666,
+          "freq": 15015.02,
+          "power": 0.0008,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 5700.0,
-          "delay": 6.0,
-          "power": 28.5,
-          "freq": 166.7,
-          "cells": 57
+          "area": 25.54,
+          "delay": 0.0666,
+          "freq": 15015.02,
+          "power": 0.0016,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 9600.0,
-          "delay": 8.0,
-          "power": 48.0,
-          "freq": 125.0,
-          "cells": 96
+          "area": 195.78,
+          "delay": 1.0998,
+          "freq": 909.26,
+          "power": 0.0166,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 19200.0,
-          "delay": 10.0,
-          "power": 96.0,
-          "freq": 100.0,
-          "cells": 192
+          "area": 391.55,
+          "delay": 2.1207,
+          "freq": 471.54,
+          "power": 0.0333,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 38400.0,
-          "delay": 12.0,
-          "power": 192.0,
-          "freq": 83.3,
-          "cells": 384
+          "area": 783.1,
+          "delay": 4.1626,
+          "freq": 240.23,
+          "power": 0.0669,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 76800.0,
-          "delay": 14.0,
-          "power": 384.0,
-          "freq": 71.4,
-          "cells": 768
+          "area": 1566.21,
+          "delay": 8.2464,
+          "freq": 121.27,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 153600.0,
-          "delay": 16.0,
-          "power": 768.0,
-          "freq": 62.5,
-          "cells": 1536
-        },
-        {
-          "width": 1024,
-          "area": 307200.0,
-          "delay": 18.0,
-          "power": 1536.0,
-          "freq": 55.6,
-          "cells": 3072
+          "area": 3132.42,
+          "delay": 16.4141,
+          "freq": 60.92,
+          "power": 0.268,
+          "cells": -1
         }
       ],
       "references": [
@@ -2984,16 +2581,17 @@
         "critical path is dominated by block-carry progression and local block logic,",
         "block sizing controls the delay/area balance,",
         "larger radix may simplify control but can increase local logic depth."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_redundant_binary",
       "name": "Redundant Binary",
       "kind": "classical",
-      "area_512": 100600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 503.0,
-      "delay_512_ns": 16.0,
+      "area_512": 5440.5,
+      "freq_512_mhz": 62.08,
+      "power_512_mw": 0.524,
+      "delay_512_ns": 16.1076,
       "overview": "The `redundant_binary_adder` is a parameterized Verilog module implementing a simplified redundant binary adder. A true redundant binary adder uses a signed-digit number system where each digit can be -1, 0, or 1, allowing carry-free addition in some cases. However, this implementation provides standard binary addition semantics for compatibility with the verification framework, performing direct binary addition with overflow detection.\n\n**Note**: This is a simplified implementation that performs standard binary addition. A true redundant binary adder would use signed-digit representation and different addition algorithms that can achieve carry-free addition in certain cases. This implementation maintains compatibility with standard binary arithmetic.",
       "characteristics": [
         "**Logic Depth**: O(1) - single addition operation (synthesis-dependent)",
@@ -3012,76 +2610,60 @@
       "mermaid": "flowchart LR\n  A[A operand] --> ENC[Redundant encode and combine]\n  B[B operand] --> ENC\n  Cin[Cin] --> ENC\n\n  ENC --> RED[Redundant add core]\n  RED --> NORM[Normalization stage]\n  NORM --> S[Sum bus]\n  NORM --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1200.0,
-          "delay": 6.0,
-          "power": 6.0,
-          "freq": 166.7,
-          "cells": 12
-        },
-        {
           "width": 8,
-          "area": 2600.0,
-          "delay": 6.0,
-          "power": 13.0,
-          "freq": 166.7,
-          "cells": 26
+          "area": 64.9,
+          "delay": 0.3693,
+          "freq": 2707.83,
+          "power": 0.0062,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 5200.0,
-          "delay": 6.0,
-          "power": 26.0,
-          "freq": 166.7,
-          "cells": 52
+          "area": 138.32,
+          "delay": 0.8034,
+          "freq": 1244.71,
+          "power": 0.0129,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 500.0,
-          "delay": 8.0,
-          "power": 2.5,
-          "freq": 125.0,
-          "cells": 5
+          "area": 307.5,
+          "delay": 1.6405,
+          "freq": 609.57,
+          "power": 0.0266,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 4000.0,
-          "delay": 10.0,
-          "power": 20.0,
-          "freq": 100.0,
-          "cells": 40
+          "area": 613.4,
+          "delay": 2.8962,
+          "freq": 345.28,
+          "power": 0.0548,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 15500.0,
-          "delay": 12.0,
-          "power": 77.5,
-          "freq": 83.3,
-          "cells": 155
+          "area": 1205.51,
+          "delay": 4.7158,
+          "freq": 212.05,
+          "power": 0.114,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 40900.0,
-          "delay": 14.0,
-          "power": 204.5,
-          "freq": 71.4,
-          "cells": 409
+          "area": 2519.55,
+          "delay": 8.3328,
+          "freq": 120.01,
+          "power": 0.242,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 100600.0,
-          "delay": 16.0,
-          "power": 503.0,
-          "freq": 62.5,
-          "cells": 1006
-        },
-        {
-          "width": 1024,
-          "area": 242800.0,
-          "delay": 18.0,
-          "power": 1214.0,
-          "freq": 55.6,
-          "cells": 2428
+          "area": 5440.5,
+          "delay": 16.1076,
+          "freq": 62.08,
+          "power": 0.524,
+          "cells": -1
         }
       ],
       "references": [
@@ -3113,16 +2695,17 @@
         "normalization policy influences final timing and area,",
         "representation consistency is critical for verification robustness,",
         "strong fit in systems already using redundant arithmetic internally."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_ripple_carry",
       "name": "Ripple Carry",
       "kind": "classical",
-      "area_512": 54300.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 271.5,
-      "delay_512_ns": 16.0,
+      "area_512": 3117.25,
+      "freq_512_mhz": 57.13,
+      "power_512_mw": 0.268,
+      "delay_512_ns": 17.5038,
       "overview": "The `ripple_carry_adder` is a parameterized Verilog module implementing a standard ripple carry adder (RCA), also known as a carry-propagate adder. It is the simplest and most area-efficient adder design, but has the longest critical path delay. Carries propagate sequentially from the least significant bit (LSB) to the most significant bit (MSB) through a chain of full adders.\n\n**Note**: This adder is functionally identical to the carry-chain adder. Both terms refer to the same sequential carry propagation approach. The name \"ripple carry\" emphasizes that carries \"ripple\" through the chain of adders.",
       "characteristics": [
         "**Logic Depth**: O(n) - worst case delay grows linearly with width",
@@ -3143,76 +2726,60 @@
       "mermaid": "flowchart LR\n  N0[FA bit 0] -->|C1| N1[FA bit 1]\n  N1 -->|C2| N2[Intermediate stages]\n  N2 -->|C last| N3[FA bit N-1]\n\n  A0[A0] --> N0\n  B0[B0] --> N0\n  A1[A1] --> N1\n  B1[B1] --> N1\n  A_last[A N-1] --> N3\n  B_last[B N-1] --> N3\n  Cin[Cin] --> N0\n\n  N0 --> S0[S0]\n  N1 --> S1[S1]\n  N3 --> S_last[S N-1]\n  N3 --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
+          "area": 48.94,
+          "delay": 0.338,
+          "freq": 2958.58,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 1900.0,
-          "delay": 6.0,
-          "power": 9.5,
-          "freq": 166.7,
-          "cells": 19
+          "area": 97.09,
+          "delay": 0.6161,
+          "freq": 1623.11,
+          "power": 0.0081,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 3500.0,
-          "delay": 8.0,
-          "power": 17.5,
-          "freq": 125.0,
-          "cells": 35
+          "area": 194.98,
+          "delay": 1.1481,
+          "freq": 871.0,
+          "power": 0.0165,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 7200.0,
-          "delay": 10.0,
-          "power": 36.0,
-          "freq": 100.0,
-          "cells": 72
+          "area": 390.49,
+          "delay": 2.2751,
+          "freq": 439.54,
+          "power": 0.0335,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 13800.0,
-          "delay": 12.0,
-          "power": 69.0,
-          "freq": 83.3,
-          "cells": 138
+          "area": 780.44,
+          "delay": 4.4536,
+          "freq": 224.54,
+          "power": 0.0671,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 27400.0,
-          "delay": 14.0,
-          "power": 137.0,
-          "freq": 71.4,
-          "cells": 274
+          "area": 1558.76,
+          "delay": 8.8083,
+          "freq": 113.53,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 54300.0,
-          "delay": 16.0,
-          "power": 271.5,
-          "freq": 62.5,
-          "cells": 543
-        },
-        {
-          "width": 1024,
-          "area": 108400.0,
-          "delay": 18.0,
-          "power": 542.0,
-          "freq": 55.6,
-          "cells": 1084
+          "area": 3117.25,
+          "delay": 17.5038,
+          "freq": 57.13,
+          "power": 0.268,
+          "cells": -1
         }
       ],
       "references": [
@@ -3245,16 +2812,17 @@
         "the critical path is typically `Cin -> carry chain -> Cout` (or high-order `S`),",
         "physical implementation quality is dominated by carry-chain mapping and routing,",
         "on FPGAs, dedicated carry resources can make RCA competitive at moderate widths."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_serial",
       "name": "Serial",
       "kind": "classical",
-      "area_512": 53400.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 267.0,
-      "delay_512_ns": 16.0,
+      "area_512": null,
+      "freq_512_mhz": null,
+      "power_512_mw": null,
+      "delay_512_ns": null,
       "overview": "The `serial_adder` is a parameterized Verilog module implementing a serial (bit-serial) adder that processes operands one bit at a time, starting from the least significant bit (LSB). This design trades speed for minimal hardware resources, requiring DATA_WIDTH clock cycles to complete but using only one full adder and shift registers. It is ideal for area-constrained designs, low-speed applications, or when operands arrive serially.",
       "characteristics": [
         "**Logic Depth**: O(1) per bit (single full adder)",
@@ -3273,80 +2841,7 @@
         "Prototyping and resource-limited designs"
       ],
       "mermaid": "flowchart LR\n  A[A bit stream] --> FA[One-bit full-adder core]\n  B[B bit stream] --> FA\n  CREG[Carry register] --> FA\n\n  FA --> SUM[Sum bit stream]\n  FA --> CNEXT[Next carry]\n  CNEXT --> CREG",
-      "scaling": [
-        {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
-          "width": 8,
-          "area": 900.0,
-          "delay": 6.0,
-          "power": 4.5,
-          "freq": 166.7,
-          "cells": 9
-        },
-        {
-          "width": 16,
-          "area": 2800.0,
-          "delay": 6.0,
-          "power": 14.0,
-          "freq": 166.7,
-          "cells": 28
-        },
-        {
-          "width": 32,
-          "area": 4600.0,
-          "delay": 8.0,
-          "power": 23.0,
-          "freq": 125.0,
-          "cells": 46
-        },
-        {
-          "width": 64,
-          "area": 8000.0,
-          "delay": 10.0,
-          "power": 40.0,
-          "freq": 100.0,
-          "cells": 80
-        },
-        {
-          "width": 128,
-          "area": 14600.0,
-          "delay": 12.0,
-          "power": 73.0,
-          "freq": 83.3,
-          "cells": 146
-        },
-        {
-          "width": 256,
-          "area": 27600.0,
-          "delay": 14.0,
-          "power": 138.0,
-          "freq": 71.4,
-          "cells": 276
-        },
-        {
-          "width": 512,
-          "area": 53400.0,
-          "delay": 16.0,
-          "power": 267.0,
-          "freq": 62.5,
-          "cells": 534
-        },
-        {
-          "width": 1024,
-          "area": 104800.0,
-          "delay": 18.0,
-          "power": 524.0,
-          "freq": 55.6,
-          "cells": 1048
-        }
-      ],
+      "scaling": [],
       "references": [
         {
           "id": "R62",
@@ -3376,16 +2871,17 @@
         "carry register timing and control sequencing are critical,",
         "serialization saves hardware but increases operation time,",
         "good fit when arithmetic bandwidth demand is modest."
-      ]
+      ],
+      "has_sta": false
     },
     {
       "slug": "db_sparse_kogge_stone",
       "name": "Sparse Kogge Stone",
       "kind": "classical",
-      "area_512": 681700.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 3408.5,
-      "delay_512_ns": 16.0,
+      "area_512": 12318.19,
+      "freq_512_mhz": 47.01,
+      "power_512_mw": 1.12,
+      "delay_512_ns": 21.274,
       "overview": "The `sparse_kogge_stone_adder` is a parameterized Verilog module implementing a parameterized prefix tree adder that can operate in either dense (standard Kogge-Stone) or sparse mode. The dense mode provides maximum parallelism with full connectivity, while the sparse mode reduces wiring complexity by using exponential-distance connections, both maintaining minimum logic depth. This makes it ideal for comparing dense vs sparse implementations or optimizing for specific wiring constraints.",
       "characteristics": [
         "**Logic Depth**: O(log\u2082 n) stages - minimum possible",
@@ -3406,76 +2902,60 @@
       "mermaid": "flowchart LR\n  n0[A bus] --> n2[Generate propagate generation]\n  n1[B bus] --> n2\n  n3[Cin] --> n4[Sparse prefix stages]\n  n2 --> n4\n\n  n4 --> n5[Local carry completion]\n  n2 --> n5\n  n5 --> n6[Sum stage]\n  n2 --> n6\n\n  n6 --> n7[Sum bus]\n  n5 --> n8[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 600.0,
-          "delay": 6.0,
-          "power": 3.0,
-          "freq": 166.7,
-          "cells": 6
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 6.0,
-          "power": 12.0,
-          "freq": 166.7,
-          "cells": 24
+          "area": 73.42,
+          "delay": 0.3445,
+          "freq": 2902.76,
+          "power": 0.0063,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 7700.0,
-          "delay": 6.0,
-          "power": 38.5,
-          "freq": 166.7,
-          "cells": 77
+          "area": 179.82,
+          "delay": 0.795,
+          "freq": 1257.86,
+          "power": 0.0158,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 21900.0,
-          "delay": 8.0,
-          "power": 109.5,
-          "freq": 125.0,
-          "cells": 219
+          "area": 464.7,
+          "delay": 1.6258,
+          "freq": 615.08,
+          "power": 0.0428,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 52200.0,
-          "delay": 10.0,
-          "power": 261.0,
-          "freq": 100.0,
-          "cells": 522
+          "area": 1048.04,
+          "delay": 2.7687,
+          "freq": 361.18,
+          "power": 0.0975,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 127300.0,
-          "delay": 12.0,
-          "power": 636.5,
-          "freq": 83.3,
-          "cells": 1273
+          "area": 2499.07,
+          "delay": 6.0856,
+          "freq": 164.32,
+          "power": 0.23,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 295700.0,
-          "delay": 14.0,
-          "power": 1478.5,
-          "freq": 71.4,
-          "cells": 2957
+          "area": 5603.82,
+          "delay": 9.2904,
+          "freq": 107.64,
+          "power": 0.513,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 681700.0,
-          "delay": 16.0,
-          "power": 3408.5,
-          "freq": 62.5,
-          "cells": 6817
-        },
-        {
-          "width": 1024,
-          "area": 1498700.0,
-          "delay": 18.0,
-          "power": 7493.5,
-          "freq": 55.6,
-          "cells": 14987
+          "area": 12318.19,
+          "delay": 21.274,
+          "freq": 47.01,
+          "power": 1.12,
+          "cells": -1
         }
       ],
       "references": [
@@ -3507,16 +2987,17 @@
         "sparsity configuration is the central tuning knob,",
         "local carry completion quality strongly affects net timing benefit,",
         "often easier to route than fully dense Kogge-Stone networks."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_vedic",
       "name": "Vedic",
       "kind": "classical",
-      "area_512": 153600.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 768.0,
-      "delay_512_ns": 16.0,
+      "area_512": 3132.42,
+      "freq_512_mhz": 54.35,
+      "power_512_mw": 0.269,
+      "delay_512_ns": 18.4002,
       "overview": "The `vedic_adder` is a parameterized Verilog module implementing an adder inspired by Vedic mathematics principles, which emphasizes efficient computation through grouping and parallel processing. The implementation uses grouped full adders with optimized carry propagation, balancing parallelism with manageable carry chains. This makes it ideal for medium-width adders where balanced speed/area is desired.",
       "characteristics": [
         "**Logic Depth**: O(n/GROUP_SIZE) - faster than ripple, slower than full parallel prefix",
@@ -3535,76 +3016,60 @@
       "mermaid": "flowchart LR\n  A[A bus] --> P0[Partition stage]\n  B[B bus] --> P0\n  Cin[Cin] --> P0\n\n  P0 --> B0[Block adders]\n  B0 --> CMB[Combine and recompose stage]\n  CMB --> S[Sum bus]\n  CMB --> Cout[Cout]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1200.0,
-          "delay": 6.0,
-          "power": 6.0,
-          "freq": 166.7,
-          "cells": 12
-        },
-        {
           "width": 8,
-          "area": 2400.0,
-          "delay": 6.0,
-          "power": 12.0,
-          "freq": 166.7,
-          "cells": 24
+          "area": 48.94,
+          "delay": 0.3571,
+          "freq": 2800.34,
+          "power": 0.004,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 4800.0,
-          "delay": 6.0,
-          "power": 24.0,
-          "freq": 166.7,
-          "cells": 48
+          "area": 97.89,
+          "delay": 0.6435,
+          "freq": 1554.0,
+          "power": 0.0082,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 9600.0,
-          "delay": 8.0,
-          "power": 48.0,
-          "freq": 125.0,
-          "cells": 96
+          "area": 195.78,
+          "delay": 1.2162,
+          "freq": 822.23,
+          "power": 0.0166,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 19200.0,
-          "delay": 10.0,
-          "power": 96.0,
-          "freq": 100.0,
-          "cells": 192
+          "area": 391.55,
+          "delay": 2.3618,
+          "freq": 423.41,
+          "power": 0.0334,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 38400.0,
-          "delay": 12.0,
-          "power": 192.0,
-          "freq": 83.3,
-          "cells": 384
+          "area": 783.1,
+          "delay": 4.653,
+          "freq": 214.92,
+          "power": 0.067,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 76800.0,
-          "delay": 14.0,
-          "power": 384.0,
-          "freq": 71.4,
-          "cells": 768
+          "area": 1566.21,
+          "delay": 9.2354,
+          "freq": 108.28,
+          "power": 0.134,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 153600.0,
-          "delay": 16.0,
-          "power": 768.0,
-          "freq": 62.5,
-          "cells": 1536
-        },
-        {
-          "width": 1024,
-          "area": 307200.0,
-          "delay": 18.0,
-          "power": 1536.0,
-          "freq": 55.6,
-          "cells": 3072
+          "area": 3132.42,
+          "delay": 18.4002,
+          "freq": 54.35,
+          "power": 0.269,
+          "cells": -1
         }
       ],
       "references": [
@@ -3636,16 +3101,17 @@
         "decomposition granularity is a key design knob,",
         "block interface correctness is important for carry integrity,",
         "modular style can aid code reuse and maintainability."
-      ]
+      ],
+      "has_sta": true
     },
     {
       "slug": "db_wallace_tree",
       "name": "Wallace Tree",
       "kind": "classical",
-      "area_512": 178700.0,
-      "freq_512_mhz": 62.5,
-      "power_512_mw": 893.5,
-      "delay_512_ns": 16.0,
+      "area_512": 26245.42,
+      "freq_512_mhz": 77.39,
+      "power_512_mw": 61.0,
+      "delay_512_ns": 12.9215,
       "overview": "The `wallace_tree_adder` is a parameterized Verilog module implementing a **true Wallace tree adder** using carry-save adders (CSAs) arranged in reduction stages. This is the full implementation that uses CSAs to reduce multiple operands to two operands, which are then added with a final adder. This achieves O(log n) delay through structured CSA reduction stages.\n\n**Note**: This is the full implementation with CSA stages. The previous simplified version directly computed the sum, but this implementation uses true CSA reduction stages for optimal performance.",
       "characteristics": [
         "**Logic Depth**: O(log n) - logarithmic depth through CSA stages",
@@ -3665,76 +3131,60 @@
       "mermaid": "flowchart LR\n  PP[Partial products and operands] --> R0[Reduction stage 0]\n  R0 --> R1[Reduction stage 1]\n  R1 --> R2[Reduction stage 2]\n  R2 --> V2[Two-vector output]\n  V2 --> FA[Final carry-propagate adder]\n  FA --> OUT[Final sum]",
       "scaling": [
         {
-          "width": 4,
-          "area": 1000.0,
-          "delay": 6.0,
-          "power": 5.0,
-          "freq": 166.7,
-          "cells": 10
-        },
-        {
           "width": 8,
-          "area": 1400.0,
-          "delay": 6.0,
-          "power": 7.0,
-          "freq": 166.7,
-          "cells": 14
+          "area": 299.78,
+          "delay": 1.0027,
+          "freq": 997.31,
+          "power": 0.38,
+          "cells": -1
         },
         {
           "width": 16,
-          "area": 2800.0,
-          "delay": 6.0,
-          "power": 14.0,
-          "freq": 166.7,
-          "cells": 28
+          "area": 612.86,
+          "delay": 1.2787,
+          "freq": 782.04,
+          "power": 1.21,
+          "cells": -1
         },
         {
           "width": 32,
-          "area": 5800.0,
-          "delay": 8.0,
-          "power": 29.0,
-          "freq": 125.0,
-          "cells": 58
+          "area": 1284.51,
+          "delay": 1.8699,
+          "freq": 534.79,
+          "power": 2.85,
+          "cells": -1
         },
         {
           "width": 64,
-          "area": 13700.0,
-          "delay": 10.0,
-          "power": 68.5,
-          "freq": 100.0,
-          "cells": 137
+          "area": 2966.7,
+          "delay": 3.8773,
+          "freq": 257.91,
+          "power": 4.89,
+          "cells": -1
         },
         {
           "width": 128,
-          "area": 32400.0,
-          "delay": 12.0,
-          "power": 162.0,
-          "freq": 83.3,
-          "cells": 324
+          "area": 5882.06,
+          "delay": 6.4167,
+          "freq": 155.84,
+          "power": 11.5,
+          "cells": -1
         },
         {
           "width": 256,
-          "area": 78400.0,
-          "delay": 14.0,
-          "power": 392.0,
-          "freq": 71.4,
-          "cells": 784
+          "area": 12744.86,
+          "delay": 10.6828,
+          "freq": 93.61,
+          "power": 26.1,
+          "cells": -1
         },
         {
           "width": 512,
-          "area": 178700.0,
-          "delay": 16.0,
-          "power": 893.5,
-          "freq": 62.5,
-          "cells": 1787
-        },
-        {
-          "width": 1024,
-          "area": 394800.0,
-          "delay": 18.0,
-          "power": 1974.0,
-          "freq": 55.6,
-          "cells": 3948
+          "area": 26245.42,
+          "delay": 12.9215,
+          "freq": 77.39,
+          "power": 61.0,
+          "cells": -1
         }
       ],
       "references": [
@@ -3776,7 +3226,8 @@
         "compressor placement and column balancing are critical,",
         "irregular tree wiring can challenge physical design,",
         "widely used where speed dominates over strict layout regularity."
-      ]
+      ],
+      "has_sta": true
     }
   ],
   "ideas": [

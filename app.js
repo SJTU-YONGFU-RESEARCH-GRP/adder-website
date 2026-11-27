@@ -98,10 +98,10 @@ function renderDbTable() {
     return `
       <tr>
         <td><a href="design.html?slug=${r.slug}" style="font-weight:800; color:var(--ink); text-decoration:underline; text-decoration-color:var(--cyan); text-underline-offset:3px;">${r.name}</a></td>
-        <td class="mono">${r.area_512.toFixed(2)}</td>
-        <td class="mono">${r.freq_512_mhz.toFixed(1)}</td>
-        <td class="mono">${r.delay_512_ns.toFixed(2)}</td>
-        <td class="mono">${r.power_512_mw.toFixed(2)}</td>
+        <td class="mono">${r.area_512 != null ? r.area_512.toFixed(2) : '—'}</td>
+        <td class="mono">${r.freq_512_mhz != null ? r.freq_512_mhz.toFixed(1) : '—'}</td>
+        <td class="mono">${r.delay_512_ns != null ? r.delay_512_ns.toFixed(2) : '—'}</td>
+        <td class="mono">${r.power_512_mw != null ? r.power_512_mw.toFixed(2) : '—'}</td>
         <td><button class="btn-mini ${isAdded ? 'added' : ''}" onclick="toggleCompare('${r.slug}')">${isAdded ? 'Added' : '+ Compare'}</button></td>
       </tr>
     `;
@@ -175,21 +175,9 @@ document.querySelectorAll('#ideas-table th[data-sort]').forEach(th => {
   });
 });
 
-const BASE_RCA_STA = {
-  64: { area: 390.49, delay: 2.2751 },
-  256: { area: 1558.76, delay: 8.8083 },
-};
-
 function getPointsForWidth(width, dataset = selectedDataset) {
   const pts = [];
-  const normMode = dataset === 'both';
-  const rcaClassic = (() => {
-    const rc = DATA.classical.find(c => c.slug === 'db_ripple_carry');
-    return rc ? (rc.scaling || []).find(s => s.width === width) : null;
-  })();
-  const rcaSta = BASE_RCA_STA[width] || null;
-
-  if (dataset === 'ideas' || normMode) {
+  if (dataset === 'ideas' || dataset === 'both') {
     for (const r of DATA.ideas) {
       const pt = (r.sta_scaling || []).find(s => s.width === width);
       if (pt) {
@@ -200,8 +188,8 @@ function getPointsForWidth(width, dataset = selectedDataset) {
           name: r.name,
           area: pt.area,
           delay: pt.delay,
-          xVal: normMode && rcaSta ? pt.area / rcaSta.area : pt.area,
-          yVal: normMode && rcaSta ? pt.delay / rcaSta.delay : pt.delay,
+          xVal: pt.area,
+          yVal: pt.delay,
           fmax: pt.fmax,
           power: pt.power,
           adp: pt.area * pt.delay,
@@ -210,7 +198,7 @@ function getPointsForWidth(width, dataset = selectedDataset) {
       }
     }
   }
-  if (dataset === 'classical' || normMode) {
+  if (dataset === 'classical' || dataset === 'both') {
     for (const c of DATA.classical) {
       const pt = (c.scaling || []).find(s => s.width === width);
       if (pt) {
@@ -221,8 +209,8 @@ function getPointsForWidth(width, dataset = selectedDataset) {
           name: `${c.name} Adder`,
           area: pt.area,
           delay: pt.delay,
-          xVal: normMode && rcaClassic ? pt.area / rcaClassic.area : pt.area,
-          yVal: normMode && rcaClassic ? pt.delay / rcaClassic.delay : pt.delay,
+          xVal: pt.area,
+          yVal: pt.delay,
           fmax: pt.freq,
           power: pt.power,
           adp: pt.area * pt.delay,
@@ -294,7 +282,7 @@ function renderBubbleDetail(pt) {
 function renderParetoChart() {
   const pts = getPointsForWidth(selectedWidth);
   if (!pts.length) return;
-  const normMode = selectedDataset === 'both';
+  const normMode = false;
   const w = 780, h = 360, padL = 62, padR = 32, padT = 24, padB = 46;
   const xVals = pts.map(p => p.xVal), yVals = pts.map(p => p.yVal);
   const minX = Math.min(...xVals) * 0.92, maxX = Math.max(...xVals) * 1.05;
@@ -361,15 +349,11 @@ document.querySelectorAll('.dataset-btn').forEach(btn => {
       const w = Number(wb.dataset.width);
       if (selectedDataset === 'classical') {
         wb.style.display = '';
-      } else if (selectedDataset === 'both') {
-        wb.style.display = (w === 64 || w === 256) ? '' : 'none';
       } else {
-        wb.style.display = [4, 512, 1024].includes(w) ? 'none' : '';
+        wb.style.display = (w === 512) ? 'none' : '';
       }
     });
-    if (selectedDataset === 'both' && ![64, 256].includes(selectedWidth)) {
-      selectedWidth = 256;
-    } else if (selectedDataset === 'ideas' && [4, 512, 1024].includes(selectedWidth)) {
+    if (selectedDataset !== 'classical' && selectedWidth === 512) {
       selectedWidth = 256;
     }
     document.querySelectorAll('.width-btn').forEach(wb => wb.classList.toggle('active', Number(wb.dataset.width) === selectedWidth));
