@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADDER-LAB — Open Arithmetic Benchmark & 100-Idea Discovery Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-group" href="#overview">
+        <div class="brand-badge">
+          <svg viewBox="0 0 24 24"><path d="M6 2v2H4a2 2 0 0 0-2 2v2h2v2H2v2h2v2H2v2h2a2 2 0 0 0 2 2v2h2v-2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2v-2h-2V6a2 2 0 0 0-2-2h-2V2h-2v2h-2V2h-2v2H8V2H6m2 4h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m1 2v8h6V8H9z"/></svg>
+          <span>ADDER-LAB</span>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">Open Arithmetic Benchmarks</span>
+          <span class="brand-sub">29 Classical Baselines &amp; 100 Discovered Policy Adders</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button id="open-compare-btn" class="btn-neo btn-yellow" title="Compare up to 3 architectures (Keyboard: C)">
+          <span>&#9878; Compare</span>
+          <span id="compare-count-badge" class="badge-count">3</span>
+        </button>
+        <a class="btn-neo btn-cyan" href="https://github.com/SJTU-YONGFU-RESEARCH-GRP/adder-lab/blob/main/docs/PLAN.md" target="_blank" rel="noopener noreferrer">OJCAS 2026 Plan</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs-bar" aria-label="Primary Navigation">
+    <div class="tabs-inner">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="database">Classical Database (29)</button>
+      <button class="tab-btn" data-tab="benchmarking">256b OpenSTA &amp; Pareto</button>
+      <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
+      <button class="tab-btn" data-tab="ideas">100 Discovered Ideas</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- OVERVIEW -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="hero">
+        <h1>Open-Source Adder Architectures: <span class="highlight">From Classical Trees to Policy Silicon</span></h1>
+        <p>
+          A benchmark-driven hardware dataset and autonomous discovery platform unifying
+          <strong>29 parameterized classical adder families</strong> (<code>projects/database</code>, 4–1024 bits)
+          with <strong>100 policy-driven adder proposals</strong> (<code>experiments/idea-adders</code>, evaluated via dual-pass LLM novelty scoring and Nangate45 OpenSTA 3.1.0).
+        </p>
+        <div class="hero-actions">
+          <button class="btn-neo btn-yellow" onclick="switchTab('benchmarking')">Explore 256-bit Pareto Frontier</button>
+          <button class="btn-neo btn-cyan" onclick="switchTab('database')">Browse 29 Classical Baselines</button>
+          <button class="btn-neo btn-lime" onclick="switchTab('ideas')">Inspect 100 Discovered Ideas</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card accent-cyan">
+          <div class="kpi-val">29</div>
+          <div class="kpi-label">Classical Adder Families</div>
+          <div class="kpi-sub">Parameterized RTL &amp; sweeps (4–1024b)</div>
+        </div>
+        <div class="kpi-card accent-yellow">
+          <div class="kpi-val">100</div>
+          <div class="kpi-label">Discovered Policy Adders</div>
+          <div class="kpi-sub">Verified Python, RTL &amp; Yosys sweeps</div>
+        </div>
+        <div class="kpi-card accent-lime">
+          <div class="kpi-val">69</div>
+          <div class="kpi-label">OpenSTA 256b Verified</div>
+          <div class="kpi-sub">Nangate45 matched-flow timing &amp; power</div>
+        </div>
+        <div class="kpi-card accent-purple">
+          <div class="kpi-val">4</div>
+          <div class="kpi-label">256b Pareto-Optimal Ideas</div>
+          <div class="kpi-sub">idea3, idea23, idea11, idea22</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>IEEE OJCAS 2026 — Triad of Champions</h2>
+        <p class="section-sub">Selected via joint 50% Novelty (Report 11) + 50% 256-bit Nangate45 OpenSTA PPA (Report 12) across all 100 ideas.</p>
+        <div id="champions-grid" class="champ-grid"></div>
+      </div>
+    </section>
+
+    <!-- CLASSICAL DATABASE -->
+    <section id="tab-database" class="tab-panel">
+      <div class="section-card">
+        <h2>Classical Parameterized Adder Database (512-bit Comparison)</h2>
+        <p class="section-sub">Source: <code>projects/database/REPORT.md</code> — 29 classical architectures benchmarked at 512-bit data width.</p>
+        <div class="toolbar">
+          <input id="db-search" class="search-input" type="text" placeholder="Search classical adder (e.g., Kogge Stone, Brent Kung, Carry Select)...">
+        </div>
+        <div class="table-wrap">
+          <table id="db-table">
+            <thead>
+              <tr>
+                <th data-sort="name">Architecture</th>
+                <th data-sort="area_512">Area 512b (&mu;m&sup2;)</th>
+                <th data-sort="freq_512_mhz">Speed 512b (MHz)</th>
+                <th data-sort="delay_512_ns">Delay 512b (ns)</th>
+                <th data-sort="power_512_mw">Power 512b (mW)</th>
+                <th>Compare</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENCHMARKING & PARETO -->
+    <section id="tab-benchmarking" class="tab-panel">
+      <div class="section-card">
+        <h2>256-bit Nangate45 OpenSTA: Area vs. Delay &amp; Pareto Frontier</h2>
+        <p class="section-sub">
+          69 ideas with matched-flow OpenSTA 3.1.0 results. Notice the <strong>ABC equivalence-collapse cluster</strong> at <code>1566.21 &mu;m&sup2; / ~8.5 ns</code> vs. the non-collapsed Pareto leaders (<code>idea3</code>, <code>idea23</code>, <code>idea11</code>).
+        </p>
+        <div id="pareto-chart" class="chart-box"></div>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background: var(--yellow);"></span>Pareto-Optimal (idea3, idea23, idea11, idea22)</span>
+          <span><span class="legend-dot" style="background: var(--cyan);"></span>Non-Collapsed Policy Adders</span>
+          <span><span class="legend-dot" style="background: var(--coral);"></span>ABC Equivalence-Collapsed (1566.21 &mu;m&sup2;)</span>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Champion Width Scaling (8-bit to 256-bit OpenSTA Delay)</h2>
+        <p class="section-sub">Comparing delay scaling of Case Study 1 (<code>idea3</code>), Case Study 2 (<code>idea11</code>), and Case Study 3 (<code>idea93</code>).</p>
+        <div id="scaling-chart" class="chart-box"></div>
+      </div>
+    </section>
+
+    <!-- 100 IDEAS -->
+    <section id="tab-ideas" class="tab-panel">
+      <div class="section-card">
+        <h2>100 Discovered Ideas — Joint PPA + Novelty Leaderboard</h2>
+        <p class="section-sub">Ranked by <code>0.50 &times; (Novelty/5) + 0.50 &times; PPA_256b</code>. Click column headers to sort or add any idea to Compare.</p>
+        <div class="toolbar">
+          <input id="ideas-search" class="search-input" type="text" placeholder="Search idea ID or name (e.g., idea3, Hysteresis, Entropy)...">
+          <button class="filter-btn active" data-filter="all">All (100)</button>
+          <button class="filter-btn" data-filter="novel">Novel</button>
+          <button class="filter-btn" data-filter="pareto">Pareto (4)</button>
+          <button class="filter-btn" data-filter="noncollapsed">Non-Collapsed</button>
+          <button class="filter-btn" data-filter="sta">OpenSTA (69)</button>
+        </div>
+        <div class="table-wrap">
+          <table id="ideas-table">
+            <thead>
+              <tr>
+                <th data-sort="joint_rank">Rank</th>
+                <th data-sort="idea_id">Idea</th>
+                <th data-sort="joint_score">Joint</th>
+                <th data-sort="nov_score">Novelty</th>
+                <th data-sort="ppa_score">PPA</th>
+                <th data-sort="area_256">Area 256b</th>
+                <th data-sort="delay_256_ns">Delay (ns)</th>
+                <th data-sort="fmax_256_mhz">Fmax (MHz)</th>
+                <th data-sort="power_256_mw">Power (mW)</th>
+                <th>Status</th>
+                <th>Compare</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEYWORD TAXONOMY -->
+    <section id="tab-taxonomy" class="tab-panel">
+      <div class="section-card">
+        <h2>Corpus Keyword Taxonomy (100 Ideas)</h2>
+        <p class="section-sub">Source: <code>docs/EXPLAIN.md</code> — frequency of architectural, control, stateful, and statistical keywords across <code>IDEA_1.md</code>–<code>IDEA_100.md</code>.</p>
+        <div id="kw-grid" class="kw-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- COMPARE MATRIX MODAL -->
+  <div id="compare-modal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 style="margin:0;">Interactive Architecture Comparison Matrix</h2>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-mini" onclick="applyPreset(['idea3','idea11','idea93'])">OJCAS Champions</button>
+          <button class="btn-mini" onclick="applyPreset(['idea3','idea23','idea11'])">Pareto Top-3</button>
+          <button class="btn-mini" onclick="applyPreset(['db_kogge_stone','db_brent_kung','db_han_carlson'])">Classical Prefix</button>
+          <button id="close-compare-btn" class="btn-neo">Close</button>
+        </div>
+      </div>
+      <div class="compare-selectors">
+        <select id="cmp-sel-0" class="compare-select"></select>
+        <select id="cmp-sel-1" class="compare-select"></select>
+        <select id="cmp-sel-2" class="compare-select"></select>
+      </div>
+      <div class="table-wrap">
+        <table id="compare-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

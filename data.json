@@ -1,0 +1,5660 @@
+{
+  "classical": [
+    {
+      "slug": "db_bcd",
+      "name": "Bcd",
+      "kind": "classical",
+      "area_512": 30400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 152.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_brent_kung",
+      "name": "Brent Kung",
+      "kind": "classical",
+      "area_512": 697400.0,
+      "freq_512_mhz": 71.4,
+      "power_512_mw": 3487.0,
+      "delay_512_ns": 14.01
+    },
+    {
+      "slug": "db_brent_kung_hybrid",
+      "name": "Brent Kung Hybrid",
+      "kind": "classical",
+      "area_512": 697400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 3487.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_bypass",
+      "name": "Carry Bypass",
+      "kind": "classical",
+      "area_512": 54500.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 272.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_chain",
+      "name": "Carry Chain",
+      "kind": "classical",
+      "area_512": 54300.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 271.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_completion_sensing",
+      "name": "Carry Completion Sensing",
+      "kind": "classical",
+      "area_512": 52800.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 264.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_generate_propagate",
+      "name": "Carry Generate Propagate",
+      "kind": "classical",
+      "area_512": 108300.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 541.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_lookahead",
+      "name": "Carry Lookahead",
+      "kind": "classical",
+      "area_512": 153600.0,
+      "freq_512_mhz": 125.0,
+      "power_512_mw": 768.0,
+      "delay_512_ns": 8.0
+    },
+    {
+      "slug": "db_carry_lookahead_bcd",
+      "name": "Carry Lookahead Bcd",
+      "kind": "classical",
+      "area_512": 80100.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 400.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_save",
+      "name": "Carry Save",
+      "kind": "classical",
+      "area_512": 102400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 512.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_carry_select",
+      "name": "Carry Select",
+      "kind": "classical",
+      "area_512": 57800.0,
+      "freq_512_mhz": 55.6,
+      "power_512_mw": 289.0,
+      "delay_512_ns": 17.99
+    },
+    {
+      "slug": "db_carry_skip",
+      "name": "Carry Skip",
+      "kind": "classical",
+      "area_512": 54500.0,
+      "freq_512_mhz": 45.5,
+      "power_512_mw": 272.5,
+      "delay_512_ns": 21.98
+    },
+    {
+      "slug": "db_conditional_sum",
+      "name": "Conditional Sum",
+      "kind": "classical",
+      "area_512": 68000.0,
+      "freq_512_mhz": 50.0,
+      "power_512_mw": 340.0,
+      "delay_512_ns": 20.0
+    },
+    {
+      "slug": "db_dadda_tree",
+      "name": "Dadda Tree",
+      "kind": "classical",
+      "area_512": 178300.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 891.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_error_correcting",
+      "name": "Error Correcting",
+      "kind": "classical",
+      "area_512": 378600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 1893.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_han_carlson",
+      "name": "Han Carlson",
+      "kind": "classical",
+      "area_512": 167000.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 835.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_knowles",
+      "name": "Knowles",
+      "kind": "classical",
+      "area_512": 261400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 1307.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_kogge_stone",
+      "name": "Kogge Stone",
+      "kind": "classical",
+      "area_512": 697400.0,
+      "freq_512_mhz": 100.0,
+      "power_512_mw": 3487.0,
+      "delay_512_ns": 10.0
+    },
+    {
+      "slug": "db_ladner_fischer",
+      "name": "Ladner Fischer",
+      "kind": "classical",
+      "area_512": 698100.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 3490.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_ling",
+      "name": "Ling",
+      "kind": "classical",
+      "area_512": 153600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 768.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_lynch_swartzlander",
+      "name": "Lynch Swartzlander",
+      "kind": "classical",
+      "area_512": 697400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 3487.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_manchester",
+      "name": "Manchester",
+      "kind": "classical",
+      "area_512": 153600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 768.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_radix_cla",
+      "name": "Radix Cla",
+      "kind": "classical",
+      "area_512": 153600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 768.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_redundant_binary",
+      "name": "Redundant Binary",
+      "kind": "classical",
+      "area_512": 100600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 503.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_ripple_carry",
+      "name": "Ripple Carry",
+      "kind": "classical",
+      "area_512": 54300.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 271.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_serial",
+      "name": "Serial",
+      "kind": "classical",
+      "area_512": 53400.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 267.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_sparse_kogge_stone",
+      "name": "Sparse Kogge Stone",
+      "kind": "classical",
+      "area_512": 681700.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 3408.5,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_vedic",
+      "name": "Vedic",
+      "kind": "classical",
+      "area_512": 153600.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 768.0,
+      "delay_512_ns": 16.0
+    },
+    {
+      "slug": "db_wallace_tree",
+      "name": "Wallace Tree",
+      "kind": "classical",
+      "area_512": 178700.0,
+      "freq_512_mhz": 62.5,
+      "power_512_mw": 893.5,
+      "delay_512_ns": 16.0
+    }
+  ],
+  "ideas": [
+    {
+      "slug": "idea3",
+      "idea_id": 3,
+      "name": "Hierarchical Group-Generate Carry-Bypass Adder (HGGCBA)",
+      "kind": "discovered",
+      "joint_rank": 1,
+      "joint_score": 0.852,
+      "nov_score": 3.52,
+      "ppa_score": 1.0,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": true,
+      "collapsed_cla": false,
+      "area_256": 1887.27,
+      "delay_256_ns": 3.6717,
+      "fmax_256_mhz": 272.35,
+      "power_256_mw": 0.165,
+      "adp_256": 6929.5,
+      "pdp_256_pj": 0.6058,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 53.2,
+          "delay": 0.352,
+          "fmax": 2840.91,
+          "power": 0.0045
+        },
+        {
+          "width": 16,
+          "area": 110.92,
+          "delay": 0.4358,
+          "fmax": 2294.63,
+          "power": 0.0096
+        },
+        {
+          "width": 32,
+          "area": 228.23,
+          "delay": 0.707,
+          "fmax": 1414.43,
+          "power": 0.02
+        },
+        {
+          "width": 64,
+          "area": 455.66,
+          "delay": 1.0647,
+          "fmax": 939.23,
+          "power": 0.04
+        },
+        {
+          "width": 128,
+          "area": 921.42,
+          "delay": 1.9163,
+          "fmax": 521.84,
+          "power": 0.0815
+        },
+        {
+          "width": 256,
+          "area": 1887.27,
+          "delay": 3.6717,
+          "fmax": 272.35,
+          "power": 0.165
+        }
+      ]
+    },
+    {
+      "slug": "idea23",
+      "idea_id": 23,
+      "name": "Hysteresis Triple-Path Exact Adder (HTPEA)",
+      "kind": "discovered",
+      "joint_rank": 2,
+      "joint_score": 0.8499,
+      "nov_score": 3.67,
+      "ppa_score": 0.9658,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": true,
+      "collapsed_cla": false,
+      "area_256": 1840.45,
+      "delay_256_ns": 3.8354,
+      "fmax_256_mhz": 260.73,
+      "power_256_mw": 0.164,
+      "adp_256": 7058.9,
+      "pdp_256_pj": 0.629,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3462,
+          "fmax": 2888.5,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 102.94,
+          "delay": 0.5959,
+          "fmax": 1678.13,
+          "power": 0.0088
+        },
+        {
+          "width": 32,
+          "area": 225.57,
+          "delay": 0.6804,
+          "fmax": 1469.72,
+          "power": 0.0196
+        },
+        {
+          "width": 64,
+          "area": 459.12,
+          "delay": 1.1278,
+          "fmax": 886.68,
+          "power": 0.041
+        },
+        {
+          "width": 128,
+          "area": 938.71,
+          "delay": 1.8614,
+          "fmax": 537.23,
+          "power": 0.0842
+        },
+        {
+          "width": 256,
+          "area": 1840.45,
+          "delay": 3.8354,
+          "fmax": 260.73,
+          "power": 0.164
+        }
+      ]
+    },
+    {
+      "slug": "idea4",
+      "idea_id": 4,
+      "name": "Parity-Staggered Hybrid Carry Adder (PSHCA)",
+      "kind": "discovered",
+      "joint_rank": 3,
+      "joint_score": 0.7679,
+      "nov_score": 3.888,
+      "ppa_score": 0.7582,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2040.75,
+      "delay_256_ns": 4.6016,
+      "fmax_256_mhz": 217.32,
+      "power_256_mw": 0.191,
+      "adp_256": 9390.7,
+      "pdp_256_pj": 0.8789,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 61.98,
+          "delay": 0.3073,
+          "fmax": 3254.15,
+          "power": 0.0052
+        },
+        {
+          "width": 16,
+          "area": 121.56,
+          "delay": 0.4651,
+          "fmax": 2150.08,
+          "power": 0.0109
+        },
+        {
+          "width": 32,
+          "area": 255.89,
+          "delay": 0.7572,
+          "fmax": 1320.66,
+          "power": 0.0233
+        },
+        {
+          "width": 64,
+          "area": 506.73,
+          "delay": 1.2654,
+          "fmax": 790.26,
+          "power": 0.0473
+        },
+        {
+          "width": 128,
+          "area": 1019.84,
+          "delay": 2.5853,
+          "fmax": 386.8,
+          "power": 0.0942
+        },
+        {
+          "width": 256,
+          "area": 2040.75,
+          "delay": 4.6016,
+          "fmax": 217.32,
+          "power": 0.191
+        }
+      ]
+    },
+    {
+      "slug": "idea11",
+      "idea_id": 11,
+      "name": "Majority-Edge Carry Fusion Adder (MECFA)",
+      "kind": "discovered",
+      "joint_rank": 4,
+      "joint_score": 0.7413,
+      "nov_score": 4.125,
+      "ppa_score": 0.6576,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": true,
+      "collapsed_cla": false,
+      "area_256": 1716.76,
+      "delay_256_ns": 5.8458,
+      "fmax_256_mhz": 171.06,
+      "power_256_mw": 0.152,
+      "adp_256": 10035.8,
+      "pdp_256_pj": 0.8886,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 101.35,
+          "delay": 0.5143,
+          "fmax": 1944.39,
+          "power": 0.0087
+        },
+        {
+          "width": 32,
+          "area": 210.41,
+          "delay": 0.8504,
+          "fmax": 1175.92,
+          "power": 0.0183
+        },
+        {
+          "width": 64,
+          "area": 432.52,
+          "delay": 1.5121,
+          "fmax": 661.33,
+          "power": 0.0381
+        },
+        {
+          "width": 128,
+          "area": 860.51,
+          "delay": 2.9954,
+          "fmax": 333.85,
+          "power": 0.0762
+        },
+        {
+          "width": 256,
+          "area": 1716.76,
+          "delay": 5.8458,
+          "fmax": 171.06,
+          "power": 0.152
+        }
+      ]
+    },
+    {
+      "slug": "idea68",
+      "idea_id": 68,
+      "name": "Phase Quorum Inertia Adder (PQIA)",
+      "kind": "discovered",
+      "joint_rank": 5,
+      "joint_score": 0.671,
+      "nov_score": 4.332,
+      "ppa_score": 0.4756,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea93",
+      "idea_id": 93,
+      "name": "Polarity-Window Carry-Fusion Adder (PWCFA)",
+      "kind": "discovered",
+      "joint_rank": 6,
+      "joint_score": 0.6651,
+      "nov_score": 4.27,
+      "ppa_score": 0.4761,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5429,
+      "fmax_256_mhz": 117.06,
+      "power_256_mw": 0.134,
+      "adp_256": 13380.0,
+      "pdp_256_pj": 1.1447,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1189,
+          "fmax": 893.73,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1638,
+          "fmax": 462.15,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2917,
+          "fmax": 233.01,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5429,
+          "fmax": 117.06,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea21",
+      "idea_id": 21,
+      "name": "Parity-Density Adaptive Triple-Path Adder (PDATPA)",
+      "kind": "discovered",
+      "joint_rank": 7,
+      "joint_score": 0.664,
+      "nov_score": 4.176,
+      "ppa_score": 0.4927,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.256,
+      "fmax_256_mhz": 121.12,
+      "power_256_mw": 0.134,
+      "adp_256": 12930.6,
+      "pdp_256_pj": 1.1063,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5893,
+          "fmax": 1696.93,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1088,
+          "fmax": 901.88,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1207,
+          "fmax": 471.54,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1752,
+          "fmax": 239.51,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.256,
+          "fmax": 121.12,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea9",
+      "idea_id": 9,
+      "name": "Parity-Window Carry Fusion Adder (PWCFA)",
+      "kind": "discovered",
+      "joint_rank": 8,
+      "joint_score": 0.6618,
+      "nov_score": 4.042,
+      "ppa_score": 0.5151,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1996.06,
+      "delay_256_ns": 6.8578,
+      "fmax_256_mhz": 145.82,
+      "power_256_mw": 0.185,
+      "adp_256": 13688.6,
+      "pdp_256_pj": 1.2687,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3277,
+          "fmax": 3051.57,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 108.53,
+          "delay": 0.5727,
+          "fmax": 1746.11,
+          "power": 0.0097
+        },
+        {
+          "width": 32,
+          "area": 240.46,
+          "delay": 0.9708,
+          "fmax": 1030.08,
+          "power": 0.0219
+        },
+        {
+          "width": 64,
+          "area": 486.78,
+          "delay": 1.8246,
+          "fmax": 548.07,
+          "power": 0.0448
+        },
+        {
+          "width": 128,
+          "area": 989.25,
+          "delay": 3.5005,
+          "fmax": 285.67,
+          "power": 0.0918
+        },
+        {
+          "width": 256,
+          "area": 1996.06,
+          "delay": 6.8578,
+          "fmax": 145.82,
+          "power": 0.185
+        }
+      ]
+    },
+    {
+      "slug": "idea16",
+      "idea_id": 16,
+      "name": "Generate-Density Gated Hybrid Adder (GDGHA)",
+      "kind": "discovered",
+      "joint_rank": 9,
+      "joint_score": 0.6568,
+      "nov_score": 4.115,
+      "ppa_score": 0.4907,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2884,
+      "fmax_256_mhz": 120.65,
+      "power_256_mw": 0.134,
+      "adp_256": 12981.4,
+      "pdp_256_pj": 1.1106,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3461,
+          "fmax": 2889.34,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6061,
+          "fmax": 1649.89,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1166,
+          "fmax": 895.58,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1375,
+          "fmax": 467.84,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.192,
+          "fmax": 238.55,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2884,
+          "fmax": 120.65,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea65",
+      "idea_id": 65,
+      "name": "Phase-Fusion Carry Adder (PFCA)",
+      "kind": "discovered",
+      "joint_rank": 10,
+      "joint_score": 0.6498,
+      "nov_score": 4.12,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea100",
+      "idea_id": 100,
+      "name": "Confidence-Window Carry-Fusion Adder (CWCFA)",
+      "kind": "discovered",
+      "joint_rank": 11,
+      "joint_score": 0.6455,
+      "nov_score": 4.077,
+      "ppa_score": 0.4756,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6021,
+          "fmax": 1660.85,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1237,
+          "fmax": 889.92,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea63",
+      "idea_id": 63,
+      "name": "Dual-Window Consensus Carry Adder (DWCCA)",
+      "kind": "discovered",
+      "joint_rank": 12,
+      "joint_score": 0.6385,
+      "nov_score": 4.007,
+      "ppa_score": 0.4756,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea61",
+      "idea_id": 61,
+      "name": "Consensus-Gradient Carry Adder (CGCA)",
+      "kind": "discovered",
+      "joint_rank": 13,
+      "joint_score": 0.6368,
+      "nov_score": 3.99,
+      "ppa_score": 0.4756,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea67",
+      "idea_id": 67,
+      "name": "Confidence-Window Hysteresis Adder (CWHA)",
+      "kind": "discovered",
+      "joint_rank": 14,
+      "joint_score": 0.6328,
+      "nov_score": 3.95,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea19",
+      "idea_id": 19,
+      "name": "Confidence-Weighted Carry Selective Adder (CWCSA)",
+      "kind": "discovered",
+      "joint_rank": 15,
+      "joint_score": 0.6264,
+      "nov_score": 4.145,
+      "ppa_score": 0.4238,
+      "decision": "novel",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2144.49,
+      "delay_256_ns": 7.9071,
+      "fmax_256_mhz": 126.47,
+      "power_256_mw": 0.222,
+      "adp_256": 16956.7,
+      "pdp_256_pj": 1.7554,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.15,
+          "delay": 0.338,
+          "fmax": 2958.58,
+          "power": 0.0041
+        },
+        {
+          "width": 16,
+          "area": 123.16,
+          "delay": 0.4937,
+          "fmax": 2025.52,
+          "power": 0.0114
+        },
+        {
+          "width": 32,
+          "area": 259.88,
+          "delay": 0.9524,
+          "fmax": 1049.98,
+          "power": 0.0259
+        },
+        {
+          "width": 64,
+          "area": 518.43,
+          "delay": 2.0107,
+          "fmax": 497.34,
+          "power": 0.0529
+        },
+        {
+          "width": 128,
+          "area": 1060.54,
+          "delay": 3.9601,
+          "fmax": 252.52,
+          "power": 0.11
+        },
+        {
+          "width": 256,
+          "area": 2144.49,
+          "delay": 7.9071,
+          "fmax": 126.47,
+          "power": 0.222
+        }
+      ]
+    },
+    {
+      "slug": "idea51",
+      "idea_id": 51,
+      "name": "Carry Momentum-Window Tri-Path Adder (CMWTA)",
+      "kind": "discovered",
+      "joint_rank": 16,
+      "joint_score": 0.6251,
+      "nov_score": 3.873,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea52",
+      "idea_id": 52,
+      "name": "Carry Phase-Memory Tri-Path Adder (CPMTA)",
+      "kind": "discovered",
+      "joint_rank": 17,
+      "joint_score": 0.6166,
+      "nov_score": 3.788,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea71",
+      "idea_id": 71,
+      "name": "Windowed Momentum Carry Fusion Adder (WMCFA)",
+      "kind": "discovered",
+      "joint_rank": 18,
+      "joint_score": 0.6162,
+      "nov_score": 3.784,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea10",
+      "idea_id": 10,
+      "name": "Hamming-Weight Gated Hybrid Adder (HWGHA)",
+      "kind": "discovered",
+      "joint_rank": 19,
+      "joint_score": 0.6146,
+      "nov_score": 4.022,
+      "ppa_score": 0.4247,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2129.06,
+      "delay_256_ns": 7.9132,
+      "fmax_256_mhz": 126.37,
+      "power_256_mw": 0.221,
+      "adp_256": 16847.7,
+      "pdp_256_pj": 1.7488,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3022,
+          "fmax": 3309.07,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 114.38,
+          "delay": 0.5507,
+          "fmax": 1815.87,
+          "power": 0.0108
+        },
+        {
+          "width": 32,
+          "area": 252.17,
+          "delay": 0.9688,
+          "fmax": 1032.2,
+          "power": 0.025
+        },
+        {
+          "width": 64,
+          "area": 518.7,
+          "delay": 2.0107,
+          "fmax": 497.34,
+          "power": 0.053
+        },
+        {
+          "width": 128,
+          "area": 1055.22,
+          "delay": 3.9795,
+          "fmax": 251.29,
+          "power": 0.109
+        },
+        {
+          "width": 256,
+          "area": 2129.06,
+          "delay": 7.9132,
+          "fmax": 126.37,
+          "power": 0.221
+        }
+      ]
+    },
+    {
+      "slug": "idea14",
+      "idea_id": 14,
+      "name": "Windowed Transition-Gated Hybrid Adder (WTGHA)",
+      "kind": "discovered",
+      "joint_rank": 20,
+      "joint_score": 0.6145,
+      "nov_score": 4.005,
+      "ppa_score": 0.428,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2138.37,
+      "delay_256_ns": 7.8413,
+      "fmax_256_mhz": 127.53,
+      "power_256_mw": 0.221,
+      "adp_256": 16767.6,
+      "pdp_256_pj": 1.7329,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 60.12,
+          "delay": 0.3042,
+          "fmax": 3287.31,
+          "power": 0.0051
+        },
+        {
+          "width": 16,
+          "area": 129.28,
+          "delay": 0.4944,
+          "fmax": 2022.65,
+          "power": 0.0119
+        },
+        {
+          "width": 32,
+          "area": 273.71,
+          "delay": 0.9763,
+          "fmax": 1024.28,
+          "power": 0.0265
+        },
+        {
+          "width": 64,
+          "area": 522.96,
+          "delay": 1.9832,
+          "fmax": 504.24,
+          "power": 0.0525
+        },
+        {
+          "width": 128,
+          "area": 1077.57,
+          "delay": 3.7925,
+          "fmax": 263.68,
+          "power": 0.11
+        },
+        {
+          "width": 256,
+          "area": 2138.37,
+          "delay": 7.8413,
+          "fmax": 127.53,
+          "power": 0.221
+        }
+      ]
+    },
+    {
+      "slug": "idea22",
+      "idea_id": 22,
+      "name": "Momentum-Fused Dual-Threshold Adder (MFDTA)",
+      "kind": "discovered",
+      "joint_rank": 21,
+      "joint_score": 0.6082,
+      "nov_score": 3.617,
+      "ppa_score": 0.4931,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": true,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2494,
+      "fmax_256_mhz": 121.22,
+      "power_256_mw": 0.134,
+      "adp_256": 12920.3,
+      "pdp_256_pj": 1.1054,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3335,
+          "fmax": 2998.5,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6001,
+          "fmax": 1666.39,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1052,
+          "fmax": 904.81,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1321,
+          "fmax": 469.02,
+          "power": 0.0334
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1865,
+          "fmax": 238.86,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2494,
+          "fmax": 121.22,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea94",
+      "idea_id": 94,
+      "name": "Polarity-Balanced Carry-Fusion Adder (PBCFA)",
+      "kind": "discovered",
+      "joint_rank": 22,
+      "joint_score": 0.6063,
+      "nov_score": 3.63,
+      "ppa_score": 0.4867,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3564,
+      "fmax_256_mhz": 119.67,
+      "power_256_mw": 0.134,
+      "adp_256": 13087.9,
+      "pdp_256_pj": 1.1198,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3466,
+          "fmax": 2885.17,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1141,
+          "fmax": 897.59,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1255,
+          "fmax": 470.48,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2009,
+          "fmax": 238.04,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3564,
+          "fmax": 119.67,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea27",
+      "idea_id": 27,
+      "name": "Propagate-Runlength Adaptive Triple-Path Adder (PRATPA)",
+      "kind": "discovered",
+      "joint_rank": 23,
+      "joint_score": 0.6035,
+      "nov_score": 3.574,
+      "ppa_score": 0.4921,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2656,
+      "fmax_256_mhz": 120.98,
+      "power_256_mw": 0.134,
+      "adp_256": 12945.7,
+      "pdp_256_pj": 1.1076,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3468,
+          "fmax": 2883.51,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5893,
+          "fmax": 1696.93,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1028,
+          "fmax": 906.78,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1381,
+          "fmax": 467.7,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.18,
+          "fmax": 239.23,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2656,
+          "fmax": 120.98,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea78",
+      "idea_id": 78,
+      "name": "Phase-Voted Dualpath Carry Adder (PVDCA)",
+      "kind": "discovered",
+      "joint_rank": 24,
+      "joint_score": 0.6028,
+      "nov_score": 3.61,
+      "ppa_score": 0.4837,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.409,
+      "fmax_256_mhz": 118.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13170.3,
+      "pdp_256_pj": 1.1268,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3419,
+          "fmax": 2924.83,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5893,
+          "fmax": 1696.93,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1231,
+          "fmax": 890.39,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1207,
+          "fmax": 471.54,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2182,
+          "fmax": 237.07,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.409,
+          "fmax": 118.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea7",
+      "idea_id": 7,
+      "name": "Quad-Mode Ladder Hybrid Adder (QMLHA)",
+      "kind": "discovered",
+      "joint_rank": 25,
+      "joint_score": 0.5998,
+      "nov_score": 3.19,
+      "ppa_score": 0.5617,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1902.43,
+      "delay_256_ns": 6.4532,
+      "fmax_256_mhz": 154.96,
+      "power_256_mw": 0.174,
+      "adp_256": 12276.8,
+      "pdp_256_pj": 1.1229,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 53.2,
+          "delay": 0.352,
+          "fmax": 2840.91,
+          "power": 0.0045
+        },
+        {
+          "width": 16,
+          "area": 113.58,
+          "delay": 0.4967,
+          "fmax": 2013.29,
+          "power": 0.0098
+        },
+        {
+          "width": 32,
+          "area": 233.55,
+          "delay": 0.8613,
+          "fmax": 1161.04,
+          "power": 0.0209
+        },
+        {
+          "width": 64,
+          "area": 471.62,
+          "delay": 1.7219,
+          "fmax": 580.75,
+          "power": 0.0424
+        },
+        {
+          "width": 128,
+          "area": 944.83,
+          "delay": 3.339,
+          "fmax": 299.49,
+          "power": 0.086
+        },
+        {
+          "width": 256,
+          "area": 1902.43,
+          "delay": 6.4532,
+          "fmax": 154.96,
+          "power": 0.174
+        }
+      ]
+    },
+    {
+      "slug": "idea90",
+      "idea_id": 90,
+      "name": "Transition-Bias Carry-Fusion Adder (TBCFA)",
+      "kind": "discovered",
+      "joint_rank": 26,
+      "joint_score": 0.5987,
+      "nov_score": 3.592,
+      "ppa_score": 0.4789,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.4933,
+      "fmax_256_mhz": 117.74,
+      "power_256_mw": 0.134,
+      "adp_256": 13302.3,
+      "pdp_256_pj": 1.1381,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6019,
+          "fmax": 1661.41,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.162,
+          "fmax": 462.53,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2726,
+          "fmax": 234.05,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.4933,
+          "fmax": 117.74,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea26",
+      "idea_id": 26,
+      "name": "Carry-Divergence Adaptive Triple-Path Adder (CDATPA)",
+      "kind": "discovered",
+      "joint_rank": 27,
+      "joint_score": 0.5939,
+      "nov_score": 3.482,
+      "ppa_score": 0.4914,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2763,
+      "fmax_256_mhz": 120.83,
+      "power_256_mw": 0.134,
+      "adp_256": 12962.4,
+      "pdp_256_pj": 1.109,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5893,
+          "fmax": 1696.93,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1171,
+          "fmax": 895.18,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1315,
+          "fmax": 469.15,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2033,
+          "fmax": 237.91,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2763,
+          "fmax": 120.83,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea89",
+      "idea_id": 89,
+      "name": "Entropy-Balanced Carry Fusion Adder (EBCFA)",
+      "kind": "discovered",
+      "joint_rank": 28,
+      "joint_score": 0.5867,
+      "nov_score": 3.424,
+      "ppa_score": 0.4887,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3229,
+      "fmax_256_mhz": 120.15,
+      "power_256_mw": 0.134,
+      "adp_256": 13035.4,
+      "pdp_256_pj": 1.1153,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.345,
+          "fmax": 2898.55,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1201,
+          "fmax": 892.78,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1303,
+          "fmax": 469.42,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1818,
+          "fmax": 239.13,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3229,
+          "fmax": 120.15,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea15",
+      "idea_id": 15,
+      "name": "Run-Length Adaptive Carry Adder (RLACA)",
+      "kind": "discovered",
+      "joint_rank": 29,
+      "joint_score": 0.5849,
+      "nov_score": 3.4,
+      "ppa_score": 0.4898,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1879.56,
+      "delay_256_ns": 7.4438,
+      "fmax_256_mhz": 134.34,
+      "power_256_mw": 0.172,
+      "adp_256": 13991.1,
+      "pdp_256_pj": 1.2803,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 109.06,
+          "delay": 0.5667,
+          "fmax": 1764.6,
+          "power": 0.0095
+        },
+        {
+          "width": 32,
+          "area": 226.9,
+          "delay": 0.9904,
+          "fmax": 1009.69,
+          "power": 0.0206
+        },
+        {
+          "width": 64,
+          "area": 467.36,
+          "delay": 1.8906,
+          "fmax": 528.93,
+          "power": 0.0425
+        },
+        {
+          "width": 128,
+          "area": 947.76,
+          "delay": 3.6696,
+          "fmax": 272.51,
+          "power": 0.0864
+        },
+        {
+          "width": 256,
+          "area": 1879.56,
+          "delay": 7.4438,
+          "fmax": 134.34,
+          "power": 0.172
+        }
+      ]
+    },
+    {
+      "slug": "idea96",
+      "idea_id": 96,
+      "name": "Entropy-Balanced Dual-Rail Carry-Corridor Adder (EBDR-CCA)",
+      "kind": "discovered",
+      "joint_rank": 30,
+      "joint_score": 0.5835,
+      "nov_score": 3.457,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6068,
+          "fmax": 1647.99,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1189,
+          "fmax": 893.73,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1877,
+          "fmax": 457.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea29",
+      "idea_id": 29,
+      "name": "Parity-Hysteresis Window Adder (PHWA)",
+      "kind": "discovered",
+      "joint_rank": 31,
+      "joint_score": 0.582,
+      "nov_score": 3.377,
+      "ppa_score": 0.4887,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3229,
+      "fmax_256_mhz": 120.15,
+      "power_256_mw": 0.134,
+      "adp_256": 13035.4,
+      "pdp_256_pj": 1.1153,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1093,
+          "fmax": 901.47,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.141,
+          "fmax": 467.07,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2009,
+          "fmax": 238.04,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3229,
+          "fmax": 120.15,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea80",
+      "idea_id": 80,
+      "name": "Entropy-Weighted Triplepath Skip Adder (ETTSA)",
+      "kind": "discovered",
+      "joint_rank": 32,
+      "joint_score": 0.5819,
+      "nov_score": 3.357,
+      "ppa_score": 0.4924,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2602,
+      "fmax_256_mhz": 121.06,
+      "power_256_mw": 0.134,
+      "adp_256": 12937.2,
+      "pdp_256_pj": 1.1069,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1105,
+          "fmax": 900.5,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1333,
+          "fmax": 468.76,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1674,
+          "fmax": 239.96,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2602,
+          "fmax": 121.06,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea75",
+      "idea_id": 75,
+      "name": "Hysteretic Tripath Carry Adder (HTCA)",
+      "kind": "discovered",
+      "joint_rank": 33,
+      "joint_score": 0.5784,
+      "nov_score": 3.383,
+      "ppa_score": 0.4801,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1598.39,
+      "delay_256_ns": 8.4024,
+      "fmax_256_mhz": 119.01,
+      "power_256_mw": 0.135,
+      "adp_256": 13430.3,
+      "pdp_256_pj": 1.1343,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.15,
+          "delay": 0.3329,
+          "fmax": 3003.91,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 99.22,
+          "delay": 0.569,
+          "fmax": 1757.47,
+          "power": 0.0085
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1075,
+          "fmax": 902.93,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 399.27,
+          "delay": 2.1129,
+          "fmax": 473.28,
+          "power": 0.0339
+        },
+        {
+          "width": 128,
+          "area": 799.33,
+          "delay": 4.2023,
+          "fmax": 237.96,
+          "power": 0.068
+        },
+        {
+          "width": 256,
+          "area": 1598.39,
+          "delay": 8.4024,
+          "fmax": 119.01,
+          "power": 0.135
+        }
+      ]
+    },
+    {
+      "slug": "idea20",
+      "idea_id": 20,
+      "name": "Kill-Adaptive Triple-Path Adder (KATPA)",
+      "kind": "discovered",
+      "joint_rank": 34,
+      "joint_score": 0.5779,
+      "nov_score": 3.315,
+      "ppa_score": 0.4929,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2512,
+      "fmax_256_mhz": 121.19,
+      "power_256_mw": 0.134,
+      "adp_256": 12923.1,
+      "pdp_256_pj": 1.1057,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5965,
+          "fmax": 1676.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.11,
+          "fmax": 900.9,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1261,
+          "fmax": 470.34,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1806,
+          "fmax": 239.2,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2512,
+          "fmax": 121.19,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea87",
+      "idea_id": 87,
+      "name": "Adaptive Incremental Bypass Adder (AIBA)",
+      "kind": "discovered",
+      "joint_rank": 35,
+      "joint_score": 0.5759,
+      "nov_score": 3.381,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6048,
+          "fmax": 1653.44,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1093,
+          "fmax": 901.47,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1781,
+          "fmax": 459.12,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea5",
+      "idea_id": 5,
+      "name": "Tri-Mode Window Hybrid Adder (TMWHA)",
+      "kind": "discovered",
+      "joint_rank": 36,
+      "joint_score": 0.5756,
+      "nov_score": 2.813,
+      "ppa_score": 0.5887,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1917.06,
+      "delay_256_ns": 6.1296,
+      "fmax_256_mhz": 163.14,
+      "power_256_mw": 0.176,
+      "adp_256": 11750.8,
+      "pdp_256_pj": 1.0788,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3571,
+          "fmax": 2800.34,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 104.54,
+          "delay": 0.5726,
+          "fmax": 1746.42,
+          "power": 0.0089
+        },
+        {
+          "width": 32,
+          "area": 227.7,
+          "delay": 0.8507,
+          "fmax": 1175.5,
+          "power": 0.0202
+        },
+        {
+          "width": 64,
+          "area": 467.89,
+          "delay": 1.6729,
+          "fmax": 597.76,
+          "power": 0.0421
+        },
+        {
+          "width": 128,
+          "area": 969.57,
+          "delay": 3.0225,
+          "fmax": 330.85,
+          "power": 0.0886
+        },
+        {
+          "width": 256,
+          "area": 1917.06,
+          "delay": 6.1296,
+          "fmax": 163.14,
+          "power": 0.176
+        }
+      ]
+    },
+    {
+      "slug": "idea30",
+      "idea_id": 30,
+      "name": "Carry-Consensus Adaptive Tri-Path Adder (CCATPA)",
+      "kind": "discovered",
+      "joint_rank": 37,
+      "joint_score": 0.5727,
+      "nov_score": 3.281,
+      "ppa_score": 0.4893,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3134,
+      "fmax_256_mhz": 120.29,
+      "power_256_mw": 0.134,
+      "adp_256": 13020.5,
+      "pdp_256_pj": 1.114,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6037,
+          "fmax": 1656.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1093,
+          "fmax": 901.47,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1428,
+          "fmax": 466.68,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2009,
+          "fmax": 238.04,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3134,
+          "fmax": 120.29,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea76",
+      "idea_id": 76,
+      "name": "Confidence-Gated Dualpath Skip Adder (CGDSA)",
+      "kind": "discovered",
+      "joint_rank": 38,
+      "joint_score": 0.5726,
+      "nov_score": 3.263,
+      "ppa_score": 0.4927,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.256,
+      "fmax_256_mhz": 121.12,
+      "power_256_mw": 0.134,
+      "adp_256": 12930.6,
+      "pdp_256_pj": 1.1063,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1124,
+          "fmax": 898.96,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1351,
+          "fmax": 468.36,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.18,
+          "fmax": 239.23,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.256,
+          "fmax": 121.12,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea79",
+      "idea_id": 79,
+      "name": "Stability-Weighted Dualpath Skip Adder (SWDSA)",
+      "kind": "discovered",
+      "joint_rank": 39,
+      "joint_score": 0.5702,
+      "nov_score": 3.243,
+      "ppa_score": 0.4919,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2685,
+      "fmax_256_mhz": 120.94,
+      "power_256_mw": 0.134,
+      "adp_256": 12950.2,
+      "pdp_256_pj": 1.108,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3371,
+          "fmax": 2966.48,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1093,
+          "fmax": 901.47,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1303,
+          "fmax": 469.42,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1752,
+          "fmax": 239.51,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2685,
+          "fmax": 120.94,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea2",
+      "idea_id": 2,
+      "name": "Predictive Hybrid Select-Bypass Adder (PHSBA)",
+      "kind": "discovered",
+      "joint_rank": 40,
+      "joint_score": 0.5701,
+      "nov_score": 3.561,
+      "ppa_score": 0.4279,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2130.66,
+      "delay_256_ns": 7.8456,
+      "fmax_256_mhz": 127.46,
+      "power_256_mw": 0.222,
+      "adp_256": 16716.3,
+      "pdp_256_pj": 1.7417,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3022,
+          "fmax": 3309.07,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 114.38,
+          "delay": 0.5507,
+          "fmax": 1815.87,
+          "power": 0.0108
+        },
+        {
+          "width": 32,
+          "area": 252.17,
+          "delay": 0.9688,
+          "fmax": 1032.2,
+          "power": 0.025
+        },
+        {
+          "width": 64,
+          "area": 518.7,
+          "delay": 2.0107,
+          "fmax": 497.34,
+          "power": 0.053
+        },
+        {
+          "width": 128,
+          "area": 1055.22,
+          "delay": 3.9795,
+          "fmax": 251.29,
+          "power": 0.109
+        },
+        {
+          "width": 256,
+          "area": 2130.66,
+          "delay": 7.8456,
+          "fmax": 127.46,
+          "power": 0.222
+        }
+      ]
+    },
+    {
+      "slug": "idea88",
+      "idea_id": 88,
+      "name": "Polarity-Window Hysteresis Adder (PWHA)",
+      "kind": "discovered",
+      "joint_rank": 41,
+      "joint_score": 0.5698,
+      "nov_score": 3.32,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1237,
+          "fmax": 889.92,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea24",
+      "idea_id": 24,
+      "name": "Confidence-Gated Dual-Path Exact Adder (CGDPEA)",
+      "kind": "discovered",
+      "joint_rank": 42,
+      "joint_score": 0.5694,
+      "nov_score": 3.229,
+      "ppa_score": 0.493,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2506,
+      "fmax_256_mhz": 121.2,
+      "power_256_mw": 0.134,
+      "adp_256": 12922.2,
+      "pdp_256_pj": 1.1056,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3383,
+          "fmax": 2955.96,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.104,
+          "fmax": 905.8,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1249,
+          "fmax": 470.61,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1668,
+          "fmax": 239.99,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2506,
+          "fmax": 121.2,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea77",
+      "idea_id": 77,
+      "name": "Parity-Biased Dualrail Carry Adder (PBDCA)",
+      "kind": "discovered",
+      "joint_rank": 43,
+      "joint_score": 0.5685,
+      "nov_score": 3.285,
+      "ppa_score": 0.4801,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1598.39,
+      "delay_256_ns": 8.4024,
+      "fmax_256_mhz": 119.01,
+      "power_256_mw": 0.135,
+      "adp_256": 13430.3,
+      "pdp_256_pj": 1.1343,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 98.95,
+          "delay": 0.5749,
+          "fmax": 1739.43,
+          "power": 0.0084
+        },
+        {
+          "width": 32,
+          "area": 198.97,
+          "delay": 1.07,
+          "fmax": 934.58,
+          "power": 0.0169
+        },
+        {
+          "width": 64,
+          "area": 399.0,
+          "delay": 2.1162,
+          "fmax": 472.55,
+          "power": 0.0339
+        },
+        {
+          "width": 128,
+          "area": 799.33,
+          "delay": 4.2052,
+          "fmax": 237.8,
+          "power": 0.0678
+        },
+        {
+          "width": 256,
+          "area": 1598.39,
+          "delay": 8.4024,
+          "fmax": 119.01,
+          "power": 0.135
+        }
+      ]
+    },
+    {
+      "slug": "idea25",
+      "idea_id": 25,
+      "name": "Skew-Polarity Adaptive Triple-Path Adder (SPATPA)",
+      "kind": "discovered",
+      "joint_rank": 44,
+      "joint_score": 0.5676,
+      "nov_score": 3.238,
+      "ppa_score": 0.4877,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3403,
+      "fmax_256_mhz": 119.9,
+      "power_256_mw": 0.134,
+      "adp_256": 13062.7,
+      "pdp_256_pj": 1.1176,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3371,
+          "fmax": 2966.48,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6037,
+          "fmax": 1656.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1141,
+          "fmax": 897.59,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1446,
+          "fmax": 466.29,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2057,
+          "fmax": 237.77,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3403,
+          "fmax": 119.9,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea53",
+      "idea_id": 53,
+      "name": "Carry Inertia-Window Tri-Path Adder (CIWTA)",
+      "kind": "discovered",
+      "joint_rank": 45,
+      "joint_score": 0.5653,
+      "nov_score": 3.275,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea86",
+      "idea_id": 86,
+      "name": "Stability Hysteresis Triple-Path Adder (SHTA)",
+      "kind": "discovered",
+      "joint_rank": 46,
+      "joint_score": 0.5649,
+      "nov_score": 3.19,
+      "ppa_score": 0.4918,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2697,
+      "fmax_256_mhz": 120.92,
+      "power_256_mw": 0.134,
+      "adp_256": 12952.1,
+      "pdp_256_pj": 1.1081,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3418,
+          "fmax": 2925.69,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1243,
+          "fmax": 889.44,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1399,
+          "fmax": 467.31,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1722,
+          "fmax": 239.68,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2697,
+          "fmax": 120.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea92",
+      "idea_id": 92,
+      "name": "IDEA 92 - Polarity-Biased Carry-Increment Adder",
+      "kind": "discovered",
+      "joint_rank": 47,
+      "joint_score": 0.5625,
+      "nov_score": 3.492,
+      "ppa_score": 0.4265,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2136.25,
+      "delay_256_ns": 7.8707,
+      "fmax_256_mhz": 127.05,
+      "power_256_mw": 0.221,
+      "adp_256": 16813.8,
+      "pdp_256_pj": 1.7394,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 60.38,
+          "delay": 0.3116,
+          "fmax": 3209.24,
+          "power": 0.0051
+        },
+        {
+          "width": 16,
+          "area": 124.75,
+          "delay": 0.526,
+          "fmax": 1901.14,
+          "power": 0.0119
+        },
+        {
+          "width": 32,
+          "area": 259.88,
+          "delay": 1.0141,
+          "fmax": 986.1,
+          "power": 0.0259
+        },
+        {
+          "width": 64,
+          "area": 532.0,
+          "delay": 1.9133,
+          "fmax": 522.66,
+          "power": 0.0542
+        },
+        {
+          "width": 128,
+          "area": 1059.74,
+          "delay": 3.921,
+          "fmax": 255.04,
+          "power": 0.11
+        },
+        {
+          "width": 256,
+          "area": 2136.25,
+          "delay": 7.8707,
+          "fmax": 127.05,
+          "power": 0.221
+        }
+      ]
+    },
+    {
+      "slug": "idea8",
+      "idea_id": 8,
+      "name": "Pentamode Stratified Hybrid Adder (PSHA)",
+      "kind": "discovered",
+      "joint_rank": 48,
+      "joint_score": 0.5615,
+      "nov_score": 3.025,
+      "ppa_score": 0.5181,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1849.76,
+      "delay_256_ns": 7.097,
+      "fmax_256_mhz": 140.9,
+      "power_256_mw": 0.169,
+      "adp_256": 13127.7,
+      "pdp_256_pj": 1.1994,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 53.2,
+          "delay": 0.352,
+          "fmax": 2840.91,
+          "power": 0.0045
+        },
+        {
+          "width": 16,
+          "area": 113.58,
+          "delay": 0.4967,
+          "fmax": 2013.29,
+          "power": 0.0098
+        },
+        {
+          "width": 32,
+          "area": 217.59,
+          "delay": 0.9024,
+          "fmax": 1108.16,
+          "power": 0.0196
+        },
+        {
+          "width": 64,
+          "area": 480.66,
+          "delay": 1.799,
+          "fmax": 555.86,
+          "power": 0.0439
+        },
+        {
+          "width": 128,
+          "area": 906.0,
+          "delay": 3.6379,
+          "fmax": 274.88,
+          "power": 0.0822
+        },
+        {
+          "width": 256,
+          "area": 1849.76,
+          "delay": 7.097,
+          "fmax": 140.9,
+          "power": 0.169
+        }
+      ]
+    },
+    {
+      "slug": "idea83",
+      "idea_id": 83,
+      "name": "Margin-Weighted Triplepath Skip Adder (MWTSA)",
+      "kind": "discovered",
+      "joint_rank": 49,
+      "joint_score": 0.5562,
+      "nov_score": 3.105,
+      "ppa_score": 0.4913,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2793,
+      "fmax_256_mhz": 120.78,
+      "power_256_mw": 0.134,
+      "adp_256": 12967.1,
+      "pdp_256_pj": 1.1094,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1075,
+          "fmax": 902.93,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1303,
+          "fmax": 469.42,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1926,
+          "fmax": 238.52,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2793,
+          "fmax": 120.78,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea64",
+      "idea_id": 64,
+      "name": "Dual-Window Momentum Carry Adder (DWMCA)",
+      "kind": "discovered",
+      "joint_rank": 50,
+      "joint_score": 0.5533,
+      "nov_score": 3.155,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea84",
+      "idea_id": 84,
+      "name": "Variance-Guarded Triplepath Skip Adder (VGTSA)",
+      "kind": "discovered",
+      "joint_rank": 51,
+      "joint_score": 0.5521,
+      "nov_score": 3.143,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea73",
+      "idea_id": 73,
+      "name": "Confidence-Gated Carry Consensus Adder (CGCCA)",
+      "kind": "discovered",
+      "joint_rank": 52,
+      "joint_score": 0.5514,
+      "nov_score": 3.113,
+      "ppa_score": 0.4801,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 1598.39,
+      "delay_256_ns": 8.4024,
+      "fmax_256_mhz": 119.01,
+      "power_256_mw": 0.135,
+      "adp_256": 13430.3,
+      "pdp_256_pj": 1.1343,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 56.39,
+          "delay": 0.3472,
+          "fmax": 2880.18,
+          "power": 0.0048
+        },
+        {
+          "width": 16,
+          "area": 105.34,
+          "delay": 0.6115,
+          "fmax": 1635.32,
+          "power": 0.0089
+        },
+        {
+          "width": 32,
+          "area": 198.17,
+          "delay": 1.0791,
+          "fmax": 926.7,
+          "power": 0.0168
+        },
+        {
+          "width": 64,
+          "area": 398.73,
+          "delay": 2.1202,
+          "fmax": 471.65,
+          "power": 0.0339
+        },
+        {
+          "width": 128,
+          "area": 799.33,
+          "delay": 4.2023,
+          "fmax": 237.96,
+          "power": 0.068
+        },
+        {
+          "width": 256,
+          "area": 1598.39,
+          "delay": 8.4024,
+          "fmax": 119.01,
+          "power": 0.135
+        }
+      ]
+    },
+    {
+      "slug": "idea70",
+      "idea_id": 70,
+      "name": "Hysteretic Phase Fusion Adder (HPFA)",
+      "kind": "discovered",
+      "joint_rank": 53,
+      "joint_score": 0.5513,
+      "nov_score": 3.135,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea17",
+      "idea_id": 17,
+      "name": "Carry-Polarity Runlength Gated Hybrid Adder (CPRGHA)",
+      "kind": "discovered",
+      "joint_rank": 54,
+      "joint_score": 0.5507,
+      "nov_score": 3.045,
+      "ppa_score": 0.4925,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2584,
+      "fmax_256_mhz": 121.09,
+      "power_256_mw": 0.134,
+      "adp_256": 12934.4,
+      "pdp_256_pj": 1.1066,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3431,
+          "fmax": 2914.6,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5983,
+          "fmax": 1671.4,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1166,
+          "fmax": 895.58,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1345,
+          "fmax": 468.49,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1764,
+          "fmax": 239.44,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2584,
+          "fmax": 121.09,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea72",
+      "idea_id": 72,
+      "name": "Carry Bypass-Select Fusion Adder (CBSFA)",
+      "kind": "discovered",
+      "joint_rank": 55,
+      "joint_score": 0.5463,
+      "nov_score": 2.998,
+      "ppa_score": 0.4929,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2512,
+      "fmax_256_mhz": 121.19,
+      "power_256_mw": 0.134,
+      "adp_256": 12923.1,
+      "pdp_256_pj": 1.1057,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1105,
+          "fmax": 900.5,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1255,
+          "fmax": 470.48,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1961,
+          "fmax": 238.32,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2512,
+          "fmax": 121.19,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea66",
+      "idea_id": 66,
+      "name": "Hysteretic Phase Momentum Adder (HPMA)",
+      "kind": "discovered",
+      "joint_rank": 56,
+      "joint_score": 0.5448,
+      "nov_score": 3.07,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea82",
+      "idea_id": 82,
+      "name": "Threshold-Balanced Triplepath Skip Adder (TBTSA)",
+      "kind": "discovered",
+      "joint_rank": 57,
+      "joint_score": 0.5434,
+      "nov_score": 2.98,
+      "ppa_score": 0.4908,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.287,
+      "fmax_256_mhz": 120.67,
+      "power_256_mw": 0.134,
+      "adp_256": 12979.2,
+      "pdp_256_pj": 1.1105,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1237,
+          "fmax": 889.92,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1399,
+          "fmax": 467.31,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1704,
+          "fmax": 239.79,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.287,
+          "fmax": 120.67,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea62",
+      "idea_id": 62,
+      "name": "Hysteretic Confidence Carry Adder (HCCA)",
+      "kind": "discovered",
+      "joint_rank": 58,
+      "joint_score": 0.5418,
+      "nov_score": 3.04,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6037,
+          "fmax": 1656.45,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea95",
+      "idea_id": 95,
+      "name": "Confidence-Window Carry-Fusion Adder (CWCFA)",
+      "kind": "discovered",
+      "joint_rank": 59,
+      "joint_score": 0.5415,
+      "nov_score": 3.02,
+      "ppa_score": 0.4791,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.4903,
+      "fmax_256_mhz": 117.78,
+      "power_256_mw": 0.134,
+      "adp_256": 13297.6,
+      "pdp_256_pj": 1.1377,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6019,
+          "fmax": 1661.41,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.159,
+          "fmax": 463.18,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2726,
+          "fmax": 234.05,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.4903,
+          "fmax": 117.78,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea28",
+      "idea_id": 28,
+      "name": "Carry-Run Adaptive Select-Bypass Adder (CRASBA)",
+      "kind": "discovered",
+      "joint_rank": 60,
+      "joint_score": 0.5405,
+      "nov_score": 2.965,
+      "ppa_score": 0.4881,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3331,
+      "fmax_256_mhz": 120.0,
+      "power_256_mw": 0.134,
+      "adp_256": 13051.4,
+      "pdp_256_pj": 1.1166,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.342,
+          "fmax": 2923.98,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1136,
+          "fmax": 897.99,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1471,
+          "fmax": 465.74,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2099,
+          "fmax": 237.54,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3331,
+          "fmax": 120.0,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea85",
+      "idea_id": 85,
+      "name": "Confidence Dual-Mode Bypass Adder (CDBA)",
+      "kind": "discovered",
+      "joint_rank": 61,
+      "joint_score": 0.5397,
+      "nov_score": 2.938,
+      "ppa_score": 0.4919,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2685,
+      "fmax_256_mhz": 120.94,
+      "power_256_mw": 0.134,
+      "adp_256": 12950.2,
+      "pdp_256_pj": 1.108,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.345,
+          "fmax": 2898.55,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1524,
+          "fmax": 464.6,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1913,
+          "fmax": 238.59,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2685,
+          "fmax": 120.94,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea91",
+      "idea_id": 91,
+      "name": "Density-Aware Carry-Select Adder (DACSA)",
+      "kind": "discovered",
+      "joint_rank": 62,
+      "joint_score": 0.5371,
+      "nov_score": 2.91,
+      "ppa_score": 0.4921,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.265,
+      "fmax_256_mhz": 120.99,
+      "power_256_mw": 0.134,
+      "adp_256": 12944.7,
+      "pdp_256_pj": 1.1075,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3341,
+          "fmax": 2993.12,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6019,
+          "fmax": 1661.41,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1076,
+          "fmax": 902.85,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1255,
+          "fmax": 470.48,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1818,
+          "fmax": 239.13,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.265,
+          "fmax": 120.99,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea81",
+      "idea_id": 81,
+      "name": "Polarity-Hysteresis Dualpath Skip Adder (PHDSA)",
+      "kind": "discovered",
+      "joint_rank": 63,
+      "joint_score": 0.5363,
+      "nov_score": 2.938,
+      "ppa_score": 0.4851,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.3851,
+      "fmax_256_mhz": 119.26,
+      "power_256_mw": 0.134,
+      "adp_256": 13132.8,
+      "pdp_256_pj": 1.1236,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1046,
+          "fmax": 905.31,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1351,
+          "fmax": 468.36,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2152,
+          "fmax": 237.24,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.3851,
+          "fmax": 119.26,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea50",
+      "idea_id": 50,
+      "name": "Carry Resonance-Window Tri-Path Adder (CRWTA)",
+      "kind": "discovered",
+      "joint_rank": 64,
+      "joint_score": 0.5318,
+      "nov_score": 2.94,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3431,
+          "fmax": 2914.6,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5971,
+          "fmax": 1674.76,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1171,
+          "fmax": 895.18,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1733,
+          "fmax": 460.13,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea1",
+      "idea_id": 1,
+      "name": "Adaptive Block Bypass Adder (ABBA)",
+      "kind": "discovered",
+      "joint_rank": 65,
+      "joint_score": 0.5312,
+      "nov_score": 3.11,
+      "ppa_score": 0.4404,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 9.2354,
+      "fmax_256_mhz": 108.28,
+      "power_256_mw": 0.134,
+      "adp_256": 14464.6,
+      "pdp_256_pj": 1.2375,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3571,
+          "fmax": 2800.34,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6435,
+          "fmax": 1554.0,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.2162,
+          "fmax": 822.23,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.3618,
+          "fmax": 423.41,
+          "power": 0.0334
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.653,
+          "fmax": 214.92,
+          "power": 0.067
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 9.2354,
+          "fmax": 108.28,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea6",
+      "idea_id": 6,
+      "name": "Quorum-Gated Dual-Path Adder (QGDA)",
+      "kind": "discovered",
+      "joint_rank": 66,
+      "joint_score": 0.5303,
+      "nov_score": 3.12,
+      "ppa_score": 0.4366,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2155.4,
+      "delay_256_ns": 7.6583,
+      "fmax_256_mhz": 130.58,
+      "power_256_mw": 0.223,
+      "adp_256": 16506.7,
+      "pdp_256_pj": 1.7078,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 59.58,
+          "delay": 0.3089,
+          "fmax": 3237.29,
+          "power": 0.0052
+        },
+        {
+          "width": 16,
+          "area": 111.72,
+          "delay": 0.534,
+          "fmax": 1872.66,
+          "power": 0.0098
+        },
+        {
+          "width": 32,
+          "area": 252.97,
+          "delay": 1.0309,
+          "fmax": 970.03,
+          "power": 0.0246
+        },
+        {
+          "width": 64,
+          "area": 545.57,
+          "delay": 1.8941,
+          "fmax": 527.96,
+          "power": 0.0547
+        },
+        {
+          "width": 128,
+          "area": 1069.85,
+          "delay": 3.8172,
+          "fmax": 261.97,
+          "power": 0.11
+        },
+        {
+          "width": 256,
+          "area": 2155.4,
+          "delay": 7.6583,
+          "fmax": 130.58,
+          "power": 0.223
+        }
+      ]
+    },
+    {
+      "slug": "idea69",
+      "idea_id": 69,
+      "name": "Entropy Drift Quorum Adder (EDQA)",
+      "kind": "discovered",
+      "joint_rank": 67,
+      "joint_score": 0.5133,
+      "nov_score": 2.755,
+      "ppa_score": 0.4756,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.5525,
+      "fmax_256_mhz": 116.92,
+      "power_256_mw": 0.134,
+      "adp_256": 13395.0,
+      "pdp_256_pj": 1.146,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.6084,
+          "fmax": 1643.66,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1381,
+          "fmax": 878.66,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1973,
+          "fmax": 455.1,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.3157,
+          "fmax": 231.71,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5525,
+          "fmax": 116.92,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea74",
+      "idea_id": 74,
+      "name": "Dual-Path Carry Fusion Adder (DPCFA)",
+      "kind": "discovered",
+      "joint_rank": 68,
+      "joint_score": 0.4834,
+      "nov_score": 2.37,
+      "ppa_score": 0.4929,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": true,
+      "area_256": 1566.21,
+      "delay_256_ns": 8.2512,
+      "fmax_256_mhz": 121.19,
+      "power_256_mw": 0.134,
+      "adp_256": 12923.1,
+      "pdp_256_pj": 1.1057,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5989,
+          "fmax": 1669.73,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1105,
+          "fmax": 900.5,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1255,
+          "fmax": 470.48,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.1961,
+          "fmax": 238.32,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.2512,
+          "fmax": 121.19,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea18",
+      "idea_id": 18,
+      "name": "Carry-Signature Score Gated Hybrid Adder (CSSGHA)",
+      "kind": "discovered",
+      "joint_rank": 69,
+      "joint_score": 0.4471,
+      "nov_score": 2.325,
+      "ppa_score": 0.4292,
+      "decision": "incremental",
+      "has_sta": true,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": 2138.37,
+      "delay_256_ns": 7.8142,
+      "fmax_256_mhz": 127.97,
+      "power_256_mw": 0.222,
+      "adp_256": 16709.7,
+      "pdp_256_pj": 1.7348,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 46.82,
+          "delay": 0.3439,
+          "fmax": 2907.82,
+          "power": 0.0039
+        },
+        {
+          "width": 16,
+          "area": 114.38,
+          "delay": 0.5507,
+          "fmax": 1815.87,
+          "power": 0.0108
+        },
+        {
+          "width": 32,
+          "area": 252.17,
+          "delay": 0.9683,
+          "fmax": 1032.74,
+          "power": 0.025
+        },
+        {
+          "width": 64,
+          "area": 518.43,
+          "delay": 2.0142,
+          "fmax": 496.48,
+          "power": 0.0528
+        },
+        {
+          "width": 128,
+          "area": 1058.68,
+          "delay": 3.952,
+          "fmax": 253.04,
+          "power": 0.109
+        },
+        {
+          "width": 256,
+          "area": 2138.37,
+          "delay": 7.8142,
+          "fmax": 127.97,
+          "power": 0.222
+        }
+      ]
+    },
+    {
+      "slug": "idea12",
+      "idea_id": 12,
+      "name": "Transition-Density Steered Carry Adder (TDSCA)",
+      "kind": "discovered",
+      "joint_rank": 70,
+      "joint_score": 0.424,
+      "nov_score": 4.24,
+      "ppa_score": 0.0,
+      "decision": "novel",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 61.98,
+          "delay": 0.3074,
+          "fmax": 3253.09,
+          "power": 0.0052
+        },
+        {
+          "width": 16,
+          "area": 108.26,
+          "delay": 0.5548,
+          "fmax": 1802.45,
+          "power": 0.0096
+        },
+        {
+          "width": 32,
+          "area": 233.81,
+          "delay": 0.9691,
+          "fmax": 1031.89,
+          "power": 0.0211
+        },
+        {
+          "width": 64,
+          "area": 467.36,
+          "delay": 1.8858,
+          "fmax": 530.28,
+          "power": 0.0427
+        }
+      ]
+    },
+    {
+      "slug": "idea97",
+      "idea_id": 97,
+      "name": "Hysteresis-Margin Carry-Fusion Adder (HMCFA)",
+      "kind": "discovered",
+      "joint_rank": 71,
+      "joint_score": 0.3766,
+      "nov_score": 3.766,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3389,
+          "fmax": 2950.72,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1237,
+          "fmax": 889.92,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1781,
+          "fmax": 459.12,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2965,
+          "fmax": 232.75,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5286,
+          "fmax": 117.25,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea56",
+      "idea_id": 56,
+      "name": "Carry Hysteresis-Gradient Adder (CHGA)",
+      "kind": "discovered",
+      "joint_rank": 72,
+      "joint_score": 0.3758,
+      "nov_score": 3.758,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea99",
+      "idea_id": 99,
+      "name": "Signature-Window Carry Adder (SWCA)",
+      "kind": "discovered",
+      "joint_rank": 73,
+      "joint_score": 0.367,
+      "nov_score": 3.67,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea44",
+      "idea_id": 44,
+      "name": "Carry Certainty-Gradient Tri-Path Adder (CCGTPA)",
+      "kind": "discovered",
+      "joint_rank": 74,
+      "joint_score": 0.3632,
+      "nov_score": 3.632,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea36",
+      "idea_id": 36,
+      "name": "Carry Inertia-Phase Weighted Tri-Path Adder (CIPW-TPA)",
+      "kind": "discovered",
+      "joint_rank": 75,
+      "joint_score": 0.3607,
+      "nov_score": 3.607,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea40",
+      "idea_id": 40,
+      "name": "Carry Temporal-Bias Tri-Path Adder (CTBTA)",
+      "kind": "discovered",
+      "joint_rank": 76,
+      "joint_score": 0.3607,
+      "nov_score": 3.607,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea34",
+      "idea_id": 34,
+      "name": "Carry Phase-Entropy Weighted Tri-Path Adder (CPETPA)",
+      "kind": "discovered",
+      "joint_rank": 77,
+      "joint_score": 0.3548,
+      "nov_score": 3.548,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea47",
+      "idea_id": 47,
+      "name": "Carry-Momentum Hysteresis Tri-Path Adder",
+      "kind": "discovered",
+      "joint_rank": 78,
+      "joint_score": 0.353,
+      "nov_score": 3.53,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea35",
+      "idea_id": 35,
+      "name": "Carry Momentum-Polarity Tri-Path Adder (CMPTPA)",
+      "kind": "discovered",
+      "joint_rank": 79,
+      "joint_score": 0.3432,
+      "nov_score": 3.432,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea32",
+      "idea_id": 32,
+      "name": "Carry-Gradient Stability Tri-Path Adder (CGSTPA)",
+      "kind": "discovered",
+      "joint_rank": 80,
+      "joint_score": 0.3431,
+      "nov_score": 3.431,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea57",
+      "idea_id": 57,
+      "name": "Entropy-Hysteresis Carry Fusion Adder (EHCFA)",
+      "kind": "discovered",
+      "joint_rank": 81,
+      "joint_score": 0.3403,
+      "nov_score": 3.403,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea45",
+      "idea_id": 45,
+      "name": "Carry Momentum-Window Tri-Path Adder (CMWTPA)",
+      "kind": "discovered",
+      "joint_rank": 82,
+      "joint_score": 0.3397,
+      "nov_score": 3.397,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea55",
+      "idea_id": 55,
+      "name": "Adaptive Carry-Momentum Fusion Adder (ACMFA)",
+      "kind": "discovered",
+      "joint_rank": 83,
+      "joint_score": 0.3382,
+      "nov_score": 3.382,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea43",
+      "idea_id": 43,
+      "name": "Carry Completion-Signature Tri-Path Adder (CCSTPA)",
+      "kind": "discovered",
+      "joint_rank": 84,
+      "joint_score": 0.3368,
+      "nov_score": 3.368,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea59",
+      "idea_id": 59,
+      "name": "Dual-Signal Hysteresis Carry Adder (DSHCA)",
+      "kind": "discovered",
+      "joint_rank": 85,
+      "joint_score": 0.3367,
+      "nov_score": 3.367,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea49",
+      "idea_id": 49,
+      "name": "Carry Phase-Lattice Tri-Path Adder (CPLTA)",
+      "kind": "discovered",
+      "joint_rank": 86,
+      "joint_score": 0.3345,
+      "nov_score": 3.345,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea31",
+      "idea_id": 31,
+      "name": "Carry-Entropy Balanced Tri-Path Adder (CEBTPA)",
+      "kind": "discovered",
+      "joint_rank": 87,
+      "joint_score": 0.3343,
+      "nov_score": 3.343,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea39",
+      "idea_id": 39,
+      "name": "Carry Saturation-Leak Tri-Path Adder (CSLTPA)",
+      "kind": "discovered",
+      "joint_rank": 88,
+      "joint_score": 0.3325,
+      "nov_score": 3.325,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea46",
+      "idea_id": 46,
+      "name": "Carry Phase-Resonance Tri-Path Adder (CPR-TPA)",
+      "kind": "discovered",
+      "joint_rank": 89,
+      "joint_score": 0.332,
+      "nov_score": 3.32,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea38",
+      "idea_id": 38,
+      "name": "Carry Phase-Hysteresis Dual-Weight Tri-Path Adder (CPHDTA)",
+      "kind": "discovered",
+      "joint_rank": 90,
+      "joint_score": 0.331,
+      "nov_score": 3.31,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea33",
+      "idea_id": 33,
+      "name": "Carry-Hysteresis Weighted Tri-Path Adder (CHWTPA)",
+      "kind": "discovered",
+      "joint_rank": 91,
+      "joint_score": 0.328,
+      "nov_score": 3.28,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea60",
+      "idea_id": 60,
+      "name": "Phase-Weighted Transition Carry Adder (PWTCA)",
+      "kind": "discovered",
+      "joint_rank": 92,
+      "joint_score": 0.3274,
+      "nov_score": 3.274,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea42",
+      "idea_id": 42,
+      "name": "Carry Hysteresis Dual-Memory Tri-Path Adder (CHDMTA)",
+      "kind": "discovered",
+      "joint_rank": 93,
+      "joint_score": 0.327,
+      "nov_score": 3.27,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea98",
+      "idea_id": 98,
+      "name": "Entropy-Window Carry-Fusion Adder (EWCFA)",
+      "kind": "discovered",
+      "joint_rank": 94,
+      "joint_score": 0.3248,
+      "nov_score": 3.248,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.94,
+          "delay": 0.3436,
+          "fmax": 2910.36,
+          "power": 0.004
+        },
+        {
+          "width": 16,
+          "area": 97.89,
+          "delay": 0.5941,
+          "fmax": 1683.22,
+          "power": 0.0082
+        },
+        {
+          "width": 32,
+          "area": 195.78,
+          "delay": 1.1141,
+          "fmax": 897.59,
+          "power": 0.0166
+        },
+        {
+          "width": 64,
+          "area": 391.55,
+          "delay": 2.1733,
+          "fmax": 460.13,
+          "power": 0.0333
+        },
+        {
+          "width": 128,
+          "area": 783.1,
+          "delay": 4.2965,
+          "fmax": 232.75,
+          "power": 0.0669
+        },
+        {
+          "width": 256,
+          "area": 1566.21,
+          "delay": 8.5381,
+          "fmax": 117.12,
+          "power": 0.134
+        }
+      ]
+    },
+    {
+      "slug": "idea13",
+      "idea_id": 13,
+      "name": "Entropy-Guided Dual-Path Block Adder",
+      "kind": "discovered",
+      "joint_rank": 95,
+      "joint_score": 0.3195,
+      "nov_score": 3.195,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": [
+        {
+          "width": 8,
+          "area": 48.15,
+          "delay": 0.3349,
+          "fmax": 2985.97,
+          "power": 0.0041
+        },
+        {
+          "width": 16,
+          "area": 121.83,
+          "delay": 0.4732,
+          "fmax": 2113.27,
+          "power": 0.0113
+        },
+        {
+          "width": 32,
+          "area": 249.51,
+          "delay": 0.9668,
+          "fmax": 1034.34,
+          "power": 0.0233
+        },
+        {
+          "width": 64,
+          "area": 490.77,
+          "delay": 1.9421,
+          "fmax": 514.91,
+          "power": 0.0463
+        }
+      ]
+    },
+    {
+      "slug": "idea58",
+      "idea_id": 58,
+      "name": "Consensus-Window Carry Adder (CWCA)",
+      "kind": "discovered",
+      "joint_rank": 96,
+      "joint_score": 0.3123,
+      "nov_score": 3.123,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea41",
+      "idea_id": 41,
+      "name": "Carry Hysteresis-Entropy Tri-Path Adder (CHETA)",
+      "kind": "discovered",
+      "joint_rank": 97,
+      "joint_score": 0.3075,
+      "nov_score": 3.075,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea48",
+      "idea_id": 48,
+      "name": "Carry Saturation-Memory Tri-Path Adder (CSM-TPA)",
+      "kind": "discovered",
+      "joint_rank": 98,
+      "joint_score": 0.2698,
+      "nov_score": 2.698,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea54",
+      "idea_id": 54,
+      "name": "Dual-Window Carry Fusion Adder (DWCFA)",
+      "kind": "discovered",
+      "joint_rank": 99,
+      "joint_score": 0.2518,
+      "nov_score": 2.518,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    },
+    {
+      "slug": "idea37",
+      "idea_id": 37,
+      "name": "Carry Hysteresis-Entropy Tri-Path Adder (CHETPA)",
+      "kind": "discovered",
+      "joint_rank": 100,
+      "joint_score": 0.2325,
+      "nov_score": 2.325,
+      "ppa_score": 0.0,
+      "decision": "incremental",
+      "has_sta": false,
+      "pareto_256": false,
+      "collapsed_cla": false,
+      "area_256": null,
+      "delay_256_ns": null,
+      "fmax_256_mhz": null,
+      "power_256_mw": null,
+      "adp_256": null,
+      "pdp_256_pj": null,
+      "sta_scaling": []
+    }
+  ],
+  "champions": [
+    "idea3",
+    "idea11",
+    "idea93"
+  ],
+  "keywords": [
+    {
+      "category": "Carry-Path Primitives",
+      "items": [
+        {
+          "kw": "select",
+          "files": 100,
+          "mentions": 497
+        },
+        {
+          "kw": "ripple",
+          "files": 99,
+          "mentions": 433
+        },
+        {
+          "kw": "propagate",
+          "files": 91,
+          "mentions": 338
+        },
+        {
+          "kw": "generate",
+          "files": 76,
+          "mentions": 205
+        },
+        {
+          "kw": "skip",
+          "files": 61,
+          "mentions": 221
+        },
+        {
+          "kw": "bypass",
+          "files": 43,
+          "mentions": 216
+        }
+      ]
+    },
+    {
+      "category": "Control & Selection",
+      "items": [
+        {
+          "kw": "exact",
+          "files": 100,
+          "mentions": 881
+        },
+        {
+          "kw": "policy",
+          "files": 100,
+          "mentions": 795
+        },
+        {
+          "kw": "deterministic",
+          "files": 100,
+          "mentions": 643
+        },
+        {
+          "kw": "bounded",
+          "files": 96,
+          "mentions": 234
+        },
+        {
+          "kw": "threshold",
+          "files": 48,
+          "mentions": 118
+        },
+        {
+          "kw": "gating",
+          "files": 39,
+          "mentions": 58
+        }
+      ]
+    },
+    {
+      "category": "Stateful & Temporal",
+      "items": [
+        {
+          "kw": "memory",
+          "files": 37,
+          "mentions": 93
+        },
+        {
+          "kw": "hysteresis",
+          "files": 32,
+          "mentions": 169
+        },
+        {
+          "kw": "momentum",
+          "files": 12,
+          "mentions": 95
+        },
+        {
+          "kw": "inertia",
+          "files": 6,
+          "mentions": 47
+        },
+        {
+          "kw": "streak",
+          "files": 5,
+          "mentions": 14
+        },
+        {
+          "kw": "saturation/leak",
+          "files": 2,
+          "mentions": 35
+        }
+      ]
+    },
+    {
+      "category": "Block-Local Features",
+      "items": [
+        {
+          "kw": "imbalance",
+          "files": 40,
+          "mentions": 68
+        },
+        {
+          "kw": "confidence",
+          "files": 35,
+          "mentions": 148
+        },
+        {
+          "kw": "entropy",
+          "files": 34,
+          "mentions": 120
+        },
+        {
+          "kw": "transition",
+          "files": 33,
+          "mentions": 85
+        },
+        {
+          "kw": "density",
+          "files": 32,
+          "mentions": 82
+        },
+        {
+          "kw": "stability",
+          "files": 23,
+          "mentions": 50
+        }
+      ]
+    },
+    {
+      "category": "Verification & Collapse",
+      "items": [
+        {
+          "kw": "sweep",
+          "files": 100,
+          "mentions": 1272
+        },
+        {
+          "kw": "yosys",
+          "files": 100,
+          "mentions": 482
+        },
+        {
+          "kw": "nangate45",
+          "files": 63,
+          "mentions": 131
+        },
+        {
+          "kw": "opensta",
+          "files": 63,
+          "mentions": 126
+        },
+        {
+          "kw": "equivalence",
+          "files": 31,
+          "mentions": 36
+        },
+        {
+          "kw": "collapse",
+          "files": 26,
+          "mentions": 26
+        }
+      ]
+    }
+  ]
+}
