@@ -344,18 +344,54 @@ function renderParetoChart() {
   const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.xVal - b.xVal);
   const poly = paretoPts.map(p => `${sx(p.xVal).toFixed(1)},${sy(p.yVal).toFixed(1)}`).join(' ');
 
+  const placedBoxes = [];
+  const candidateOffsets = [
+    [10, 4], [10, -10], [10, 16], [-10, -10], [-10, 16],
+    [14, -22], [14, 28], [-14, -22], [-14, 28], [22, 4], [10, -34], [10, 40]
+  ];
+
+  const labelsSvg = [];
   const circles = pts.map(p => {
     const cx = sx(p.xVal), cy = sy(p.yVal);
     const isSel = p.slug === selectedBubbleSlug;
     let fill = '#22bfd7';
-    if (p.pareto) fill = '#ffc83e';
+    if (p.pareto) fill = p.kind === 'classical' ? '#b7df69' : '#ffc83e';
     else if (p.kind === 'classical') fill = '#8275e8';
     else if (p.entity.collapsed_cla) fill = '#f38469';
     const rad = isSel ? 9 : (p.pareto ? 7 : 5);
     const strokeW = isSel ? 3 : 1.5;
     const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
-    const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${labelText}</text>` : '';
-    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area.toFixed(2)} um2, Delay=${p.delay.toFixed(4)} ns, Power=${p.power.toFixed(4)} mW, PDP=${p.pdp.toFixed(4)} pJ</title></circle>${label}`;
+
+    if (p.pareto || isSel) {
+      const tw = labelText.length * 6.8 + 6;
+      const th = 14;
+      let best = candidateOffsets[0];
+      let anchor = 'start';
+      for (const [dx, dy] of candidateOffsets) {
+        const isLeft = dx < 0;
+        const lx = cx + dx;
+        const ly = cy + dy;
+        const x0 = isLeft ? lx - tw : lx;
+        const x1 = isLeft ? lx : lx + tw;
+        const y0 = ly - th + 2;
+        const y1 = ly + 2;
+        if (x0 < padL || x1 > w - 4 || y0 < 6 || y1 > h - padB) continue;
+        const overlaps = placedBoxes.some(b => !(x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1));
+        if (!overlaps) {
+          best = [dx, dy];
+          anchor = isLeft ? 'end' : 'start';
+          placedBoxes.push({ x0, y0, x1, y1 });
+          break;
+        }
+      }
+      const lx = cx + best[0], ly = cy + best[1];
+      if (Math.hypot(best[0], best[1]) > 14) {
+        labelsSvg.push(`<line x1="${cx.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${lx.toFixed(1)}" y2="${(ly - 3).toFixed(1)}" stroke="rgba(21,27,32,0.45)" stroke-width="1"/>`);
+      }
+      labelsSvg.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" font-size="11" font-weight="800" font-family="JetBrains Mono" stroke="#fffaf0" stroke-width="3" paint-order="stroke">${labelText}</text>`);
+    }
+
+    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area.toFixed(2)} um2, Delay=${p.delay.toFixed(4)} ns, Power=${p.power.toFixed(4)} mW, PDP=${p.pdp.toFixed(4)} pJ</title></circle>`;
   }).join('');
 
   const fmtTick = (val, unit) => {
@@ -381,6 +417,7 @@ function renderParetoChart() {
       <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
       ${xTicks}${yTicks}
       ${circles}
+      ${labelsSvg.join('')}
       <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit ${ax.xLabel}</text>
       <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${selectedWidth}-bit ${ax.yLabel}</text>
     </svg>
