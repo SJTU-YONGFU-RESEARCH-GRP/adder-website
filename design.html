@@ -141,7 +141,7 @@
       }
     });
 
-    let zoomScale = 0.70;
+    let zoomScale = 1.0;
     let baseSvgWidth = null;
 
     function esc(s) {
@@ -316,9 +316,9 @@
             </div>
             <div style="display:flex; gap:6px; align-items:center;">
               <button class="btn-mini" onclick="setZoom(zoomScale - 0.15)">-</button>
-              <span id="zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">70%</span>
+              <span id="zoom-label" class="mono" style="font-size:0.78rem; min-width:44px; text-align:center;">100%</span>
               <button class="btn-mini" onclick="setZoom(zoomScale + 0.15)">+</button>
-              <button class="btn-mini" onclick="setZoom(0.70)">Reset</button>
+              <button class="btn-mini" onclick="setZoom(1.0)">Reset</button>
               <button class="btn-mini" style="background:var(--yellow);" onclick="downloadSvg('${d.slug}')">Download SVG</button>
             </div>
           </div>
@@ -380,8 +380,8 @@
         colorizeDiagram();
         const svg = document.querySelector('#diagram-stage svg');
         if (svg) {
-          baseSvgWidth = svg.getBoundingClientRect().width || 720;
-          setZoom(0.70);
+          baseSvgWidth = (svg.getBoundingClientRect().width || 720) * 0.70;
+          setZoom(1.0);
         }
       }
     }
