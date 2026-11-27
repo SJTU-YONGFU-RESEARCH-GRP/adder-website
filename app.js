@@ -7,6 +7,7 @@ let selectedWidth = 256;
 let selectedDataset = 'ideas';
 let selectedAxis = 'area_delay';
 let focusCluster = false;
+let paretoOnly = false;
 let paretoZoom = 1.0;
 let selectedBubbleSlug = 'idea3';
 
@@ -224,6 +225,7 @@ function getPointsForWidth(width, dataset = selectedDataset) {
   }
   if (dataset === 'classical' || dataset === 'both') {
     for (const c of DATA.classical) {
+      if (c.slug === 'db_carry_save') continue; // 3:2 redundant compressor, not a CPA
       const pt = (c.scaling || []).find(s => s.width === width);
       if (pt) {
         const pdp = pt.power * pt.delay;
@@ -321,7 +323,9 @@ function renderParetoChart() {
 
   // Optional main-cluster focus: trim top 15% outliers by X/Y when extreme trees skew the view
   let pts = allPts;
-  if (focusCluster && allPts.length > 10) {
+  if (paretoOnly) {
+    pts = allPts.filter(p => p.pareto);
+  } else if (focusCluster && allPts.length > 10) {
     const xs = [...allPts.map(p => p.xVal)].sort((a, b) => a - b);
     const ys = [...allPts.map(p => p.yVal)].sort((a, b) => a - b);
     const xCap = xs[Math.floor(xs.length * 0.85)] * 1.15;
@@ -393,6 +397,12 @@ document.querySelectorAll('.axis-btn').forEach(btn => {
     selectedAxis = btn.dataset.axis;
     renderParetoChart();
   });
+});
+
+document.getElementById('pareto-only-btn').addEventListener('click', (e) => {
+  paretoOnly = !paretoOnly;
+  e.target.classList.toggle('active', paretoOnly);
+  renderParetoChart();
 });
 
 document.getElementById('pareto-focus-btn').addEventListener('click', (e) => {
