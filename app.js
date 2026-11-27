@@ -5,6 +5,9 @@ let ideasSort = { key: 'joint_rank', asc: true };
 let ideasFilter = 'all';
 let selectedWidth = 256;
 let selectedDataset = 'ideas';
+let selectedAxis = 'area_delay';
+let focusCluster = false;
+let paretoZoom = 1.0;
 let selectedBubbleSlug = 'idea3';
 
 async function init() {
@@ -175,26 +178,47 @@ document.querySelectorAll('#ideas-table th[data-sort]').forEach(th => {
   });
 });
 
+const AXIS_MODES = {
+  area_delay: { xKey: 'area', yKey: 'delay', xLabel: 'Area (um^2)', yLabel: 'Delay (ns)', xUnit: 'um^2', yUnit: 'ns' },
+  power_delay: { xKey: 'power', yKey: 'delay', xLabel: 'Power (mW)', yLabel: 'Delay (ns)', xUnit: 'mW', yUnit: 'ns' },
+  pdp_delay: { xKey: 'pdp', yKey: 'delay', xLabel: 'Energy / PDP (pJ)', yLabel: 'Delay (ns)', xUnit: 'pJ', yUnit: 'ns' },
+  area_pdp: { xKey: 'area', yKey: 'pdp', xLabel: 'Area (um^2)', yLabel: 'Energy / PDP (pJ)', xUnit: 'um^2', yUnit: 'pJ' },
+};
+
+function setParetoZoom(val) {
+  paretoZoom = Math.max(0.75, Math.min(3.0, val));
+  const svg = document.querySelector('#pareto-chart svg');
+  const lbl = document.getElementById('pareto-zoom-label');
+  if (svg) {
+    svg.style.width = `${Math.round(780 * paretoZoom)}px`;
+    svg.style.maxWidth = 'none';
+  }
+  if (lbl) lbl.textContent = `${Math.round(paretoZoom * 100)}%`;
+}
+
 function getPointsForWidth(width, dataset = selectedDataset) {
+  const ax = AXIS_MODES[selectedAxis];
   const pts = [];
   if (dataset === 'ideas' || dataset === 'both') {
     for (const r of DATA.ideas) {
       const pt = (r.sta_scaling || []).find(s => s.width === width);
       if (pt) {
-        pts.push({
+        const pdp = pt.power * pt.delay;
+        const item = {
           entity: r,
           kind: 'discovered',
           slug: r.slug,
           name: r.name,
           area: pt.area,
           delay: pt.delay,
-          xVal: pt.area,
-          yVal: pt.delay,
           fmax: pt.fmax,
           power: pt.power,
           adp: pt.area * pt.delay,
-          pdp: pt.power * pt.delay,
-        });
+          pdp,
+        };
+        item.xVal = item[ax.xKey];
+        item.yVal = item[ax.yKey];
+        pts.push(item);
       }
     }
   }
@@ -202,20 +226,22 @@ function getPointsForWidth(width, dataset = selectedDataset) {
     for (const c of DATA.classical) {
       const pt = (c.scaling || []).find(s => s.width === width);
       if (pt) {
-        pts.push({
+        const pdp = pt.power * pt.delay;
+        const item = {
           entity: c,
           kind: 'classical',
           slug: c.slug,
           name: `${c.name} Adder`,
           area: pt.area,
           delay: pt.delay,
-          xVal: pt.area,
-          yVal: pt.delay,
           fmax: pt.freq,
           power: pt.power,
           adp: pt.area * pt.delay,
-          pdp: pt.power * pt.delay,
-        });
+          pdp,
+        };
+        item.xVal = item[ax.xKey];
+        item.yVal = item[ax.yKey];
+        pts.push(item);
       }
     }
   }
@@ -289,15 +315,27 @@ function renderBubbleDetail(pt) {
 }
 
 function renderParetoChart() {
-  const pts = getPointsForWidth(selectedWidth);
-  if (!pts.length) return;
-  const normMode = false;
-  const w = 780, h = 360, padL = 62, padR = 32, padT = 24, padB = 46;
+  const allPts = getPointsForWidth(selectedWidth);
+  if (!allPts.length) return;
+  const ax = AXIS_MODES[selectedAxis];
+
+  // Optional main-cluster focus: trim top 15% outliers by X/Y when extreme trees skew the view
+  let pts = allPts;
+  if (focusCluster && allPts.length > 10) {
+    const xs = [...allPts.map(p => p.xVal)].sort((a, b) => a - b);
+    const ys = [...allPts.map(p => p.yVal)].sort((a, b) => a - b);
+    const xCap = xs[Math.floor(xs.length * 0.85)] * 1.15;
+    const yCap = ys[Math.floor(ys.length * 0.90)] * 1.15;
+    const filtered = allPts.filter(p => p.xVal <= xCap && p.yVal <= yCap);
+    if (filtered.length >= 5) pts = filtered;
+  }
+
+  const w = 780, h = 360, padL = 68, padR = 32, padT = 24, padB = 46;
   const xVals = pts.map(p => p.xVal), yVals = pts.map(p => p.yVal);
   const minX = Math.min(...xVals) * 0.92, maxX = Math.max(...xVals) * 1.05;
   const minY = Math.min(...yVals) * 0.90, maxY = Math.max(...yVals) * 1.06;
-  const sx = x => padL + ((x - minX) / Math.max(1e-6, maxX - minX)) * (w - padL - padR);
-  const sy = y => h - padB - ((y - minY) / Math.max(1e-6, maxY - minY)) * (h - padT - padB);
+  const sx = x => padL + ((x - minX) / Math.max(1e-9, maxX - minX)) * (w - padL - padR);
+  const sy = y => h - padB - ((y - minY) / Math.max(1e-9, maxY - minY)) * (h - padT - padB);
 
   const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.xVal - b.xVal);
   const poly = paretoPts.map(p => `${sx(p.xVal).toFixed(1)},${sy(p.yVal).toFixed(1)}`).join(' ');
@@ -313,41 +351,55 @@ function renderParetoChart() {
     const strokeW = isSel ? 3 : 1.5;
     const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
     const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${labelText}</text>` : '';
-    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area} um2, Delay=${p.delay} ns</title></circle>${label}`;
+    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area.toFixed(2)} um2, Delay=${p.delay.toFixed(4)} ns, Power=${p.power.toFixed(4)} mW, PDP=${p.pdp.toFixed(4)} pJ</title></circle>${label}`;
   }).join('');
+
+  const fmtTick = (val, unit) => {
+    if (val >= 10000) return `${(val / 1000).toFixed(0)}k`;
+    if (unit === 'um^2') return val.toFixed(0);
+    if (val < 1) return val.toFixed(3);
+    return val.toFixed(2);
+  };
 
   const xTicks = [0, 0.5, 1.0].map(f => {
     const val = minX + (maxX - minX) * f;
-    const lbl = normMode ? `${val.toFixed(2)}x` : (val >= 10000 ? `${(val / 1000).toFixed(0)}k` : val.toFixed(0));
-    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
+    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.xUnit)}</text>`;
   }).join('');
   const yTicks = [0, 0.5, 1.0].map(f => {
     const val = minY + (maxY - minY) * f;
-    const lbl = normMode ? `${val.toFixed(2)}x` : val.toFixed(2);
-    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
+    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.yUnit)}</text>`;
   }).join('');
 
-  const rcaLines = (normMode && 1.0 >= minX && 1.0 <= maxX && 1.0 >= minY && 1.0 <= maxY)
-    ? `<line x1="${sx(1.0).toFixed(1)}" y1="${padT}" x2="${sx(1.0).toFixed(1)}" y2="${h - padB}" stroke="rgba(21,27,32,0.28)" stroke-dasharray="3,3"/>
-       <line x1="${padL}" y1="${sy(1.0).toFixed(1)}" x2="${w - padR}" y2="${sy(1.0).toFixed(1)}" stroke="rgba(21,27,32,0.28)" stroke-dasharray="3,3"/>`
-    : '';
-
   document.getElementById('pareto-chart').innerHTML = `
-    <svg viewBox="0 0 ${w} ${h}" style="width:100%; max-width:${w}px; height:auto;">
-      ${rcaLines}
+    <svg viewBox="0 0 ${w} ${h}" style="width:${Math.round(w * paretoZoom)}px; height:auto;">
       <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
       ${xTicks}${yTicks}
       ${circles}
-      <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${normMode ? `${selectedWidth}-bit Normalized Area (x RCA)` : `${selectedWidth}-bit Area (&mu;m&sup2;)`}</text>
-      <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${normMode ? `${selectedWidth}-bit Normalized Delay (x RCA)` : `${selectedWidth}-bit Delay (ns)`}</text>
+      <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit ${ax.xLabel}</text>
+      <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${selectedWidth}-bit ${ax.yLabel}</text>
     </svg>
   `;
 
-  const selPt = pts.find(p => p.slug === selectedBubbleSlug) || paretoPts[0];
+  const selPt = allPts.find(p => p.slug === selectedBubbleSlug) || paretoPts[0];
   renderBubbleDetail(selPt);
 }
+
+document.querySelectorAll('.axis-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.axis-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedAxis = btn.dataset.axis;
+    renderParetoChart();
+  });
+});
+
+document.getElementById('pareto-focus-btn').addEventListener('click', (e) => {
+  focusCluster = !focusCluster;
+  e.target.classList.toggle('active', focusCluster);
+  renderParetoChart();
+});
 
 document.querySelectorAll('.dataset-btn').forEach(btn => {
   btn.addEventListener('click', () => {
