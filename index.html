@@ -107,6 +107,26 @@
             <button class="btn-mini" onclick="setParetoZoom(1.0)">Reset</button>
           </div>
         </div>
+        <div class="toolbar" style="justify-content:space-between;">
+          <div style="display:flex; flex-wrap:wrap; gap:6px; align-items:center;">
+            <span style="font-weight:800; font-size:0.82rem;">X Scale:</span>
+            <button class="filter-btn x-scale-btn active" data-scale="linear">Linear</button>
+            <button class="filter-btn x-scale-btn" data-scale="log">Log</button>
+            <span style="font-weight:800; font-size:0.82rem; margin-left:8px;">Y Scale:</span>
+            <button class="filter-btn y-scale-btn active" data-scale="linear">Linear</button>
+            <button class="filter-btn y-scale-btn" data-scale="log">Log</button>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <label style="font-size:0.8rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+              X Max (<span id="x-cap-lbl" class="mono">100%</span>)
+              <input id="x-cap-slider" type="range" min="15" max="100" value="100" style="width:110px;">
+            </label>
+            <label style="font-size:0.8rem; font-weight:700; display:flex; align-items:center; gap:6px;">
+              Y Max (<span id="y-cap-lbl" class="mono">100%</span>)
+              <input id="y-cap-slider" type="range" min="15" max="100" value="100" style="width:110px;">
+            </label>
+          </div>
+        </div>
         <div id="pareto-chart" class="chart-box" style="overflow:auto;"></div>
         <div class="chart-legend">
           <span><span class="legend-dot" style="background: var(--yellow);"></span>Pareto-Optimal (New Idea)</span>

@@ -8,6 +8,10 @@ let jointWeights = { nov: 50, delay: 25, area: 15, power: 10 };
 let selectedWidth = 256;
 let selectedDataset = 'ideas';
 let selectedAxis = 'area_delay';
+let xScaleType = 'linear';
+let yScaleType = 'linear';
+let xCapPct = 100;
+let yCapPct = 100;
 let focusCluster = false;
 let paretoOnly = false;
 let paretoZoom = 1.0;
@@ -441,16 +445,35 @@ function renderParetoChart() {
   }
 
   const w = 780, h = 360, padL = 68, padR = 32, padT = 24, padB = 46;
-  const xVals = pts.map(p => p.xVal), yVals = pts.map(p => p.yVal);
-  const minX = Math.min(...xVals) * 0.92, maxX = Math.max(...xVals) * 1.05;
-  const minY = Math.min(...yVals) * 0.90, maxY = Math.max(...yVals) * 1.06;
-  const sx = x => padL + ((x - minX) / Math.max(1e-9, maxX - minX)) * (w - padL - padR);
-  const sy = y => h - padB - ((y - minY) / Math.max(1e-9, maxY - minY)) * (h - padT - padB);
+  const tx = v => xScaleType === 'log' ? Math.log10(Math.max(1e-6, v)) : v;
+  const ty = v => yScaleType === 'log' ? Math.log10(Math.max(1e-6, v)) : v;
+  const invX = v => xScaleType === 'log' ? Math.pow(10, v) : v;
+  const invY = v => yScaleType === 'log' ? Math.pow(10, v) : v;
+
+  const rawXs = pts.map(p => tx(p.xVal)), rawYs = pts.map(p => ty(p.yVal));
+  const dataMinX = Math.min(...rawXs), dataMaxX = Math.max(...rawXs);
+  const dataMinY = Math.min(...rawYs), dataMaxY = Math.max(...rawYs);
+
+  const minX = dataMinX - Math.abs(dataMaxX - dataMinX) * 0.05;
+  const spanX = Math.max(1e-6, dataMaxX - minX);
+  const maxX = minX + spanX * (xCapPct / 100) * 1.05;
+
+  const minY = dataMinY - Math.abs(dataMaxY - dataMinY) * 0.06;
+  const spanY = Math.max(1e-6, dataMaxY - minY);
+  const maxY = minY + spanY * (yCapPct / 100) * 1.06;
+
+  const sx = x => padL + ((tx(x) - minX) / Math.max(1e-9, maxX - minX)) * (w - padL - padR);
+  const sy = y => h - padB - ((ty(y) - minY) / Math.max(1e-9, maxY - minY)) * (h - padT - padB);
 
   const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.xVal - b.xVal);
   const poly = paretoPts.map(p => `${sx(p.xVal).toFixed(1)},${sy(p.yVal).toFixed(1)}`).join(' ');
 
-  const placedBoxes = pts.map(p => {
+  const visiblePts = pts.filter(p => {
+    const cx = sx(p.xVal), cy = sy(p.yVal);
+    return cx >= padL - 2 && cx <= w - padR + 2 && cy >= padT - 2 && cy <= h - padB + 2;
+  });
+
+  const placedBoxes = visiblePts.map(p => {
     const cx = sx(p.xVal), cy = sy(p.yVal);
     return { x0: cx - 7, y0: cy - 7, x1: cx + 7, y1: cy + 7 };
   });
@@ -462,7 +485,7 @@ function renderParetoChart() {
   ];
 
   const labelsSvg = [];
-  const circles = pts.map(p => {
+  const circles = visiblePts.map(p => {
     const cx = sx(p.xVal), cy = sy(p.yVal);
     const isSel = p.slug === selectedBubbleSlug;
     let fill = '#22bfd7';
@@ -518,24 +541,35 @@ function renderParetoChart() {
   };
 
   const xTicks = [0, 0.5, 1.0].map(f => {
-    const val = minX + (maxX - minX) * f;
-    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.xUnit)}</text>`;
+    const tVal = minX + (maxX - minX) * f;
+    const val = invX(tVal);
+    const px = padL + f * (w - padL - padR);
+    return `<text x="${px.toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.xUnit)}</text>`;
   }).join('');
   const yTicks = [0, 0.5, 1.0].map(f => {
-    const val = minY + (maxY - minY) * f;
-    return `<text x="${padL - 8}" y="${(sy(val) + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.yUnit)}</text>`;
+    const tVal = minY + (maxY - minY) * f;
+    const val = invY(tVal);
+    const py = h - padB - f * (h - padT - padB);
+    return `<text x="${padL - 8}" y="${(py + 4).toFixed(1)}" text-anchor="end" font-size="11" font-family="JetBrains Mono">${fmtTick(val, ax.yUnit)}</text>`;
   }).join('');
 
   document.getElementById('pareto-chart').innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" style="width:${Math.round(w * paretoZoom)}px; height:auto;">
+      <defs>
+        <clipPath id="plot-clip">
+          <rect x="${padL}" y="${padT}" width="${w - padL - padR}" height="${h - padT - padB}"/>
+        </clipPath>
+      </defs>
       <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
-      <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
+      <g clip-path="url(#plot-clip)">
+        <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
+        ${circles}
+      </g>
       ${xTicks}${yTicks}
-      ${circles}
       ${labelsSvg.join('')}
-      <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit ${ax.xLabel}</text>
-      <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${selectedWidth}-bit ${ax.yLabel}</text>
+      <text x="${(w + padL - padR) / 2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit ${ax.xLabel}${xScaleType === 'log' ? ' (log)' : ''}</text>
+      <text x="16" y="${(h - padB + padT) / 2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT) / 2})">${selectedWidth}-bit ${ax.yLabel}${yScaleType === 'log' ? ' (log)' : ''}</text>
     </svg>
   `;
 
@@ -550,6 +584,36 @@ document.querySelectorAll('.axis-btn').forEach(btn => {
     selectedAxis = btn.dataset.axis;
     renderParetoChart();
   });
+});
+
+document.querySelectorAll('.x-scale-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.x-scale-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    xScaleType = btn.dataset.scale;
+    renderParetoChart();
+  });
+});
+
+document.querySelectorAll('.y-scale-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.y-scale-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    yScaleType = btn.dataset.scale;
+    renderParetoChart();
+  });
+});
+
+document.getElementById('x-cap-slider').addEventListener('input', (e) => {
+  xCapPct = Number(e.target.value);
+  document.getElementById('x-cap-lbl').textContent = `${xCapPct}%`;
+  renderParetoChart();
+});
+
+document.getElementById('y-cap-slider').addEventListener('input', (e) => {
+  yCapPct = Number(e.target.value);
+  document.getElementById('y-cap-lbl').textContent = `${yCapPct}%`;
+  renderParetoChart();
 });
 
 document.getElementById('pareto-only-btn').addEventListener('click', (e) => {
