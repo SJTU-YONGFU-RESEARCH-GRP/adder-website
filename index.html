@@ -36,8 +36,8 @@
   <nav class="tabs-bar" aria-label="Primary Navigation">
     <div class="tabs-inner">
       <button class="tab-btn active" data-tab="database">Classic Design</button>
-      <button class="tab-btn" data-tab="benchmarking">OpenSTA &amp; Pareto</button>
       <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
+      <button class="tab-btn" data-tab="benchmarking">Pareto Analysis</button>
       <button class="tab-btn" data-tab="ideas">100 Discovered Ideas</button>
     </div>
   </nav>
@@ -68,27 +68,37 @@
       </div>
     </section>
 
-    <!-- BENCHMARKING & PARETO -->
+    <!-- PARETO ANALYSIS -->
     <section id="tab-benchmarking" class="tab-panel">
       <div class="section-card">
-        <h2>Nangate45 OpenSTA: Area vs. Delay &amp; Dynamic Pareto Frontier</h2>
+        <h2>Pareto Analysis: Area vs. Delay</h2>
         <p class="section-sub">
-          Select a bit width to inspect matched-flow OpenSTA 3.1.0 results across 69 verified ideas. Click any bubble to view its architecture &amp; PPA details.
+          Switch between <strong>Discovered Ideas</strong> (Nangate45 OpenSTA, 8–256b), <strong>Classic Designs</strong> (4–1024b), or <strong>Combined (Log Area)</strong>. Click any bubble to inspect its full details.
         </p>
         <div class="toolbar">
+          <span style="font-weight:800; font-size:0.86rem;">Dataset:</span>
+          <button class="filter-btn dataset-btn active" data-dataset="ideas">Discovered Ideas (69)</button>
+          <button class="filter-btn dataset-btn" data-dataset="classical">Classic Designs (29)</button>
+          <button class="filter-btn dataset-btn" data-dataset="both">Combined (Log Area)</button>
+        </div>
+        <div class="toolbar">
           <span style="font-weight:800; font-size:0.86rem;">Bit Width:</span>
+          <button class="filter-btn width-btn" data-width="4" style="display:none;">4-bit</button>
           <button class="filter-btn width-btn" data-width="8">8-bit</button>
           <button class="filter-btn width-btn" data-width="16">16-bit</button>
           <button class="filter-btn width-btn" data-width="32">32-bit</button>
           <button class="filter-btn width-btn" data-width="64">64-bit</button>
           <button class="filter-btn width-btn" data-width="128">128-bit</button>
           <button class="filter-btn width-btn active" data-width="256">256-bit</button>
+          <button class="filter-btn width-btn" data-width="512" style="display:none;">512-bit</button>
+          <button class="filter-btn width-btn" data-width="1024" style="display:none;">1024-bit</button>
         </div>
         <div id="pareto-chart" class="chart-box"></div>
         <div class="chart-legend">
           <span><span class="legend-dot" style="background: var(--yellow);"></span>Pareto-Optimal (at selected width)</span>
           <span><span class="legend-dot" style="background: var(--cyan);"></span>Non-Collapsed Policy Adders</span>
           <span><span class="legend-dot" style="background: var(--coral);"></span>ABC Equivalence-Collapsed</span>
+          <span><span class="legend-dot" style="background: var(--purple);"></span>Classic Designs</span>
         </div>
         <div id="bubble-detail" class="champ-card" style="margin-top:16px; display:none;"></div>
       </div>

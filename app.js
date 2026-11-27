@@ -4,6 +4,7 @@ let dbSort = { key: 'freq_512_mhz', asc: false };
 let ideasSort = { key: 'joint_rank', asc: true };
 let ideasFilter = 'all';
 let selectedWidth = 256;
+let selectedDataset = 'ideas';
 let selectedBubbleSlug = 'idea3';
 
 async function init() {
@@ -174,21 +175,44 @@ document.querySelectorAll('#ideas-table th[data-sort]').forEach(th => {
   });
 });
 
-function getPointsForWidth(width) {
+function getPointsForWidth(width, dataset = selectedDataset) {
   const pts = [];
-  for (const r of DATA.ideas) {
-    const pt = (r.sta_scaling || []).find(s => s.width === width);
-    if (pt) {
-      pts.push({
-        idea: r,
-        slug: r.slug,
-        area: pt.area,
-        delay: pt.delay,
-        fmax: pt.fmax,
-        power: pt.power,
-        adp: pt.area * pt.delay,
-        pdp: pt.power * pt.delay,
-      });
+  if (dataset === 'ideas' || dataset === 'both') {
+    for (const r of DATA.ideas) {
+      const pt = (r.sta_scaling || []).find(s => s.width === width);
+      if (pt) {
+        pts.push({
+          entity: r,
+          kind: 'discovered',
+          slug: r.slug,
+          name: r.name,
+          area: pt.area,
+          delay: pt.delay,
+          fmax: pt.fmax,
+          power: pt.power,
+          adp: pt.area * pt.delay,
+          pdp: pt.power * pt.delay,
+        });
+      }
+    }
+  }
+  if (dataset === 'classical' || dataset === 'both') {
+    for (const c of DATA.classical) {
+      const pt = (c.scaling || []).find(s => s.width === width);
+      if (pt) {
+        pts.push({
+          entity: c,
+          kind: 'classical',
+          slug: c.slug,
+          name: `${c.name} Adder`,
+          area: pt.area,
+          delay: pt.delay,
+          fmax: pt.freq,
+          power: pt.power,
+          adp: pt.area * pt.delay,
+          pdp: pt.power * pt.delay,
+        });
+      }
     }
   }
   for (const p of pts) {
@@ -212,23 +236,33 @@ function renderBubbleDetail(pt) {
     box.style.display = 'none';
     return;
   }
-  const r = pt.idea;
-  const isAdded = selectedCompare.includes(r.slug);
+  const e = pt.entity;
+  const isAdded = selectedCompare.includes(pt.slug);
+  const pills = pt.kind === 'classical'
+    ? `<span class="pill" style="background:var(--purple-soft);">Classic Design</span>
+       ${pt.pareto ? `<span class="pill pill-pareto">Pareto-Optimal @ ${selectedWidth}b</span>` : ''}`
+    : `<span class="pill ${e.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${e.decision} (${e.nov_score.toFixed(3)}/5)</span>
+       <span class="pill">Joint #${e.joint_rank} (${e.joint_score.toFixed(4)})</span>
+       ${pt.pareto ? `<span class="pill pill-pareto">Pareto-Optimal @ ${selectedWidth}b</span>` : ''}
+       ${e.collapsed_cla ? '<span class="pill pill-collapsed">ABC Equivalence-Collapsed</span>' : '<span class="pill" style="background:var(--cyan-soft);">Non-Collapsed</span>'}`;
+
+  const dossierLink = pt.kind === 'classical'
+    ? `<a class="btn-mini" style="text-decoration:none; color:inherit; background:var(--yellow);" href="design.html?slug=${pt.slug}">Open Classic Dossier &rarr;</a>`
+    : '';
+
   box.style.display = 'flex';
   box.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
       <div>
-        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
-          <span class="pill ${r.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${r.decision} (${r.nov_score.toFixed(3)}/5)</span>
-          <span class="pill">Joint #${r.joint_rank} (${r.joint_score.toFixed(4)})</span>
-          ${pt.pareto ? `<span class="pill pill-pareto">Pareto-Optimal @ ${selectedWidth}b</span>` : ''}
-          ${r.collapsed_cla ? '<span class="pill pill-collapsed">ABC Equivalence-Collapsed</span>' : '<span class="pill" style="background:var(--cyan-soft);">Non-Collapsed</span>'}
-        </div>
-        <h3 style="margin:0; font-size:1.1rem;">${r.slug.toUpperCase()}: ${r.name}</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;">${pills}</div>
+        <h3 style="margin:0; font-size:1.1rem;">${pt.kind === 'classical' ? pt.name : `${pt.slug.toUpperCase()}: ${pt.name}`}</h3>
       </div>
-      <button class="btn-mini ${isAdded ? 'added' : ''}" onclick="toggleCompare('${r.slug}'); renderBubbleDetail(getPointsForWidth(selectedWidth).find(p => p.slug === '${r.slug}'));">
-        ${isAdded ? 'Added to Compare' : '+ Add to Compare'}
-      </button>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        ${dossierLink}
+        <button class="btn-mini ${isAdded ? 'added' : ''}" onclick="toggleCompare('${pt.slug}'); renderBubbleDetail(getPointsForWidth(selectedWidth).find(p => p.slug === '${pt.slug}'));">
+          ${isAdded ? 'Added to Compare' : '+ Add to Compare'}
+        </button>
+      </div>
     </div>
     <div class="mono" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; font-size:0.84rem; background:var(--cream); border:1.5px solid var(--ink); border-radius:8px; padding:12px;">
       <div><strong>Area (${selectedWidth}b):</strong><br>${pt.area.toFixed(2)} &mu;m&sup2;</div>
@@ -244,11 +278,17 @@ function renderBubbleDetail(pt) {
 function renderParetoChart() {
   const pts = getPointsForWidth(selectedWidth);
   if (!pts.length) return;
+  const useLogX = selectedDataset === 'both';
   const w = 780, h = 360, padL = 62, padR = 32, padT = 24, padB = 46;
-  const areas = pts.map(p => p.area), delays = pts.map(p => p.delay);
-  const minA = Math.min(...areas) * 0.96, maxA = Math.max(...areas) * 1.04;
+  const xVals = pts.map(p => useLogX ? Math.log10(Math.max(1, p.area)) : p.area);
+  const delays = pts.map(p => p.delay);
+  const minX = Math.min(...xVals) * (useLogX ? 0.96 : 0.96);
+  const maxX = Math.max(...xVals) * (useLogX ? 1.04 : 1.04);
   const minD = Math.min(...delays) * 0.90, maxD = Math.max(...delays) * 1.06;
-  const sx = a => padL + ((a - minA) / Math.max(1e-6, maxA - minA)) * (w - padL - padR);
+  const sx = a => {
+    const xv = useLogX ? Math.log10(Math.max(1, a)) : a;
+    return padL + ((xv - minX) / Math.max(1e-6, maxX - minX)) * (w - padL - padR);
+  };
   const sy = d => h - padB - ((d - minD) / Math.max(1e-6, maxD - minD)) * (h - padT - padB);
 
   const paretoPts = pts.filter(p => p.pareto).sort((a, b) => a.area - b.area);
@@ -257,16 +297,23 @@ function renderParetoChart() {
   const circles = pts.map(p => {
     const cx = sx(p.area), cy = sy(p.delay);
     const isSel = p.slug === selectedBubbleSlug;
-    const fill = p.pareto ? '#ffc83e' : (p.idea.collapsed_cla ? '#f38469' : '#22bfd7');
+    let fill = '#22bfd7';
+    if (p.pareto) fill = '#ffc83e';
+    else if (p.kind === 'classical') fill = '#8275e8';
+    else if (p.entity.collapsed_cla) fill = '#f38469';
     const rad = isSel ? 9 : (p.pareto ? 7 : 5);
     const strokeW = isSel ? 3 : 1.5;
-    const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${p.slug}</text>` : '';
-    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${p.slug}: Area=${p.area} um2, Delay=${p.delay} ns (Click for details)</title></circle>${label}`;
+    const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
+    const label = (p.pareto || isSel) ? `<text x="${cx + 10}" y="${cy + 4}" font-size="11" font-weight="800" font-family="JetBrains Mono">${labelText}</text>` : '';
+    return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area} um2, Delay=${p.delay} ns (Click for details)</title></circle>${label}`;
   }).join('');
 
   const xTicks = [0, 0.5, 1.0].map(f => {
-    const val = minA + (maxA - minA) * f;
-    return `<text x="${sx(val).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${val.toFixed(0)}</text>`;
+    const xv = minX + (maxX - minX) * f;
+    const rawVal = useLogX ? Math.pow(10, xv) : xv;
+    const px = padL + f * (w - padL - padR);
+    const lbl = rawVal >= 10000 ? `${(rawVal/1000).toFixed(0)}k` : rawVal.toFixed(0);
+    return `<text x="${px.toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="11" font-family="JetBrains Mono">${lbl}</text>`;
   }).join('');
   const yTicks = [0, 0.5, 1.0].map(f => {
     const val = minD + (maxD - minD) * f;
@@ -280,7 +327,7 @@ function renderParetoChart() {
       <polyline points="${poly}" fill="none" stroke="#151b20" stroke-width="2" stroke-dasharray="5,4"/>
       ${xTicks}${yTicks}
       ${circles}
-      <text x="${(w + padL - padR)/2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit Area (&mu;m&sup2;)</text>
+      <text x="${(w + padL - padR)/2}" y="${h - 8}" text-anchor="middle" font-size="12" font-weight="700">${selectedWidth}-bit Area (&mu;m&sup2;${useLogX ? ', log scale' : ''})</text>
       <text x="16" y="${(h - padB + padT)/2}" text-anchor="middle" font-size="12" font-weight="700" transform="rotate(-90 16 ${(h - padB + padT)/2})">${selectedWidth}-bit Delay (ns)</text>
     </svg>
   `;
@@ -288,6 +335,26 @@ function renderParetoChart() {
   const selPt = pts.find(p => p.slug === selectedBubbleSlug) || paretoPts[0];
   renderBubbleDetail(selPt);
 }
+
+document.querySelectorAll('.dataset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.dataset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedDataset = btn.dataset.dataset;
+    const onlyClassical = selectedDataset === 'classical';
+    document.querySelectorAll('.width-btn').forEach(wb => {
+      const w = Number(wb.dataset.width);
+      if ([4, 512, 1024].includes(w)) {
+        wb.style.display = onlyClassical ? '' : 'none';
+      }
+    });
+    if (!onlyClassical && [4, 512, 1024].includes(selectedWidth)) {
+      selectedWidth = 256;
+      document.querySelectorAll('.width-btn').forEach(wb => wb.classList.toggle('active', Number(wb.dataset.width) === 256));
+    }
+    renderParetoChart();
+  });
+});
 
 document.querySelectorAll('.width-btn').forEach(btn => {
   btn.addEventListener('click', () => {
