@@ -1608,10 +1608,10 @@
       "slug": "db_error_correcting",
       "name": "Error Correcting",
       "kind": "classical",
-      "area_512": null,
-      "freq_512_mhz": null,
-      "power_512_mw": null,
-      "delay_512_ns": null,
+      "area_512": 7453.32,
+      "freq_512_mhz": 50.36,
+      "power_512_mw": 2.34,
+      "delay_512_ns": 19.8585,
       "overview": "The `error_correcting_adder` is a parameterized Verilog module implementing an error-correcting adder using Triple Modular Redundancy (TMR). It uses three identical adders computing the same operation in parallel, then applies majority voting to detect and correct single-bit errors. This provides fault tolerance for critical applications where reliability is paramount.",
       "characteristics": [
         "**Logic Depth**: Same as single adder (all compute in parallel)",
@@ -1630,7 +1630,64 @@
         "**Industrial control**: Safety-critical automation"
       ],
       "mermaid": "flowchart LR\n  A[A operand] --> ADD[Adder core]\n  B[B operand] --> ADD\n  Cin[Cin] --> ADD\n\n  ADD --> CHK[Error detect and correct logic]\n  ADD --> RAW[Raw sum path]\n  CHK --> CORR[Corrected and validated sum]\n  CORR --> S[Sum bus]\n  CHK --> ERR[Error flag]\n  CHK --> Cout[Cout]",
-      "scaling": [],
+      "scaling": [
+        {
+          "width": 8,
+          "area": 100.81,
+          "delay": 0.5931,
+          "freq": 1686.06,
+          "power": 0.0343,
+          "cells": -1
+        },
+        {
+          "width": 16,
+          "area": 236.21,
+          "delay": 0.9106,
+          "freq": 1098.18,
+          "power": 0.0768,
+          "cells": -1
+        },
+        {
+          "width": 32,
+          "area": 468.69,
+          "delay": 1.5666,
+          "freq": 638.33,
+          "power": 0.152,
+          "cells": -1
+        },
+        {
+          "width": 64,
+          "area": 948.02,
+          "delay": 2.8802,
+          "freq": 347.2,
+          "power": 0.303,
+          "cells": -1
+        },
+        {
+          "width": 128,
+          "area": 1865.46,
+          "delay": 5.2427,
+          "freq": 190.74,
+          "power": 0.595,
+          "cells": -1
+        },
+        {
+          "width": 256,
+          "area": 3699.79,
+          "delay": 10.1091,
+          "freq": 98.92,
+          "power": 1.19,
+          "cells": -1
+        },
+        {
+          "width": 512,
+          "area": 7453.32,
+          "delay": 19.8585,
+          "freq": 50.36,
+          "power": 2.34,
+          "cells": -1
+        }
+      ],
       "references": [
         {
           "id": "R83",
@@ -1661,7 +1718,7 @@
         "fault-model assumptions should be explicit in evaluation,",
         "fault-injection testing is essential for confidence."
       ],
-      "has_sta": false
+      "has_sta": true
     },
     {
       "slug": "db_han_carlson",
@@ -2819,10 +2876,10 @@
       "slug": "db_serial",
       "name": "Serial",
       "kind": "classical",
-      "area_512": null,
-      "freq_512_mhz": null,
-      "power_512_mw": null,
-      "delay_512_ns": null,
+      "area_512": 11973.72,
+      "freq_512_mhz": 11.17,
+      "power_512_mw": 12.0,
+      "delay_512_ns": 89.5045,
       "overview": "The `serial_adder` is a parameterized Verilog module implementing a serial (bit-serial) adder that processes operands one bit at a time, starting from the least significant bit (LSB). This design trades speed for minimal hardware resources, requiring DATA_WIDTH clock cycles to complete but using only one full adder and shift registers. It is ideal for area-constrained designs, low-speed applications, or when operands arrive serially.",
       "characteristics": [
         "**Logic Depth**: O(1) per bit (single full adder)",
@@ -2841,7 +2898,64 @@
         "Prototyping and resource-limited designs"
       ],
       "mermaid": "flowchart LR\n  A[A bit stream] --> FA[One-bit full-adder core]\n  B[B bit stream] --> FA\n  CREG[Carry register] --> FA\n\n  FA --> SUM[Sum bit stream]\n  FA --> CNEXT[Next carry]\n  CNEXT --> CREG",
-      "scaling": [],
+      "scaling": [
+        {
+          "width": 8,
+          "area": 245.52,
+          "delay": 0.4387,
+          "freq": 2279.46,
+          "power": 0.0651,
+          "cells": -1
+        },
+        {
+          "width": 16,
+          "area": 441.29,
+          "delay": 0.6749,
+          "freq": 1481.7,
+          "power": 0.119,
+          "cells": -1
+        },
+        {
+          "width": 32,
+          "area": 822.21,
+          "delay": 1.6686,
+          "freq": 599.3,
+          "power": 0.242,
+          "cells": -1
+        },
+        {
+          "width": 64,
+          "area": 1572.06,
+          "delay": 2.5435,
+          "freq": 393.16,
+          "power": 0.49,
+          "cells": -1
+        },
+        {
+          "width": 128,
+          "area": 3063.52,
+          "delay": 7.3699,
+          "freq": 135.69,
+          "power": 1.17,
+          "cells": -1
+        },
+        {
+          "width": 256,
+          "area": 6036.34,
+          "delay": 24.5943,
+          "freq": 40.66,
+          "power": 3.33,
+          "cells": -1
+        },
+        {
+          "width": 512,
+          "area": 11973.72,
+          "delay": 89.5045,
+          "freq": 11.17,
+          "power": 12.0,
+          "cells": -1
+        }
+      ],
       "references": [
         {
           "id": "R62",
@@ -2872,7 +2986,7 @@
         "serialization saves hardware but increases operation time,",
         "good fit when arithmetic bandwidth demand is modest."
       ],
-      "has_sta": false
+      "has_sta": true
     },
     {
       "slug": "db_sparse_kogge_stone",
