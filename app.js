@@ -15,6 +15,19 @@ async function init() {
   renderTaxonomy();
   populateCompareSelects();
   updateCompareBadge();
+  fetchGitHubStars();
+}
+
+async function fetchGitHubStars() {
+  try {
+    const res = await fetch('https://api.github.com/repos/SJTU-YONGFU-RESEARCH-GRP/adder-website');
+    if (!res.ok) return;
+    const info = await res.json();
+    const el = document.getElementById('github-star-count');
+    if (el && typeof info.stargazers_count === 'number') {
+      el.textContent = String(info.stargazers_count);
+    }
+  } catch (_) {}
 }
 
 function switchTab(tabName) {
