@@ -61,7 +61,6 @@ function renderChampions() {
         </div>
         <div style="display:flex; gap:8px;">
           <button class="btn-mini" onclick="toggleCompare('${c.slug}')">+ Compare</button>
-          <a class="btn-mini" style="text-decoration:none; color:inherit; background:var(--paper-deep);" href="https://github.com/SJTU-YONGFU-RESEARCH-GRP/adder-lab/blob/main/experiments/idea-adders/${c.slug}/IDEA_${c.idea_id}.md" target="_blank" rel="noopener noreferrer">Read Spec</a>
         </div>
       </div>
     `;
