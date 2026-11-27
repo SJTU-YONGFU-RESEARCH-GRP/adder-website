@@ -485,6 +485,79 @@ tr:hover td { background: var(--yellow-soft); }
   min-width: 220px;
 }
 
+/* RTL Code Viewer */
+.rtl-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.rtl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.rtl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.rtl-viewer {
+  background: var(--ink);
+  color: #f8f5eb;
+  border: var(--border-ink);
+  border-radius: var(--radius-sm);
+  overflow: auto;
+  padding: 12px 0;
+}
+
+.rtl-viewer.collapsed {
+  max-height: 520px;
+}
+
+.rtl-pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.rtl-line {
+  display: flex;
+  padding: 0 14px;
+}
+
+.rtl-line:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.rtl-ln {
+  user-select: none;
+  min-width: 42px;
+  padding-right: 14px;
+  text-align: right;
+  color: rgba(248, 245, 235, 0.42);
+  flex-shrink: 0;
+}
+
+.rtl-code {
+  white-space: pre;
+}
+
+.rtl-tok-kw { color: #ffc83e; font-weight: 700; }
+.rtl-tok-comment { color: #8da2b5; font-style: italic; }
+.rtl-tok-num { color: #22bfd7; }
+.rtl-tok-str { color: #b7df69; }
+.rtl-tok-pre { color: #f38469; font-weight: 700; }
+
 @media (max-width: 640px) {
   .header-inner { flex-wrap: wrap; padding: 10px 14px; }
   .brand-meta { display: none; }

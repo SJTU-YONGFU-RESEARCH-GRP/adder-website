@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New Idea Dossier — ADDER</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="rtl-viewer.js"></script>
   <style>
     .plots-grid {
       display: grid;
@@ -204,7 +205,13 @@
             </table>
           </div>
         </div>
+        <div class="section-card" id="rtl-section">
+          <h2>RTL Source Code (Verilog)</h2>
+          <p class="section-sub" style="margin-bottom:0;">Loading RTL source…</p>
+        </div>
       `;
+
+      renderRtlSection('rtl-section', d.slug);
     }
 
     loadIdea();

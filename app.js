@@ -481,11 +481,76 @@ function renderParetoChart() {
   const candidateOffsets = [
     [10, 4], [10, -12], [10, 18], [-10, -12], [-10, 18], [-10, 4],
     [16, -26], [16, 32], [-16, -26], [-16, 32],
-    [24, -40], [24, 46], [-24, -40], [-24, 46],
-    [36, 4], [-36, 4], [10, -54], [10, 60]
+    [26, -40], [26, 46], [-26, -40], [-26, 46],
+    [42, 4], [-42, 4], [48, -14], [48, 20], [-48, -14], [-48, 20],
+    [60, -30], [60, 36], [80, 0], [80, -20], [80, 22], [10, 58], [10, -56]
   ];
 
+  // Group co-located Pareto / selected points within 5px so overlapping labels merge cleanly
+  const labeledGroups = [];
+  for (const p of visiblePts) {
+    if (!p.pareto && p.slug !== selectedBubbleSlug) continue;
+    const cx = sx(p.xVal), cy = sy(p.yVal);
+    const shortName = p.kind === 'classical' ? p.entity.name : p.slug;
+    const grp = labeledGroups.find(g => Math.abs(g.cx - cx) <= 5 && Math.abs(g.cy - cy) <= 5);
+    if (grp) {
+      if (!grp.names.includes(shortName)) grp.names.push(shortName);
+      grp.isSel = grp.isSel || (p.slug === selectedBubbleSlug);
+    } else {
+      labeledGroups.push({ cx, cy, names: [shortName], isSel: p.slug === selectedBubbleSlug });
+    }
+  }
+
   const labelsSvg = [];
+  for (const g of labeledGroups) {
+    const labelText = g.names.join(', ');
+    const tw = labelText.length * 6.8 + 8;
+    const th = 15;
+    let chosen = null;
+    for (const [dx, dy] of candidateOffsets) {
+      const isLeft = dx < 0;
+      const lx = g.cx + dx;
+      const ly = g.cy + dy;
+      const x0 = isLeft ? lx - tw : lx;
+      const x1 = isLeft ? lx : lx + tw;
+      const y0 = ly - th + 2;
+      const y1 = ly + 3;
+      if (x0 < padL || x1 > w - 4 || y0 < 6 || y1 > h - padB) continue;
+      const overlaps = placedBoxes.some(b => !(x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1));
+      if (!overlaps) {
+        chosen = { dx, dy, anchor: isLeft ? 'end' : 'start', box: { x0, y0, x1, y1 } };
+        break;
+      }
+    }
+    if (!chosen) {
+      // Dense 2D scan guarantee for zero overlap
+      outer: for (let r = 18; r <= 180; r += 16) {
+        for (const angle of [0, 0.45, -0.45, 0.9, -0.9, 1.4, -1.4, Math.PI, Math.PI - 0.5, Math.PI + 0.5]) {
+          const dx = Math.cos(angle) * r;
+          const dy = Math.sin(angle) * r;
+          const isLeft = dx < 0;
+          const lx = g.cx + dx, ly = g.cy + dy;
+          const x0 = isLeft ? lx - tw : lx, x1 = isLeft ? lx : lx + tw;
+          const y0 = ly - th + 2, y1 = ly + 3;
+          if (x0 < padL || x1 > w - 4 || y0 < 6 || y1 > h - padB) continue;
+          const overlaps = placedBoxes.some(b => !(x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1));
+          if (!overlaps) {
+            chosen = { dx, dy, anchor: isLeft ? 'end' : 'start', box: { x0, y0, x1, y1 } };
+            break outer;
+          }
+        }
+      }
+    }
+    if (chosen) {
+      placedBoxes.push(chosen.box);
+      const lx = g.cx + chosen.dx, ly = g.cy + chosen.dy;
+      if (Math.hypot(chosen.dx, chosen.dy) > 12) {
+        labelsSvg.push(`<line x1="${g.cx.toFixed(1)}" y1="${g.cy.toFixed(1)}" x2="${lx.toFixed(1)}" y2="${(ly - 3).toFixed(1)}" stroke="rgba(21,27,32,0.45)" stroke-width="1"/>`);
+      }
+      labelsSvg.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${chosen.anchor}" font-size="11" font-weight="800" font-family="JetBrains Mono" stroke="#fffaf0" stroke-width="3.5" paint-order="stroke">${labelText}</text>`);
+    }
+  }
+
   const circles = visiblePts.map(p => {
     const cx = sx(p.xVal), cy = sy(p.yVal);
     const isSel = p.slug === selectedBubbleSlug;
@@ -496,40 +561,6 @@ function renderParetoChart() {
     const rad = isSel ? 9 : (p.pareto ? 7 : 5);
     const strokeW = isSel ? 3 : 1.5;
     const labelText = p.kind === 'classical' ? p.entity.name : p.slug;
-
-    if (p.pareto || isSel) {
-      const tw = labelText.length * 7.0 + 8;
-      const th = 15;
-      let chosen = null;
-      for (const [dx, dy] of candidateOffsets) {
-        const isLeft = dx < 0;
-        const lx = cx + dx;
-        const ly = cy + dy;
-        const x0 = isLeft ? lx - tw : lx;
-        const x1 = isLeft ? lx : lx + tw;
-        const y0 = ly - th + 2;
-        const y1 = ly + 3;
-        if (x0 < padL || x1 > w - 4 || y0 < 6 || y1 > h - padB) continue;
-        const overlaps = placedBoxes.some(b => !(x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1));
-        if (!overlaps) {
-          chosen = { dx, dy, anchor: isLeft ? 'end' : 'start', box: { x0, y0, x1, y1 } };
-          break;
-        }
-      }
-      if (!chosen) {
-        // Fallback: place cleanly above/below with guaranteed vertical separation
-        const dy = -14 - (labelsSvg.length * 16) % 64;
-        const lx = Math.min(w - tw - 6, Math.max(padL + 4, cx + 10));
-        const ly = Math.max(20, Math.min(h - padB - 6, cy + dy));
-        chosen = { dx: lx - cx, dy: ly - cy, anchor: 'start', box: { x0: lx, y0: ly - th + 2, x1: lx + tw, y1: ly + 3 } };
-      }
-      placedBoxes.push(chosen.box);
-      const lx = cx + chosen.dx, ly = cy + chosen.dy;
-      if (Math.hypot(chosen.dx, chosen.dy) > 14) {
-        labelsSvg.push(`<line x1="${cx.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${lx.toFixed(1)}" y2="${(ly - 3).toFixed(1)}" stroke="rgba(21,27,32,0.45)" stroke-width="1"/>`);
-      }
-      labelsSvg.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${chosen.anchor}" font-size="11" font-weight="800" font-family="JetBrains Mono" stroke="#fffaf0" stroke-width="3.5" paint-order="stroke">${labelText}</text>`);
-    }
 
     return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad}" fill="${fill}" stroke="#151b20" stroke-width="${strokeW}" style="cursor:pointer;" onclick="selectBubble('${p.slug}')"><title>${labelText}: Area=${p.area.toFixed(2)} um2, Delay=${p.delay.toFixed(4)} ns, Power=${p.power.toFixed(4)} mW, PDP=${p.pdp.toFixed(4)} pJ</title></circle>`;
   }).join('');

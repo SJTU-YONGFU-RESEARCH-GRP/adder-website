@@ -6,6 +6,7 @@
   <title>Classic Design — ADDER</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="rtl-viewer.js"></script>
   <style>
     .diagram-toolbar {
       display: flex;
@@ -369,11 +370,18 @@
           </div>
         </div>
 
+        <div class="section-card" id="rtl-section">
+          <h2>RTL Source Code (Verilog)</h2>
+          <p class="section-sub" style="margin-bottom:0;">Loading RTL source…</p>
+        </div>
+
         <div class="section-card">
           <h2>References</h2>
           ${refsHtml}
         </div>
       `;
+
+      renderRtlSection('rtl-section', d.slug);
 
       if (d.mermaid) {
         await mermaid.run({ querySelector: '.mermaid' });
