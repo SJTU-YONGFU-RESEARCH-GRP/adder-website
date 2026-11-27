@@ -696,12 +696,12 @@ function renderPresetChart() {
   const minP = Math.min(...pts.map(p => p.P));
 
   const focus = [
-    { id: 3, label: 'idea3 (CS1)', color: '#22bfd7', w: 2.6 },
-    { id: 23, label: 'idea23', color: '#0d9488', w: 1.8 },
-    { id: 11, label: 'idea11 (CS2)', color: '#ffc83e', w: 2.6 },
-    { id: 68, label: 'idea68', color: '#8275e8', w: 1.8 },
-    { id: 93, label: 'idea93 (CS3)', color: '#b7df69', w: 2.6 },
-    { id: 22, label: 'idea22', color: '#f38469', w: 1.8 },
+    { id: 3, label: 'idea3 (CS1)', color: '#22bfd7', w: 2.8, dash: '' },
+    { id: 23, label: 'idea23', color: '#0d9488', w: 1.8, dash: '5,3' },
+    { id: 11, label: 'idea11 (CS2)', color: '#ffc83e', w: 2.8, dash: '' },
+    { id: 68, label: 'idea68', color: '#8275e8', w: 1.8, dash: '5,3' },
+    { id: 93, label: 'idea93 (CS3)', color: '#b7df69', w: 2.8, dash: '' },
+    { id: 22, label: 'idea22', color: '#f38469', w: 1.8, dash: '5,3' },
   ];
 
   const scores = Object.fromEntries(focus.map(f => [f.id, []]));
@@ -719,41 +719,50 @@ function renderPresetChart() {
     }
   }
 
-  const w = 860, h = 290, padL = 52, padR = 36, padT = 32, padB = 54;
-  const gap = 58, pw = (w - padL - padR - gap) / 2;
+  const w = 900, h = 320, padL = 56, padR = 38, padT = 36, padB = 64;
+  const gap = 80, pw = (w - padL - padR - gap) / 2;
   const xAt = (pIdx, i) => (pIdx === 0 ? padL : padL + pw + gap) + (i / (presets.length - 1)) * pw;
   const yScore = v => h - padB - ((Math.max(0.5, Math.min(1.0, v)) - 0.5) / 0.5) * (h - padT - padB);
-  const maxRank = 45;
-  const yRank = r => padT + ((Math.min(maxRank, r) - 1) / (maxRank - 1)) * (h - padT - padB);
+  const maxRank = pts.length;
+  const yRank = r => padT + ((Math.min(maxRank, r) - 1) / Math.max(1, maxRank - 1)) * (h - padT - padB);
+
+  const gridScore = [0.5, 0.625, 0.75, 0.875, 1.0].map(v =>
+    `<line x1="${padL}" y1="${yScore(v).toFixed(1)}" x2="${padL + pw}" y2="${yScore(v).toFixed(1)}" stroke="#e2dcc8" stroke-width="1" stroke-dasharray="4,3"/>`
+  ).join('');
+  const rankGridVals = [1, 25, 50, 75, maxRank];
+  const gridRank = rankGridVals.map(v =>
+    `<line x1="${padL + pw + gap}" y1="${yRank(v).toFixed(1)}" x2="${padL + pw + gap + pw}" y2="${yRank(v).toFixed(1)}" stroke="#e2dcc8" stroke-width="1" stroke-dasharray="4,3"/>`
+  ).join('');
 
   const linesScore = focus.map(f => {
     const p = scores[f.id].map((v, i) => `${xAt(0, i).toFixed(1)},${yScore(v).toFixed(1)}`).join(' ');
-    const dots = scores[f.id].map((v, i) => `<circle cx="${xAt(0, i).toFixed(1)}" cy="${yScore(v).toFixed(1)}" r="4.5" fill="${f.color}" stroke="#151b20" stroke-width="1.5"/>`).join('');
-    return `<polyline points="${p}" fill="none" stroke="${f.color}" stroke-width="${f.w}"/>${dots}`;
+    const dots = scores[f.id].map((v, i) => `<circle cx="${xAt(0, i).toFixed(1)}" cy="${yScore(v).toFixed(1)}" r="4.8" fill="${f.color}" stroke="#151b20" stroke-width="1.5"/>`).join('');
+    return `<polyline points="${p}" fill="none" stroke="${f.color}" stroke-width="${f.w}" ${f.dash ? `stroke-dasharray="${f.dash}"` : ''}/>${dots}`;
   }).join('');
 
   const linesRank = focus.map(f => {
     const p = ranks[f.id].map((v, i) => `${xAt(1, i).toFixed(1)},${yRank(v).toFixed(1)}`).join(' ');
-    const dots = ranks[f.id].map((v, i) => `<rect x="${(xAt(1, i) - 4).toFixed(1)}" y="${(yRank(v) - 4).toFixed(1)}" width="8" height="8" fill="${f.color}" stroke="#151b20" stroke-width="1.4"/>`).join('');
-    return `<polyline points="${p}" fill="none" stroke="${f.color}" stroke-width="${f.w}"/>${dots}`;
+    const dots = ranks[f.id].map((v, i) => `<rect x="${(xAt(1, i) - 4.2).toFixed(1)}" y="${(yRank(v) - 4.2).toFixed(1)}" width="8.4" height="8.4" fill="${f.color}" stroke="#151b20" stroke-width="1.4"/>`).join('');
+    return `<polyline points="${p}" fill="none" stroke="${f.color}" stroke-width="${f.w}" ${f.dash ? `stroke-dasharray="${f.dash}"` : ''}/>${dots}`;
   }).join('');
 
   const shortNames = ['Pure PPA', 'Balanced', 'Low-Power', 'Pure Nov.'];
-  const xTicks0 = shortNames.map((n, i) => `<text x="${xAt(0, i).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="10.5" font-family="JetBrains Mono">${n}</text>`).join('');
-  const xTicks1 = shortNames.map((n, i) => `<text x="${xAt(1, i).toFixed(1)}" y="${h - padB + 18}" text-anchor="middle" font-size="10.5" font-family="JetBrains Mono">${n}</text>`).join('');
+  const xTicks0 = shortNames.map((n, i) => `<text x="${xAt(0, i).toFixed(1)}" y="${h - padB + 19}" text-anchor="middle" font-size="10.5" font-family="JetBrains Mono">${n}</text>`).join('');
+  const xTicks1 = shortNames.map((n, i) => `<text x="${xAt(1, i).toFixed(1)}" y="${h - padB + 19}" text-anchor="middle" font-size="10.5" font-family="JetBrains Mono">${n}</text>`).join('');
   const yTicks0 = [0.5, 0.75, 1.0].map(v => `<text x="${padL - 8}" y="${(yScore(v) + 4).toFixed(1)}" text-anchor="end" font-size="10.5" font-family="JetBrains Mono">${v.toFixed(2)}</text>`).join('');
-  const yTicks1 = [1, 15, 30, 45].map(v => `<text x="${padL + pw + gap - 8}" y="${(yRank(v) + 4).toFixed(1)}" text-anchor="end" font-size="10.5" font-family="JetBrains Mono">#${v}</text>`).join('');
+  const yTicks1 = [1, 25, 50, 75, maxRank].map(v => `<text x="${padL + pw + gap - 8}" y="${(yRank(v) + 4).toFixed(1)}" text-anchor="end" font-size="10.5" font-family="JetBrains Mono">#${v}</text>`).join('');
 
   const legend = focus.map((f, idx) => {
-    const lx = 70 + idx * 128;
-    return `<rect x="${lx}" y="${h - 18}" width="10" height="10" rx="2" fill="${f.color}" stroke="#151b20" stroke-width="1.2"/><text x="${lx + 14}" y="${h - 9}" font-size="10.5" font-weight="700">${f.label}</text>`;
+    const lx = 68 + idx * 136;
+    return `<line x1="${lx - 14}" y1="${h - 14}" x2="${lx}" y2="${h - 14}" stroke="${f.color}" stroke-width="${f.w}" ${f.dash ? `stroke-dasharray="${f.dash}"` : ''}/><rect x="${lx + 3}" y="${h - 19}" width="10" height="10" rx="2" fill="${f.color}" stroke="#151b20" stroke-width="1.2"/><text x="${lx + 17}" y="${h - 10}" font-size="10.5" font-weight="700">${f.label}</text>`;
   }).join('');
 
   el.innerHTML = `
     <svg viewBox="0 0 ${w} ${h}" style="width:100%; height:auto;">
       <rect width="${w}" height="${h}" rx="10" fill="#fffaf0"/>
-      <text x="${padL + pw / 2}" y="18" text-anchor="middle" font-size="12.5" font-weight="800">${ideasWidth}-bit Joint Score Across Presets</text>
-      <text x="${padL + pw + gap + pw / 2}" y="18" text-anchor="middle" font-size="12.5" font-weight="800">Leaderboard Rank (${pts.length} Ideas)</text>
+      <text x="${padL + pw / 2}" y="20" text-anchor="middle" font-size="13" font-weight="800">${ideasWidth}-bit Joint Score Across Presets</text>
+      <text x="${padL + pw + gap + pw / 2}" y="20" text-anchor="middle" font-size="13" font-weight="800">Leaderboard Rank (${pts.length} Ideas)</text>
+      ${gridScore}${gridRank}
       <line x1="${padL}" y1="${h - padB}" x2="${padL + pw}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL + pw + gap}" y1="${h - padB}" x2="${padL + pw + gap + pw}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
