@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Idea Dossier — ADDER</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .plots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .md-block p { margin: 0 0 10px; }
+    .md-block ul { margin: 0 0 10px; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand-group" href="index.html">
+        <div class="brand-badge">
+          <svg viewBox="0 0 24 24"><path d="M6 2v2H4a2 2 0 0 0-2 2v2h2v2H2v2h2v2H2v2h2a2 2 0 0 0 2 2v2h2v-2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2v-2h-2V6a2 2 0 0 0-2-2h-2V2h-2v2h-2V2h-2v2H8V2H6m2 4h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m1 2v8h6V8H9z"/></svg>
+          <span>ADDER</span>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">New Idea Dossier</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a class="btn-neo btn-yellow" href="index.html#ideas">&larr; Back to Main</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="idea-content">
+      <div class="section-card"><p>Loading idea details…</p></div>
+    </div>
+  </main>
+
+  <script>
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function mdInline(s) {
+      return esc(s)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    function renderMdBlock(text) {
+      if (!text) return '<p>—</p>';
+      const lines = text.split('\n');
+      let html = '';
+      let inList = false;
+      for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) {
+          if (inList) { html += '</ul>'; inList = false; }
+          continue;
+        }
+        if (line.startsWith('- ')) {
+          if (!inList) { html += '<ul>'; inList = true; }
+          html += `<li>${mdInline(line.slice(2))}</li>`;
+        } else {
+          if (inList) { html += '</ul>'; inList = false; }
+          html += `<p>${mdInline(line)}</p>`;
+        }
+      }
+      if (inList) html += '</ul>';
+      return html;
+    }
+
+    function buildScalingPlot(scaling, key, title, unit, color) {
+      if (!scaling || scaling.length < 2) return '<p>No scaling data.</p>';
+      const w = 460, h = 240, padL = 62, padR = 20, padT = 22, padB = 38;
+      const maxVal = Math.max(...scaling.map(s => s[key])) * 1.1 || 1;
+      const sx = i => padL + (i / (scaling.length - 1)) * (w - padL - padR);
+      const sy = v => h - padB - (v / maxVal) * (h - padT - padB);
+
+      const poly = scaling.map((s, i) => `${sx(i).toFixed(1)},${sy(s[key]).toFixed(1)}`).join(' ');
+      const dots = scaling.map((s, i) => `
+        <circle cx="${sx(i).toFixed(1)}" cy="${sy(s[key]).toFixed(1)}" r="4.5" fill="${color}" stroke="#151b20" stroke-width="1.6">
+          <title>${s.width}-bit: ${s[key]} ${unit}</title>
+        </circle>
+        <text x="${sx(i).toFixed(1)}" y="${h - padB + 16}" text-anchor="middle" font-size="10" font-family="JetBrains Mono">${s.width}</text>
+      `).join('');
+
+      const yTicks = [0, 0.5, 1.0].map(f => {
+        const val = maxVal * f;
+        const y = sy(val);
+        const label = val >= 1000 ? `${(val/1000).toFixed(1)}k` : (val < 1 ? val.toFixed(3) : val.toFixed(1));
+        return `
+          <line x1="${padL}" y1="${y.toFixed(1)}" x2="${w - padR}" y2="${y.toFixed(1)}" stroke="rgba(21,27,32,0.12)" stroke-dasharray="3,3"/>
+          <text x="${padL - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="10" font-family="JetBrains Mono">${label}</text>
+        `;
+      }).join('');
+
+      return `
+        <div style="font-weight:800; font-size:0.9rem; margin-bottom:6px;">${title} (${unit})</div>
+        <svg viewBox="0 0 ${w} ${h}" style="width:100%; height:auto;">
+          ${yTicks}
+          <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
+          <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
+          <polyline points="${poly}" fill="none" stroke="${color}" stroke-width="3"/>
+          ${dots}
+          <text x="${(w + padL - padR)/2}" y="${h - 4}" text-anchor="middle" font-size="11" font-weight="700">Bit Width (N)</text>
+        </svg>
+      `;
+    }
+
+    async function loadIdea() {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      const res = await fetch('data.json');
+      const data = await res.json();
+      const d = data.ideas.find(i => i.slug === slug);
+      const root = document.getElementById('idea-content');
+      if (!d) {
+        root.innerHTML = '<div class="section-card"><h2>Idea not found</h2><p><a href="index.html">Return to Main</a></p></div>';
+        return;
+      }
+      document.title = `${d.slug.toUpperCase()}: ${d.name} — ADDER`;
+
+      const sc = d.sta_scaling || [];
+      const topPt = sc.length ? sc[sc.length - 1] : null;
+      const wLabel = topPt ? `${topPt.width}-bit` : '256-bit';
+
+      const scalingRows = sc.map(s => `
+        <tr>
+          <td class="mono">${s.width}-bit</td>
+          <td class="mono">${s.area.toFixed(2)}</td>
+          <td class="mono">${s.delay.toFixed(4)}</td>
+          <td class="mono">${s.fmax.toFixed(2)}</td>
+          <td class="mono">${s.power.toFixed(4)}</td>
+          <td class="mono">${(s.power * s.delay).toFixed(4)}</td>
+        </tr>
+      `).join('');
+
+      const badges = [
+        `<span class="pill ${d.decision === 'novel' ? 'pill-novel' : 'pill-inc'}">${d.decision} (${d.nov_score.toFixed(3)}/5)</span>`,
+        `<span class="pill">Joint #${d.joint_rank} (${d.joint_score.toFixed(4)})</span>`,
+        d.pareto_256 ? '<span class="pill pill-pareto">Pareto-Optimal @ 256b</span>' : '',
+        d.collapsed_cla ? '<span class="pill pill-collapsed">ABC Equivalence-Collapsed</span>' : '<span class="pill" style="background:var(--cyan-soft);">Non-Collapsed</span>'
+      ].filter(Boolean).join(' ');
+
+      root.innerHTML = `
+        <div class="hero" style="padding:24px 28px;">
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px;">${badges}</div>
+          <h1>${esc(d.slug.toUpperCase())}: ${esc(d.name)}</h1>
+          ${d.title_sub ? `<p style="font-family:var(--font-mono); font-size:0.88rem; font-weight:700; color:var(--teal); margin-bottom:12px;">${esc(d.title_sub)}</p>` : ''}
+          <div style="background:var(--paper); border:2px solid var(--ink); border-radius:10px; padding:14px 16px;">
+            <div style="font-weight:800; font-size:0.86rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">Purpose &amp; Problem It Solves</div>
+            <div class="md-block">${renderMdBlock(d.purpose || d.abstract || '')}</div>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card accent-cyan">
+            <div class="kpi-val">${topPt ? topPt.area.toFixed(1) : '—'}</div>
+            <div class="kpi-label">${wLabel} Area (&mu;m&sup2;)</div>
+          </div>
+          <div class="kpi-card accent-yellow">
+            <div class="kpi-val">${topPt ? topPt.fmax.toFixed(1) : '—'}</div>
+            <div class="kpi-label">${wLabel} Speed (MHz)</div>
+          </div>
+          <div class="kpi-card accent-lime">
+            <div class="kpi-val">${topPt ? topPt.delay.toFixed(3) : '—'}</div>
+            <div class="kpi-label">${wLabel} Delay (ns)</div>
+          </div>
+          <div class="kpi-card accent-purple">
+            <div class="kpi-val">${topPt ? topPt.power.toFixed(4) : '—'}</div>
+            <div class="kpi-label">${wLabel} Power (mW)</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>Motivation &amp; Core Policy Formulation</h2>
+          <div class="md-block">${renderMdBlock(d.motivation)}</div>
+          <hr style="border:none; border-top:1px solid rgba(21,27,32,0.16); margin:14px 0;">
+          <div class="md-block">${renderMdBlock(d.core_idea)}</div>
+        </div>
+
+        <div class="section-card">
+          <h2>Nangate45 + OpenSTA Width Scaling</h2>
+          <div class="plots-grid" style="margin-bottom:18px;">
+            <div class="chart-box">${buildScalingPlot(sc, 'area', 'Area Scaling vs. Width', 'um^2', '#22bfd7')}</div>
+            <div class="chart-box">${buildScalingPlot(sc, 'delay', 'Delay Scaling vs. Width', 'ns', '#f38469')}</div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Width</th>
+                  <th>Area (&mu;m&sup2;)</th>
+                  <th>Delay (ns)</th>
+                  <th>Frequency (MHz)</th>
+                  <th>Power (mW)</th>
+                  <th>PDP (pJ)</th>
+                </tr>
+              </thead>
+              <tbody>${scalingRows || '<tr><td colspan="6">No OpenSTA scaling data.</td></tr>'}</tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h2>Novelty Boundary &amp; Architectural Audit</h2>
+          <div class="md-block">${renderMdBlock(d.novelty_boundary)}</div>
+          ${d.audit ? `<hr style="border:none; border-top:1px solid rgba(21,27,32,0.16); margin:14px 0;"><div class="md-block">${renderMdBlock(d.audit)}</div>` : ''}
+        </div>
+      `;
+    }
+
+    loadIdea();
+  </script>
+</body>
+</html>

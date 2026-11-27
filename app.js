@@ -23,6 +23,10 @@ async function init() {
   populateCompareSelects();
   updateCompareBadge();
   fetchGitHubStars();
+  const hash = window.location.hash.replace('#', '');
+  if (['database', 'ideas', 'benchmarking', 'taxonomy'].includes(hash)) {
+    switchTab(hash);
+  }
 }
 
 async function fetchGitHubStars() {
@@ -147,7 +151,7 @@ function renderIdeasTable() {
     return `
       <tr>
         <td class="mono">#${r.joint_rank}</td>
-        <td><strong>${r.slug}</strong> <span style="font-size:0.78rem; color:#444;">${r.name}</span></td>
+        <td><a href="idea.html?slug=${r.slug}" style="font-weight:800; color:var(--ink); text-decoration:underline; text-decoration-color:var(--yellow); text-underline-offset:3px;">${r.slug}</a> <span style="font-size:0.78rem; color:#444;">${r.name}</span></td>
         <td class="mono"><strong>${r.joint_score.toFixed(4)}</strong></td>
         <td class="mono">${r.nov_score.toFixed(3)}</td>
         <td class="mono">${r.ppa_score.toFixed(4)}</td>
@@ -289,7 +293,7 @@ function renderBubbleDetail(pt) {
 
   const dossierLink = pt.kind === 'classical'
     ? `<a class="btn-mini" style="text-decoration:none; color:inherit; background:var(--yellow);" href="design.html?slug=${pt.slug}">Open Classic Dossier &rarr;</a>`
-    : '';
+    : `<a class="btn-mini" style="text-decoration:none; color:inherit; background:var(--yellow);" href="idea.html?slug=${pt.slug}">Open Idea Dossier &rarr;</a>`;
 
   box.style.display = 'flex';
   box.innerHTML = `
