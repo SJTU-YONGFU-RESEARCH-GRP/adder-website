@@ -406,18 +406,53 @@ function renderScalingChart() {
 }
 
 function renderTaxonomy() {
-  document.getElementById('kw-grid').innerHTML = DATA.keywords.map(cat => `
+  const defs = {
+    'Carry-Path Primitives': [
+      ['select', 'Precomputes Cin=0 and Cin=1 block sums in parallel and muxes by incoming carry.'],
+      ['ripple', 'Sequential bit-by-bit carry propagation; low-area baseline or fallback branch.'],
+      ['propagate / generate / kill', 'Bitwise carry signals p=a^b, g=a&b, k=~(a|b) driving block routing.'],
+      ['skip / bypass', 'Forwards Cin directly to Cout when all bits in a block propagate (P_group=1).'],
+      ['increment / prefix', 'Conditional +1 sum increment or associative parallel-prefix carry network.'],
+      ['fusion / window', 'Combines multiple carry modes under one unified block-level policy.'],
+    ],
+    'Control & Selection': [
+      ['exact', 'All branches compute bit-for-bit identical integer sums (no approximation).'],
+      ['policy', 'Deterministic rule selecting which carry branch evaluates each block.'],
+      ['threshold / margin', 'Width-scaled integer cutoff and signed distance preventing mode chattering.'],
+      ['quorum / majority', 'Integer ratio tests (e.g., 2*popcount(p) >= w_k) to trigger fast paths.'],
+      ['consensus / gating', 'Requires agreement across multiple local indicators before switching modes.'],
+      ['deterministic / bounded', 'Repeatable integer arithmetic with clamped state registers.'],
+    ],
+    'Stateful & Temporal': [
+      ['hysteresis', 'Clamped state from prior blocks biasing the adder toward retaining its recent mode.'],
+      ['streak', 'Count of consecutive blocks where carry remained unchanged (Cin_k == Cin_{k-1}).'],
+      ['momentum', 'Decayed prior-block score (e.g., floor(prev_score / 2)) added to current score.'],
+      ['inertia', 'Low-pass integer filter smoothing score transitions across neighboring blocks.'],
+      ['drift', 'First/second-order score differences tracking multi-block carry trends.'],
+      ['saturation / leak', 'Upper-bound clamping and exponential decay keeping registers fixed-width.'],
+    ],
+    'Block-Local Features': [
+      ['popcount / density', 'Count or fraction of active P, G, or K bits inside a block.'],
+      ['imbalance / polarity', '|G_cnt - K_cnt| and signed (G_cnt - K_cnt) measuring carry generation vs. kill.'],
+      ['entropy', 'Integer disorder proxy (e.g., min(P_cnt, w_k - P_cnt)) without logarithms.'],
+      ['transition', 'Adjacent bit-flip count sum(p_j ^ p_{j+1}) capturing pattern irregularity.'],
+      ['run-length / span', 'Longest contiguous P=1 chain or boundary prefix/suffix propagate span.'],
+      ['skew / gradient / variance', 'Half-block asymmetry, boundary weighting, and squared spread metrics.'],
+    ],
+    'Verification & Synthesis': [
+      ['sweep', 'Automated width (4-512b) and block-size functional verification matrices.'],
+      ['yosys / nangate45', 'Open-source RTL synthesis and 45nm standard-cell technology mapping.'],
+      ['opensta', 'Static timing, area, and power analysis against classical adder baselines.'],
+      ['equivalence collapse', 'Yosys/ABC optimization merging logically equivalent branches into CLA-like netlists.'],
+    ],
+  };
+
+  document.getElementById('kw-grid').innerHTML = Object.entries(defs).map(([cat, items]) => `
     <div class="kw-card">
-      <h3 style="margin:0 0 12px; font-size:1rem;">${cat.category}</h3>
-      ${cat.items.map(it => `
-        <div class="kw-bar-row">
-          <div class="kw-bar-label">
-            <code>${it.kw}</code>
-            <span class="mono">${it.files}/100 (${it.mentions})</span>
-          </div>
-          <div class="kw-bar-track"><div class="kw-bar-fill" style="width:${it.files}%"></div></div>
-        </div>
-      `).join('')}
+      <h3 style="margin:0 0 12px; font-size:1rem;">${cat}</h3>
+      <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:0.84rem;">
+        ${items.map(([kw, desc]) => `<li><code>${kw}</code>: ${desc}</li>`).join('')}
+      </ul>
     </div>
   `).join('');
 }
