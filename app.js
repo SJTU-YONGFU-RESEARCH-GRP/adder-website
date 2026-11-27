@@ -768,7 +768,13 @@ function renderPresetChart() {
       <line x1="${padL + pw + gap}" y1="${h - padB}" x2="${padL + pw + gap + pw}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       <line x1="${padL + pw + gap}" y1="${padT}" x2="${padL + pw + gap}" y2="${h - padB}" stroke="#151b20" stroke-width="2"/>
       ${xTicks0}${xTicks1}${yTicks0}${yTicks1}
-      ${linesScore}${linesRank}${legend}
+      ${linesScore}${linesRank}
+      <text x="${(xAt(0, 0) + 8).toFixed(1)}" y="${(yScore(scores[3][0]) - 8).toFixed(1)}" font-size="9.5" font-weight="800" fill="#151b20">idea3: 0.91 (#1)</text>
+      <text x="${(xAt(0, 1)).toFixed(1)}" y="${(yScore(scores[11][1]) - 11).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#151b20">idea11 knee</text>
+      <text x="${(xAt(0, 2)).toFixed(1)}" y="${(yScore(scores[93][2]) - 10).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#151b20">idea93: 0.88</text>
+      <text x="${(xAt(1, 2)).toFixed(1)}" y="${(yRank(ranks[3][2]) + 16).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#151b20">idea3 (#${ranks[3][2]})</text>
+      <text x="${(xAt(1, 0) + 8).toFixed(1)}" y="${(yRank(ranks[93][0]) + 4).toFixed(1)}" font-size="9.5" font-weight="800" fill="#151b20">idea93 (#${ranks[93][0]}→#${ranks[93][2]})</text>
+      ${legend}
     </svg>
   `;
 }
