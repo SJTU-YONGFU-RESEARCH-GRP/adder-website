@@ -35,9 +35,9 @@
   <nav class="tabs-bar" aria-label="Primary Navigation">
     <div class="tabs-inner">
       <button class="tab-btn active" data-tab="database">Classic Design</button>
-      <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
+      <button class="tab-btn" data-tab="ideas">New Ideas</button>
       <button class="tab-btn" data-tab="benchmarking">Pareto Analysis</button>
-      <button class="tab-btn" data-tab="ideas">100 Discovered Ideas</button>
+      <button class="tab-btn" data-tab="taxonomy">Keyword Taxonomy</button>
     </div>
   </nav>
 
@@ -77,7 +77,7 @@
         <div class="toolbar">
           <span style="font-weight:800; font-size:0.86rem;">Dataset:</span>
           <button class="filter-btn dataset-btn" data-dataset="classical">Classic Designs (29)</button>
-          <button class="filter-btn dataset-btn active" data-dataset="ideas">Discovered Ideas (100)</button>
+          <button class="filter-btn dataset-btn active" data-dataset="ideas">New Ideas (100)</button>
           <button class="filter-btn dataset-btn" data-dataset="both">Combined (Nangate45)</button>
         </div>
         <div class="toolbar">
@@ -109,7 +109,7 @@
         </div>
         <div id="pareto-chart" class="chart-box" style="overflow:auto;"></div>
         <div class="chart-legend">
-          <span><span class="legend-dot" style="background: var(--yellow);"></span>Pareto-Optimal (Discovered Idea)</span>
+          <span><span class="legend-dot" style="background: var(--yellow);"></span>Pareto-Optimal (New Idea)</span>
           <span><span class="legend-dot" style="background: var(--lime);"></span>Pareto-Optimal (Classic Design)</span>
           <span><span class="legend-dot" style="background: var(--cyan);"></span>Non-Collapsed Policy Adders</span>
           <span><span class="legend-dot" style="background: var(--coral);"></span>ABC Equivalence-Collapsed</span>
@@ -125,10 +125,10 @@
       </div>
     </section>
 
-    <!-- 100 IDEAS -->
+    <!-- NEW IDEAS -->
     <section id="tab-ideas" class="tab-panel">
       <div class="section-card">
-        <h2>100 Discovered Ideas — Joint PPA + Novelty Leaderboard</h2>
+        <h2>New Ideas — Joint PPA + Novelty Leaderboard</h2>
         <p class="section-sub">Ranked by <code>0.50 &times; (Novelty/5) + 0.50 &times; PPA_256b</code>. Click column headers to sort or add any idea to Compare.</p>
         <div class="toolbar">
           <input id="ideas-search" class="search-input" type="text" placeholder="Search idea ID or name (e.g., idea3, Hysteresis, Entropy)...">
